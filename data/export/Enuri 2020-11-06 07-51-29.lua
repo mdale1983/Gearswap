@@ -1,0 +1,17 @@
+sets.exported={
+    main="Tokko Knuckles",
+    range="Magneto",
+    ammo="Automat. Oil +3",
+    head={ name="Anwig Salade", augments={'Attack+3','Pet: Damage taken -10%','Accuracy+3','Pet: Haste+5',}},
+    body={ name="Taeon Tabard", augments={'Attack+23','Weapon Skill Acc.+18','Weapon skill damage +3%',}},
+    hands="Malignance Gloves",
+    legs={ name="Rao Haidate +1", augments={'Pet: HP+125','Pet: Accuracy+20','Pet: Damage taken -4%',}},
+    feet="Hermes' Sandals",
+    neck="Buffoon's Collar",
+    waist="Isa Belt",
+    left_ear="Handler's Earring",
+    right_ear="Handler's Earring +1",
+    left_ring="Defending Ring",
+    right_ring="Prolix Ring",
+    back={ name="Visucius's Mantle", augments={'Accuracy+20 Attack+20',}},
+}

@@ -1,0 +1,16 @@
+sets.exported={
+    main="Bolelabunga",
+    sub="Genmei Shield",
+    head="Befouled Crown",
+    body={ name="Hagondes Coat +1", augments={'Phys. dmg. taken -3%','Magic dmg. taken -2%','"Fast Cast"+4',}},
+    hands={ name="Apogee Mitts +1", augments={'MP+80','Pet: Attack+35','Blood Pact Dmg.+8',}},
+    legs="Assid. Pants +1",
+    feet={ name="Apogee Pumps +1", augments={'MP+80','Pet: Attack+35','Blood Pact Dmg.+8',}},
+    neck="Loricate Torque +1",
+    waist="Isa Belt",
+    left_ear={ name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
+    right_ear="Handler's Earring +1",
+    left_ring="Yacuruna Ring",
+    right_ring="Warp Ring",
+    back={ name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20',}},
+}

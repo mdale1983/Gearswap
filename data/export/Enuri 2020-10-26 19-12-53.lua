@@ -1,0 +1,16 @@
+sets.exported={
+    main={ name="Lathi", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
+    sub="Enki Strap",
+    ammo="Ghastly Tathlum +1",
+    body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+    hands={ name="Merlinic Dastanas", augments={'Mag. Acc.+11 "Mag.Atk.Bns."+11','"Fast Cast"+4',}},
+    legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+25 "Mag.Atk.Bns."+25','Magic burst dmg.+9%','MND+7','Mag. Acc.+10','"Mag.Atk.Bns."+5',}},
+    feet={ name="Merlinic Crackows", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+8%','INT+8','Mag. Acc.+12',}},
+    neck="Loricate Torque +1",
+    waist="Fucho-no-Obi",
+    left_ear="Etiolation Earring",
+    right_ear="Hearty Earring",
+    left_ring="Defending Ring",
+    right_ring="Gelatinous Ring +1",
+    back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
+}

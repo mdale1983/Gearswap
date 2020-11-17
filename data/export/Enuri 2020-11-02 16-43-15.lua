@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Skinflayer", augments={'Crit. hit damage +5%','Accuracy+25','Attack+11','DMG:+15',}},
+    sub={ name="Taming Sari", augments={'STR+5','DMG:+7',}},
+    ammo="Staunch Tathlum",
+    head="Meghanada Visor +1",
+    body="Meg. Cuirie +2",
+    hands={ name="Herculean Gloves", augments={'Accuracy+30','Phys. dmg. taken -3%','STR+1',}},
+    legs={ name="Samnuha Tights", augments={'STR+9','DEX+8','"Dbl.Atk."+2','"Triple Atk."+2',}},
+    feet="Fajin Boots",
+    neck="Lissome Necklace",
+    waist="Flume Belt",
+    left_ear="Odnowa Earring",
+    right_ear="Odnowa Earring +1",
+    left_ring="Defending Ring",
+    right_ring="Sheltered Ring",
+    back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20',}},
+}

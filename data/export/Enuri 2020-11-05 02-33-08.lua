@@ -1,0 +1,18 @@
+sets.exported={
+    main="Ceremonial Dagger",
+    sub="Ceremonial Dagger",
+    range="Gastraphetes",
+    ammo="Bronze Bolt",
+    head="Meghanada Visor +1",
+    body="Meg. Cuirie +2",
+    hands={ name="Herculean Gloves", augments={'Accuracy+17 Attack+17','"Triple Atk."+3','STR+3','Accuracy+10','Attack+11',}},
+    legs={ name="Arc. Braccae +3", augments={'Enhances "Eagle Eye Shot" effect',}},
+    feet={ name="Herculean Boots", augments={'Accuracy+7','Phys. dmg. taken -3%','DEX+8',}},
+    neck="Loricate Torque +1",
+    waist="Flume Belt",
+    left_ear="Odnowa Earring +1",
+    right_ear="Etiolation Earring",
+    left_ring="Defending Ring",
+    right_ring="Fortified Ring",
+    back={ name="Belenus's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+9','"Snapshot"+10','Phys. dmg. taken-10%',}},
+}

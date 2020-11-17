@@ -1,0 +1,17 @@
+sets.exported={
+    main="Caladbolg",
+    sub="Utu Grip",
+    ammo="Staunch Tathlum",
+    head="Hjarrandi Helm",
+    body="Sacro Breastplate",
+    hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+    legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
+    feet={ name="Amm Greaves", augments={'HP+50','VIT+10','Accuracy+15','Damage taken-2%',}},
+    neck="Loricate Torque +1",
+    waist="Flume Belt",
+    left_ear="Telos Earring",
+    right_ear="Cessance Earring",
+    left_ring="Moonbeam Ring",
+    right_ring="Moonbeam Ring",
+    back={ name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},
+}
