@@ -6,18 +6,10 @@ windower.register_event('chat message', function(message,sender,mode,gm)
     local play = windower.ffxi.get_player().name
      
     message = message:lower()
---[[ White Mage stuff ]]
+--[[ Singer stuff ]]
     if sender == 'Enuri' and message:contains('jarng') then
         windower.send_command('input //sing aetude 1 ' .. sender)
 		windower.send_command('wait 1; input //sing prelude 1 ' .. sender)
-    end
-	if sender == 'Denaba' and message:contains('songs') then
-        windower.send_command('input //lua r singer')
-		windower.send_command('wait 2; input //sing')
-    end
-	if sender == 'Rymann' and message:contains('songs') then
-        windower.send_command('input //lua r singer')
-		windower.send_command('wait 2; input //sing')
     end
 	if sender == 'Faythie' and message:contains('songs') then
         windower.send_command('input //lua r singer')

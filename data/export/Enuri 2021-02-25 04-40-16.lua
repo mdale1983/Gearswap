@@ -1,0 +1,17 @@
+sets.exported={
+    main="Kikoku",
+    sub={ name="Kanaria", augments={'Weapon Skill Acc.+9','STR+2','Accuracy+20','Attack+19','DMG:+6',}},
+    ammo="Hachiya Shuriken",
+    head={ name="Adhemar Bonnet +1", augments={'STR+12','DEX+12','Attack+20',}},
+    body={ name="Ryuo Domaru +1", augments={'HP+65','"Store TP"+8','"Dbl.Atk."+4',}},
+    hands="Malignance Gloves",
+    legs={ name="Ryuo Hakama", augments={'Accuracy+20','"Store TP"+4','Phys. dmg. taken -3',}},
+    feet="Danzo Sune-Ate",
+    neck="Loricate Torque +1",
+    waist="Flume Belt",
+    left_ear="Etiolation Earring",
+    right_ear="Odnowa Earring +1",
+    left_ring="Defending Ring",
+    right_ring="Warden's Ring",
+    back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20',}},
+}

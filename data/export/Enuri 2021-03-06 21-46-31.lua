@@ -1,0 +1,16 @@
+sets.exported={
+    main={ name="Hes. Fists", augments={'Path: A',}},
+    ammo="Staunch Tathlum",
+    head="Ken. Jinpachi",
+    body="Ken. Samue +1",
+    hands="Malignance Gloves",
+    legs="Ken. Hakama",
+    feet="Hermes' Sandals",
+    neck="Loricate Torque +1",
+    waist="Moonbow Belt",
+    left_ear="Cessance Earring",
+    right_ear="Telos Earring",
+    left_ring="Defending Ring",
+    right_ring="Gelatinous Ring +1",
+    back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Accuracy+5','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
+}

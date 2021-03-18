@@ -6,20 +6,20 @@ WeaponType =  {
         ['Death Penalty'] = 	"Gun",
         ['Armageddon'] = 		"Gun",
         ['Fomalhaut'] = 		"Gun",
-		['Ataktos +2'] = 		"Gun",
+		['Anarchy +3'] = 		"Gun",
 		['Compensator'] = 		"Gun",
 		['Molybdosis'] = 		"Gun",
 		['Doomsday'] = 			"Gun",
 	}
 	DefaultAmmo = {
 		['Gun']  = {
-			['Default'] = "Adlivun Bullet",
-			['WS'] = "Adlivun Bullet",
-			['MagicWS'] = "Adlivun Bullet",
-			['Acc'] = "Adlivun Bullet",
-			['Magic'] = "Decimating Bullet",
-			['MagicAcc'] = "Decimating Bullet",
-			['CorsairShot'] = "Decimating Bullet"
+			['Default'] = 		"Chrono Bullet",
+			['WS'] = 			"Chrono Bullet",
+			['MagicWS'] =		"Chrono Bullet",
+			['Acc'] = 			"Chrono Bullet",
+			['Magic'] = 		"Chrono Bullet",
+			['MagicAcc'] = 		"Chrono Bullet",
+			['CorsairShot'] = 	"Chrono Bullet"
 		}
 	}
 ----------------------
@@ -27,17 +27,16 @@ WeaponType =  {
 ----------------------
 	sets.idle = {
         --ammo=gear.RAbullet,
-        head="Meghanada visor +1",
+        head="Meghanada visor +2",
         neck="Loricate torque +1",
-        ear1="Cessance Earring",
-        ear2="Telos Earring",
+        ear1="Odnowa earring",
+        ear2="Odnowa earring",
         body="Meghanada cuirie +2",
         hands=Herc.Hands.PDT,
-        ring1="Warp Ring",
+        ring1="Defending ring",
         ring2="Gelatinous ring +1",
     	back="Solemnity Cape",
         waist="Flume Belt",
-        legs="",
         feet=Herc.Feet.PDT
     }
 	sets.Kiting = {
@@ -72,6 +71,51 @@ WeaponType =  {
 	}
 	sets.Kiting = {
 		legs="Carmine Cuisses +1"
+	}
+	sets.Kiting.night = {
+		legs="Carmine Cuisses +1"
+	}
+------------------
+--	Weapon sets	--
+------------------
+	sets.weapons.Fomalhaut = {
+		main="Naegling",
+		sub="Nusku shield",
+		range="Fomalhaut",
+		ammo=DefaultAmmo.Gun.Default,
+		waist="Chrono bullet pouch"
+	}
+	sets.weapons.DP = {
+		main="Naegling",
+		sub="Fettering blade",
+		range="Death Penalty",
+		ammo=DefaultAmmo.Gun.Default,
+		waist="Quelling B. quiver"
+	}
+	sets.weapons.Anarchy = {
+		main="Naegling",
+		sub="Fettering blade",
+		range="Anarchy +3",
+		ammo=DefaultAmmo.Gun.Default,
+		waist="Chrono bullet pouch"
+	}
+	sets.weapons.Armageddon = { 
+		main="Naegling",
+		sub="Fettering blade",
+		range="Armageddon",
+		ammo=DefaultAmmo.Gun.Default,
+	}
+	sets.weapons.Molybdosis = { 
+		main="Naegling",
+		sub="Fettering blade",
+		range="Molybdosis",
+		ammo=DefaultAmmo.Gun.Default,
+	}
+	sets.weapons.Doomsday = { 
+		main="Naegling",
+		sub="Nusku shield",
+		range="Doomsday",
+		ammo=DefaultAmmo.Gun.Default,
 	}
 ----------------------------------
 --		Job Ability sets		--
@@ -258,6 +302,13 @@ WeaponType =  {
 		sets.midcast.RA.Gun = set_combine(sets.midcast.RA, {
 			
 		})
+		sets.midcast.TripleShot = set_combine(sets.midcast.RA, { 
+			head="Arcadian beret +3",
+			body="Arc. jerkin +3",
+			hands="Oshosi gloves",
+			legs="Oshosi trousers",
+			feet="Oshosi leggings",
+		})
 ----------------------------------
 --		Engaged sets			--
 ----------------------------------	
@@ -293,20 +344,9 @@ WeaponType =  {
     }
 	sets.engaged.DW = set_combine(sets.engaged, {
 	-- No Magic Haste 
-		head="Carmine Mask +1",
-		body="Adhemar jacket +1",		--5
-		ear2="Suppanomimi",			--5
-		legs="Carmine Cuisses +1",	--6
-		--feet=Taeon.Feet.DW,			--9
-		back=Cam.TP, 		--10
-		--ear1="Eabani Earring", 		--4
-		waist="Grunfeld rope", 		--7
+		body="Adhemar jacket +1",
+		legs="Carmine Cuisses +1",
     })-- 49% DW Needed
-    sets.engaged.DW.Haste_43 = set_combine(sets.engaged,  {
-	-- 45% Magic Haste 
-        body="Adhemar jacket",		--5
-		legs="Carmine Cuisses +1",	--6
-	}) -- 11% DW Needed
 	sets.engaged.MagicEva = { 
 		--ammo=gear.RAbullet,
         head="Meghanada visor +1",

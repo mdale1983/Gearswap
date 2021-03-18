@@ -53,7 +53,7 @@ end
 function job_setup()
 	state.mainWeapon = M{'None', 'Anarchy', 'Fomalhaut', 'Ragnarok', 'Anguta'}
 	state.rangeWeapon = M{'None', 'Anarchy', 'Fomalhaut'}
-	state.Weapons = M{'PetWeapons', 'Godhands', 'Tokko'}
+	state.Weapons = M{'PetWeapons', 'Godhands', 'Tokko', 'Kenkonken'}
 	
 	autows = "Victory Smite"
 	autofood = 'Bean Daifuku'
@@ -75,10 +75,6 @@ function job_setup()
 		"Leaden Salute", "Wildfire", "Last Stand",
 		"Savage Blade", "Requiescat", 'Sanguine Blade'
 	}
-	maneuvers = S{
-		'Fire Maneuver', 'Ice Maneuver', 'Wind Maneuver', 'Earth Maneuver',
-		'Thunder Maneuver', 'Water Maneuver', 'Light Maneuver', 'Dark Maneuver'
-	}
 --[[ Ninja Tools Section ]]
 	ninjaTools = {
 		Utsusemi = S{"Shihei",},--"Shikanofuda" 
@@ -98,11 +94,15 @@ function job_setup()
 		"Bone Crusher", "String Shredder", "Arcuballista", 
 		"Daze", "Armor Piercer", "Armor Shatterer"
 	}
+	Maneuver = S{
+      'Fire Maneuver', 'Ice Maneuver', 'Wind Maneuver', 'Earth Maneuver',
+	  'Thunder Maneuver', 'Water Maneuver', 'Light Maneuver', 'Dark Maneuver',
+    }
 	state.PartyChatWS = M(false, 'Report pet weaponskills in party chat.')
 	magicPetModes = S{'Nuke','Heal','Magic'}
-	state.PetMode = M{['description']='Pet Mode', 'None','Melee','Ranged','HybridRanged','Tank','Skillup','Lilith','LightTank','Magic','Heal','Nuke'}
+	state.PetMode = M{['description']='Pet Mode', 'None','Melee','Ranged','HybridRanged','Tank','Btank','Skillup','Lilith','LightTank','Magic','Heal','Nuke'}
 
-	state.AutoManeuvers = M{['description']='Auto Maneuver List', 'Default','Melee','Ranged','HybridRanged','Tank','Skillup','Lilith','LightTank','Magic','Heal','Nuke'}
+	state.AutoManeuvers = M{['description']='Auto Maneuver List', 'Default','Melee','Ranged','HybridRanged','Tank','Btank','Skillup','Lilith','LightTank','Magic','Heal','Nuke'}
 	
 	state.AutoPuppetMode = M(false, 'Auto Puppet Mode')
 	state.AutoRepairMode = M(true, 'Auto Repair Mode')
@@ -404,14 +404,19 @@ function job_filter_precast(spell, spellMap, eventArgs)
 	
 end
 function job_pet_precast(spell, spellMap, eventArgs)
-	if spell.english == "Fire Maneuver" then 
-		equip(sets.precast.JA.Maneuver)
+	if Maneuver:contains(spell.english) then
+		equip(sets.precast.JA['Maneuver'])
+		equip({main="Midnights"})
 	end 
 end
 function job_precast(spell, action, spellMap, eventArgs)
 	if spell.type=="Ninjutsu" then 
 		check_tools(spell) 
 	end 
+	if Maneuver:contains(spell.english) then
+		equip(sets.precast.JA['Maneuver'])
+		equip({main="Midnights"})
+	end
 	if spellMap == 'Utsusemi' then
 		if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
 			cancel_spell()
@@ -421,9 +426,6 @@ function job_precast(spell, action, spellMap, eventArgs)
 		elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
 			send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
 		end
-	end
-	if maneuvers:contains(spell.english) then 
-		equip(sets.precast.JA.Maneuver)
 	end
 end 
 function job_post_precast(spell, spellMap, eventArgs)

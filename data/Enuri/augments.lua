@@ -34,6 +34,31 @@
 	Bele = {}
 	Cich = {}
 	Tara = {}
+	Tara = {}
+	Andar = {}
+	Brig = {}
+	Segmo = {}
+--------------------
+--  Ninja Capes   --
+--------------------
+	Andar.TP = {
+		name="Andartia's Mantle", 
+		augments={'DEX+20','Accuracy+20 Attack+20'}
+	}
+--------------------
+--  Ninja Capes   --
+--------------------
+	Segmo.ACC = { 
+		name="Segomo's Mantle", 
+		augments={'STR+20','Accuracy+20 Attack+20','Accuracy+5','"Dbl.Atk."+10','Phys. dmg. taken-10%'}
+	}
+--------------------
+--  Ninja Capes   --
+--------------------
+	Brig.ACC = { 
+		name="Brigantia's Mantle", 
+		augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10'}
+	}
 ----------------------
 --  Warrior Capes   --
 ----------------------
@@ -225,7 +250,8 @@
     ------------------
     Valor.Body.TP = {
         name="Valorous mail",
-        augments = {'Accuracy+25 Attack+25','"Dbl.Atk."+3','VIT+1','Accuracy+2','Attack+11'}
+       -- augments = {'Accuracy+25 Attack+25','"Dbl.Atk."+3','VIT+1','Accuracy+2','Attack+11'}
+	    augments = {'Accuracy+25','"Dbl.Atk."+2','DEX+10','Attack+12'}
     }
     ------------------
     --  Valor Hand  --
@@ -358,6 +384,10 @@
         name="Herculean Helm", 
         augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Weapon skill damage +3%','STR+6','"Mag.Atk.Bns."+7'}
     }
+	Herc.Head.FC = {
+        name="Herculean Helm", 
+        augments={'Accuracy+15 Attack+15','"Fast Cast"+3','Mag. Acc.+10 "Mag.Atk.Bns."+10'}
+    }
 	Herc.Head.RWS = {
         name="Herculean Helm", 
         augments={'Rng.Acc.+19 Rng.Atk.+19','Weapon skill damage +4%','AGI+5','Rng.Acc.+15'}
@@ -428,7 +458,7 @@
     }
 	Herc.Feet.RWS = { 
         name="Herculean Boots", 
-        augments={'Weapon skill damage +5%','AGI+7','Rng.Acc.+14','Rng.Atk.+11'}
+        augments={'Rng.Acc.+25','Weapon skill damage +4%','Rng.Atk.+14'}
     }
 	Herc.Feet.PDT = { 
         name="Herculean Boots", 

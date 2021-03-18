@@ -10,6 +10,9 @@ windower.register_event('chat message', function(message,sender,mode,gm)
     if sender == 'Enuri' and message:contains('erase') then
         windower.send_command('input /ma Erase ' .. sender)
     end
+	if sender == 'Beardsley' and message:contains('erase') then
+        windower.send_command('input /ma Erase ' .. sender)
+    end
 	if sender == 'Enuri' and message:contains('fire') then
         windower.send_command('input /ma Barfira <me>')
     end

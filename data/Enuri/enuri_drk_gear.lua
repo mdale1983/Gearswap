@@ -35,6 +35,33 @@ include('augments.lua')
 	sets.Kiting = {
 		legs="Carmine cuisses +1"
 	}
+	sets.Kiting.night = {
+		legs="Carmine cuisses +1"
+	}
+	sets.weapons.Liberator = { 
+		main="Liberator",
+		sub="Utu Grip"
+	}
+	sets.weapons.Redemption = { 
+		main="Redemption",
+		sub="Utu grip"
+	}
+	sets.weapons.Apocalypse = { 
+		main="Apocalypse",
+		sub="Utu Grip"
+	}
+	sets.weapons.Ragnarok = { 
+		main="Ragnarok",
+		sub="Utu Grip"
+	}
+	sets.weapons.Caladbolg = { 
+		main="Caladbolg",
+		sub="Utu Grip"
+	}
+	sets.weapons.Anguta = { 
+		main="Anguta",
+		sub="Utu Grip"
+	}
 --------------------------------------
 -- 	Pre-cast Job Ability Gear-sets 	--	
 --------------------------------------
@@ -79,7 +106,7 @@ include('augments.lua')
 		neck="Voltsurge torque",
 		ear1="Etiolation earring",
 		ear2="Loquacious earring",
-		waist="Ioskeha belt",
+		waist="Ioskeha belt +1",
 		back=Ankou.FC
 	}
 	sets.midcast.FastRecast = {
@@ -199,7 +226,7 @@ include('augments.lua')
         ring1="Chirich ring +1",
         ring2="Chirich Ring +1",
         back=Ankou.TP,
-        waist="Ioskeha belt",
+        waist="Ioskeha belt +1",
     }
 	----------------------------------
 	--	Apocalypse Engaged Gear 	--
@@ -270,7 +297,7 @@ include('augments.lua')
         ring1="Chirich ring +1",
         ring2="Chirich Ring +1",
         back=Ankou.TP,
-        waist="Ioskeha belt",
+        waist="Ioskeha belt +1",
     })
 	sets.engaged.Caladbolg = set_combine(sets.engaged.GreatSword, { --+54 sTP
 		head="Flamma zucchetto +2",
@@ -280,8 +307,8 @@ include('augments.lua')
 		neck="Abyssal bead necklace +2",
 		ear1="Telos Earring",
 		ear2="Cessance earring",
-		ring1="Chirich ring +1",
-        ring2="Chirich Ring +1",
+		ring1="Regal ring",
+        ring2="Niqmaddu ring",
 	})
 	sets.engaged.MagicEva.Caladbolg = { 
 		ammo="Staunch tathlum",

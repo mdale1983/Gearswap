@@ -41,7 +41,7 @@ function init_job_states(job_bools,job_modes)
 	if settings["ui_x_res"] == 1920 and settings["ui_y_res"] == 1080 then
 		x,y = settings["ui_x_res"]-1917, settings["ui_y_res"]-18 -- -285, -18
 	else
-		x,y = 200, settings["ui_y_res"]-22 -- -285, -18
+		x,y = 120, settings["ui_y_res"]-18 -- -285, -18
 	end
 	
 	if displayx then x = displayx end
@@ -128,6 +128,7 @@ function update_job_states()
 		AutoBuffMode = "Auto Buff",
 		AutoJumpMode = "Auto Jump",
 		AutoWSMode = "Auto WS: "..autows..": "..autowstp.."",
+		RangedAutoWSMode = "Ranged Auto WS: "..rangedautows..": "..rangedautowstp.."",
 		AutoShadowMode = "Auto Shadows",
 		AutoFoodMode = "Auto Food: "..autofood.."",
 		RngHelper = "RngHelper",
@@ -166,15 +167,21 @@ function update_job_states()
 						stateBox:append(string.format("%s  Auto Entrust: "..autoentrust.."  Entrustee: "..autoentrustee.."%s", clr.h, clr.n))
 					end
 				else
-					stateBox:append(string.format("%sAuto Buff%s", clr.h, clr.n))
+					--stateBox:append(string.format("%sAuto Buff%s", clr.h, clr.n))
 				end
 				stateBox:append(spc)
 			elseif n == 'AutoWSMode' and state.AutoWSMode.value then
 				if state.RngHelper.value then
 					stateBox:append(string.format("%sAuto WS: "..rangedautows..": "..rangedautowstp.."%s", clr.h, clr.n))
 				else
-					stateBox:append(string.format("%sAuto WS: "..autows..": "..autowstp.."%s", clr.h, clr.n))
+					--stateBox:append(string.format("%sAuto WS: "..autows..": "..autowstp.."%s", clr.h, clr.n))
 				end
+				stateBox:append(spc)
+			elseif n == 'RangedAutoWSMode' and state.RangedAutoWSMode.value then
+					stateBox:append(string.format("%sAuto WS: "..rangedautows..": "..rangedautowstp.."%s", clr.h, clr.n))
+				--else
+					--stateBox:append(string.format("%sAuto WS: "..autows..": "..autowstp.."%s", clr.h, clr.n))
+				--end
 				stateBox:append(spc)
 			elseif n == 'AutoDefenseMode' then
 				if state.AutoDefenseMode.value then
@@ -186,8 +193,8 @@ function update_job_states()
 					stateBox:append(spc)
 				end
 			else
-				stateBox:append(clr.h..labels[n]..clr.n)
-				stateBox:append(spc)
+				--stateBox:append(clr.h..labels[n]..clr.n)
+				--stateBox:append(spc)
 			end
 		else
 
@@ -253,8 +260,8 @@ function update_job_states()
 				stateBox:append(string.format("%sAuto Samba: %s%s    ", clr.w, clr.h, state.AutoSambaMode.value))
 			end
 		elseif n == 'IdleMode' then
-			if state.IdleMode.value ~= 'Normal' and state.DefenseMode.value == 'None' then
-				stateBox:append(string.format("%s%s: ${%s}    ", clr.w, labels[n], n))
+			if state.IdleMode.value ~= 'Match' then
+				stateBox:append(string.format("%sIdle: %s%s    ", clr.w, clr.h, state.IdleMode.value))
 			end
 			if state.Kiting.value then
 				stateBox:append(string.format("%sKiting: %sOn    ", clr.w, clr.h))

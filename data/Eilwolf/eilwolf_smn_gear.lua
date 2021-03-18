@@ -10,16 +10,16 @@ include('augments.lua')
 		neck="Loricate Torque +1",
 		ear1="C. Palug Earring",
 		ear2="Ethereal Earring",
-        body="Hagondes coat +1",
+        body="Shomonjijoe +1",
 		hands="Inyanga dastanas +2",
 		ring1="Inyanga ring",
 		ring2="Stikini Ring +1",
-        back="Umbra Cape",
+        back="Solemnity cape",
 		waist="Regal Belt",
 		legs="Assid. Pants +1",
 		feet="Inyanga crackows +2"
 	}
-	sets.idle.Avatar = {
+	--[[sets.idle.Avatar = {
 		main="Gridarvor",
 		sub="Elan strap +1",
 		ammo="Sancus Sachet +1",
@@ -35,7 +35,7 @@ include('augments.lua')
 		waist="Lucidity Sash",
 		legs="Assid. Pants +1",
 		feet="Convo. Pigaches +3"
-	}
+	}]]
 	sets.idle.Spirit = {
 		main="Gridarvor",sub="Oneiros Grip",
 		ammo="Sancus Sachet +1",
@@ -53,10 +53,6 @@ include('augments.lua')
 		feet="Convo. Pigaches +3"
 	}
 	sets.TPEat = {neck="Chrys. Torque"}
-	sets.idle.Avatar.Favor = {}
-    sets.idle.Avatar.Engaged = {}
-	sets.idle.Avatar.Engaged.Carbuncle = {}
-	sets.idle.Avatar.Engaged['Cait Sith'] = {}
 	sets.Kiting = {feet="Herald's Gaiters"}
     sets.latent_refresh = {waist="Fucho-no-obi"}
 	sets.latent_refresh_grip = {sub="Oneiros Grip"}
@@ -92,6 +88,10 @@ include('augments.lua')
 	--
 	--
 		sets.perp = {}
+		sets.idle.perp = {
+			main="Gridarvor",
+			ring2="Evoker's ring"
+		}
 		sets.perp.Day = {}
 		sets.perp.Weather = {}
 		sets.perp.Carbuncle = {}
@@ -124,6 +124,25 @@ include('augments.lua')
     sets.precast.JA['Mana Cede'] = {
 		hands="Beck. Bracers +1"
 	}
+	sets.weapons.Gridarvor = { 
+		main="Gridarvor",
+		sub="Elan Strap +1"
+
+	}
+	sets.weapons.Grioavolr = { 
+		main="Grioavolr",
+		sub="Elan Strap +1"
+
+	}
+	sets.weapons.Nirvana = { 
+		main="Nirvana",
+		sub="Elan Strap +1"
+
+	}
+	sets.weapons.Espiritus = { 
+		main="Espiritus",
+		sub="Elan Strap +1"
+	}
 ----------------------------------
 --		Pet Gear sets			--
 ----------------------------------
@@ -131,11 +150,11 @@ include('augments.lua')
 	-- Pet idle sets --
 	-------------------
 		sets.idle.Avatar = {
-			main="Bolelabunga",
-			sub="Genmei Shield",
+			main="Gridarvor",
+			sub="Umbra strap",
 			range="Dunna",
 			head="Befouled crown",
-			body="Mallquis saio +2",
+			body="Shomonjijoe +1",
 			hands="Inyanga dastanas +2",
 			legs="Assiduity pants +1",
 			feet="Inyanga crackows +2",
@@ -144,12 +163,13 @@ include('augments.lua')
 			ear1="Moonshade Earring",
 			ear2="Handler's earring +1",
 			ring1="Inyanga ring",
-			ring2="Yacuruna Ring",
+			ring2="Evoker's ring",
 			back=Cam.Phys
 		}
 	----------------------
 	-- Pet engaged sets --
 	----------------------
+		sets.idle.Avatar.Favor = sets.idle.Avatar
 		sets.idle.Avatar.Engaged = {}
 		sets.idle.Avatar.Engaged.Carbuncle = {}
 		sets.idle.Avatar.Engaged['Cait Sith'] = {}
@@ -283,7 +303,7 @@ include('augments.lua')
 		hands="Baayami Cuffs",
 		ring1="Stikini Ring +1",
 		ring2="Stikini Ring +1",
-        back=gear.magic_jse_back,
+        back=Cam.Phys,
 		waist="Emphatikos Rope",
 		legs="Assid. Pants +1",
 		feet="Baayami Sabots"
@@ -366,18 +386,18 @@ include('augments.lua')
 			main="Gridarvor",
 			sub="Elan Strap +1",
 			ammo="Sancus Sachet +1",
-			head="Helios Band",
-			neck="Shulmanu Collar",
+			head="Apogee crown +1",
+			body="Con. Doublet +1",
+			hands="Merlinic dastanas",
+			legs="Apogee Slacks +1",
+			feet="Apogee Pumps +1",
+			waist="Incarnation Sash",
 			ear1="Lugalbanda Earring",
 			ear2="Gelos Earring",
-			body="Con. Doublet +3",
-			hands="Merlinic dastanas",
+			neck="Shulmanu Collar",
 			ring1="Varar Ring +1",
-			ring2="C. Palug Ring",
+			ring2="Varar Ring +1",
 			back=Cam.Phys,
-			waist="Incarnation Sash",
-			legs="Apogee Slacks +1",
-			feet="Apogee Pumps +1"
 		}			
 		sets.midcast.Pet.PhysicalBloodPactRage.Acc = {
 			feet="Convo. Pigaches +3"
@@ -498,4 +518,7 @@ include('augments.lua')
 		waist="Luminary Sash",
 		legs="Psycloth Lappas",
 		feet="Beck. Pigaches +1"
+	}
+	sets.CapacityMantle = {
+		back="Mecisto. Mantle"
 	}

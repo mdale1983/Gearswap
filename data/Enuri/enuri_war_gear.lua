@@ -20,6 +20,9 @@ include('augments.lua')
 	sets.Kiting = {
 		feet="Hermes' sandals"
 	}
+	sets.Kiting.night = {
+		feet="Hermes' sandals"
+	}
 	sets.idle.MagicEva = {
 		ammo="Sihirik",
         head="Hjarrandi helm",
@@ -34,6 +37,26 @@ include('augments.lua')
         ring2="Gelatinous ring +1",
         back=Cich.TP,
 		waist="Flume belt"
+	}
+	sets.weapons.Minos = { 
+		main="Minos",
+		sub="Utu Grip"
+	}
+	sets.weapons.Ukonvasara = { 
+		main="Ukonvasara",
+		sub="Utu grip"
+	}
+	sets.weapons.Ragnarok = { 
+		main="Ragnarok",
+	}
+	sets.weapons.Chango = { 
+		main="Chango",
+	}
+	sets.weapons.Conqueror = { 
+		main="Conqueror",
+	}
+	sets.weapons.Bravura = { 
+		main="Bravura",
 	}
 ----------------------------------
 --		Job Ability sets		--
@@ -108,7 +131,7 @@ include('augments.lua')
         ring1="Chirich Ring +1",
         ring2="Chirich Ring +1",
         back=Cich.TP,
-        waist="Ioskeha belt",
+        waist="Ioskeha belt +1",
     }
 	sets.engaged.MagicEva = { 
 		ammo="Staunch tathlum",
@@ -160,7 +183,7 @@ include('augments.lua')
         ring1="Rajas ring",
         ring2="Petrov Ring",
         back=Cich.TP,
-        waist="Ioskeha belt",
+        waist="Ioskeha belt +1",
     })
 	sets.engaged.Ragnarok = set_combine(sets.engaged.GreatSword, {
 		head="Flamma zucchetto +2",

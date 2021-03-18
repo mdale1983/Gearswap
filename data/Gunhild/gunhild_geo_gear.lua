@@ -33,7 +33,7 @@ include('augments.lua')
 		hands="Bagua mitaines +1"
 	}
 	sets.precast.JA['Full Circle'] = {
-		head="Azimuth hood +1"
+		head="Azimuth Hood +1 +1"
 	}
     sets.precast.JA['Mending Halation'] = {
 		legs="Bagua pants"
@@ -48,7 +48,7 @@ include('augments.lua')
 				main="Solstice",
 				sub="Genbu's Shield",
 				range="Dunna",
-				head="Azimuth hood",
+				head="Azimuth Hood +1",
 				body="Geomancy tunic +1",
 				hands="Bagua Mitaines +1",
 				legs=Telc.Legs.Pet,
@@ -71,7 +71,7 @@ include('augments.lua')
 				ear1="Ethereal earring",
 				ear2="",
 				body="Jhakri robe",
-				hands="Geomancy mitaines +1",
+				hands="Geomancy mitaines +2",
 				ring1="Vocane ring",
 				ring2="Dark Ring",
 				back="Lifestream cape",
@@ -128,7 +128,7 @@ include('augments.lua')
 	    sets.midcast.Geomancy = {
 			main="Solstice",
 			range="Dunna",
-			head="Azimuth Hood",
+			head="Azimuth Hood +1",
 			body="Bagua Tunic +1",
 			hands="Geo. Mitaines +2",
 			legs="Bagua pants +1",
@@ -137,14 +137,14 @@ include('augments.lua')
 			waist="Austerity Belt",
 			ear1="Halasz Earring",
 			ear2="Gifted Earring",
-			ring1="Dark ring",
+			ring1="Stikini ring",
 			ring2="Renaye ring",
 			back="Lifestream Cape"
 		}
 		sets.midcast.Geomancy.Indi = {
 			main="Solstice",
 			range="Dunna",
-			head="Azimuth Hood",
+			head="Azimuth Hood +1",
 			body="Bagua Tunic +1",
 			hands="Geo. Mitaines +2",
 			legs="Bagua pants +1",

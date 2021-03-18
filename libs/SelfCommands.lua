@@ -375,7 +375,7 @@ function equip_weaponset(cmdParams)
 		add_to_chat(123,'Error: A weapons set for ['..cmdParams..'] does not exist.')
 	end
 	if state.Weapons.value ~= 'None' then
-		disable('main','sub')
+		disable('main')
 		if sets.weapons[state.Weapons.value] and (sets.weapons[state.Weapons.value].range or sets.weapons[state.Weapons.value].ranged) then
 			disable('range')
 		end
@@ -395,7 +395,7 @@ function handle_showset(cmdParams)
 		local set = get_set_from_keys(key_list)
 	
 		equip(set)
-		disable('main','sub','range','ammo','head','neck','lear','rear','body','hands','lring','rring','back','waist','legs','feet')
+		disable('main','Sub','range','ammo','head','neck','lear','rear','body','hands','lring','rring','back','waist','legs','feet')
 	else
 		handle_update({'auto'})
 	end

@@ -10,18 +10,17 @@ include('augments.lua')
 		legs="Chev. Cuisses +1",
         feet="Souveran schuhs +1",
 		neck="Warder's charm +1",
-		ear1="Thureous earring",
+		ear1="Odnowa earring",
 		ear2="Odnowa Earring +1",
-        ring1="Defending ring",
+        ring1="Moonbeam ring",
         ring2="Moonbeam ring",
         back=Rudian.FC,
-		waist="Flume Belt"
+		waist="Carrier's sash"
 	}
 	sets.idle.PDT = set_combine(sets.idle, {
 		legs="Chevalier's cuisses +1",
-		hands="Chevalier's gauntlets +1",
+		hands="Souv. Handsch. +1",
 		neck="Creed collar",
-		ring1="Moonbeam ring"
 	})
 	sets.idle.Turtle = set_combine(sets.idle, {
 		body="Souveran cuirass +1",
@@ -35,6 +34,27 @@ include('augments.lua')
 	})
 	sets.Kiting = {
 		legs="Carmine cuisses +1"
+	}
+	sets.Kiting.night = { 
+		legs="Carmine cuisses +1"
+	}
+	sets.weapons.Excalibur = { 
+		main="Excalibur",
+	}
+	sets.weapons.Burtgang = { 
+		main="Burtgang",
+	}
+	sets.weapons.Almace = { 
+		main="Almace",
+	}
+	sets.Shields.Aegis = { 
+		sub="Aegis"
+	}
+	sets.Shields.Ochain = { 
+		sub="Ochain"
+	}
+	sets.Shields.Priwen = { 
+		sub="Priwen"
 	}
 ----------------------
 -- 	Enmity Gear set --
@@ -284,9 +304,9 @@ include('augments.lua')
 		waist="Creed baudrier"
 	}
 	sets.precast.WS['Savage Blade'] = {
-		head=Odyssean.Helm.VitWS,
-		body=Odyssean.Body.WS,
-		hands=Odyssean.Hands.VitWS,
+		head="Hjarrandi helm",
+		body="Hjarrandi breastplate",
+		hands=Odyssean.Hands.WS,
 		legs=Odyssean.Legs.VitWS,
 		feet="Sulevia's Leggings +2",
 		ammo="Ginsen",
@@ -294,7 +314,6 @@ include('augments.lua')
 		ear1="Ishvara earring",
 		ear2="Telos earring",
 		ring1="Regal ring",
-		ring2="Karieyh ring",
 		back=Rudian.Str,
 		waist="Fotia belt"
 	}

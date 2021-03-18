@@ -62,6 +62,21 @@ include('augments.lua')
 	sets.Kiting = { 
 		legs="Carmine cuisses +1"
 	}
+	sets.Kiting.night = { 
+		legs="Carmine cuisses +1"
+	}
+	sets.weapons.Lionheart = { 
+		main="Lionheart",
+		sub="Utu Grip"
+	}
+	sets.weapons.Aettir = { 
+		main="Aettir",
+		sub="Refined grip +1"
+	}
+	sets.weapons.Epeolatry = { 
+		main="Epeolatry",
+		sub="Utu Grip"
+	}
 --------------------------
 -- 	Enmity Gear-set 	--
 --------------------------
@@ -283,7 +298,7 @@ include('augments.lua')
 		ring1="Chirich Ring +1",
 		ring2="Chirich Ring +1",
 		back=Ogma.TP,
-		waist="Ioskeha belt",
+		waist="Ioskeha belt +1",
 	}
 	sets.engaged.PDT = set_combine(sets.idle, {
 	--[[ PDT caps at 50% and MDT 24% (with shell V]]
@@ -292,7 +307,7 @@ include('augments.lua')
 		legs="Meghanada chausses +2",
 		feet="Erilaz greaves +1",
 		ring1="Defending ring",
-		waist="Ioskeha belt",
+		waist="Ioskeha belt +1",
 		back=Ogma.TP
 	})
 	sets.engaged.MagicEva = set_combine(sets.idle, {
@@ -318,7 +333,7 @@ include('augments.lua')
 		ring1="Defending Ring",
 		ring2="Moonbeam ring",
 		back=Ogma.TP,
-		waist="Ioskeha Belt",
+		waist="Ioskeha belt +1",
 		legs="Erilaz leg guards +1",
 		feet="Turms leggings"
 	})

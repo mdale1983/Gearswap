@@ -15,7 +15,7 @@ include('augments.lua')
 		back="Solemnity Cape",
 		waist="Flume Belt",
 		legs="Meghanada Chausses +1",
-		feet=Herc.Feet.PDT
+		feet="",
 	}
     sets.idle.MagicEva = set_combine(sets.idle, {
 		hands="Malignance gloves",
@@ -26,42 +26,16 @@ include('augments.lua')
 		ring1="Sheltered Ring",
 		ring2="Paguroidea Ring"
 	})
-	sets.Kiting = {
-		feet="Fajin Boots"
+	sets.Weapons = {
+		main="Sandung",
+		sub="Skinflayer",
 	}
-	sets.Kiting.night = {
-		feet="Fajin Boots"
-	}
-	sets.weapons.Tauret = { 
-		main="Tauret",
-		sub="Ternion dagger +1"
-	}
-	sets.weapons.Vajra = { 
-		main="Vajra",
-		sub="Ternion dagger +1"
-	}
-	sets.weapons.Mandau = { 
-		main="Mandau",
-		sub="Ternion dagger +1"
-	}
-	sets.weapons.Skinflayer = { 
-		main="Skinflayer",
-		sub="Ternion dagger +1"
-	}
-	sets.weapons.Twashtar = { 
-		main="Twashtar",
-		sub="Ternion dagger +1"
-	}
-	sets.weapons.Aeneas = { 
-		main="Aeneas",
-		sub="Ternion dagger +1"
-	}
-----------------------------------
+------------------------------------------
 --	 Special sets (required by rules)	--
 ------------------------------------------
     sets.TreasureHunter = {
-		hands="Plunderer's Armlets +1", 
-		feet="Skulker's Poulaines +1", 
+		hands="Plunderer's Armlets", 
+		feet="Skulker's Poulaines", 
 		--waist="Chaac Belt"
 	}
     sets.ExtraRegen = {
@@ -69,6 +43,9 @@ include('augments.lua')
 		neck="Wiglen Gorget",
 		ring1="Sheltered Ring",
 		ring2="Paguroidea Ring"
+	}
+    sets.Kiting = {
+		feet="Fajin Boots"
 	}
     sets.buff['Sneak Attack'] = {
 		ammo="Yetshila",
@@ -138,8 +115,6 @@ include('augments.lua')
 		ear1="Suppanomimi",
 		ear2="Sherida Earring",
         waist="Grunfeld Rope",
-		legs=herc_legs_DEXCRIT,
-		feet=herc_feet_TA
 	})
     organizer_items = {
         "Taming Sari",
@@ -160,7 +135,6 @@ include('augments.lua')
 		neck="Orunmila's Torque",
 		ear1="Enchanter Earring +1",
 		ear2="Loquacious Earring",
-        head=herc_head_DT,
 		body="Dread Jupon",
 		hands="Leyline Gloves",
 		ring1="Kishar Ring",
@@ -180,7 +154,6 @@ include('augments.lua')
 	---------------------
     sets.midcast.Utsusemi = {
 		ammo="Staunch Tathlum",
-        head=herc_head_DT,
 		neck="Magoraga Beads",
 		ear1="Enchanter Earring +1",
 		ear2="Loquacious Earring",
@@ -191,7 +164,6 @@ include('augments.lua')
         back="Moonbeam Cape",
 		waist="Flume Belt",
 		legs="Meghanada Chausses +2",
-		feet=herc_feet_PDT
 	}
     -- Ranged gear
     sets.midcast.RA = {}
@@ -205,61 +177,39 @@ include('augments.lua')
     -- (Aeneas/Sari) Accuracy 1080, Attack 1140
     sets.engaged = {
 		ammo="Yamarang",
-        head="Adhemar bonnet +1",
+        head="Dampening tam",
 		body="Adhemar Jacket +1",
-		hands=Herc.Hands.WS,
 		legs="Samnuha Tights",
-		feet=Herc.Feet.WS,
-		neck="Lissome necklace",
+		neck="Anu Torque",
 		ear1="Telos Earring",
-		ear2="Suppanomimi",
-        ring1="Chirich ring +1",
+		ear2="Eabani earring",
+        ring1="Chirich ring",
 		ring2="Epona's Ring",
         back="Toutatis's cape",
-		waist="Kentarch belt +1",
+		waist="Reiki yotai",
 	}
 	sets.engaged.Ceremonial = set_combine(sets.engaged, { 
-		head=Taeon.Head.WS,
+		
 		hands="Plun. Armlets",
-		body=Taeon.Body.FC,
+		
 		legs="Samnuha tights",
 		feet="Skulk. Poulaines",
 		waist="Chaac belt"
 		
 	})
     sets.engaged.MagicEva = {
-        head="Turms cap",
+		ammo="Yamarang",
+        head="Meghanada Visor +1",
 		neck="Loricate Torque +1",
+		ear1="Telos Earring",
+		ear2="Sherida Earring",
         body="Meghanada Cuirie +2",
-		hands="Malignance gloves",
+		hands="Meghanada Gloves +2",
 		ring1="Defending Ring",
 		ring2="Moonbeam Ring",
-		feet="Turms leggings"
+		waist="Reiki Yotai",
+		legs="Meghanada Chausses +2",
 	}
-	--[[ (Delay1 + Delay2) ร— (1 - Dual Wield %) รท 2 = New Delay per Hand ]]
-	sets.engaged.DW = set_combine(sets.engaged, { -- No Magic Haste 
-		--head="Ryuo somen +1",		--9
-		body="Adhemar jacket +1",	--6
-		ear1="Suppanomimi",			--5
-		ear2="Eabani earring",		--4
-		--feet="Hiza. sune-ate +1",	--7
-		waist="Reiki yotai",		--7
-    })-- 39% DW Needed
-	sets.engaged.DW.Haste_15 = set_combine(sets.engaged, { 
-		--head="Ryuo somen +1",		--9
-		ear1="Suppanomimi",			--5
-		ear2="Eabani earring",		--4
-		--feet="Hiza. sune-ate +1",	--7
-		waist="Reiki yotai",		--7
-	})-- +32 DW is needed to cap
-	sets.engaged.DW.Haste_30 = set_combine(sets.engaged, { 
-		--head="Ryuo somen +1",		--9
-		ear1="Suppanomimi",			--5
-		waist="Reiki yotai",		--7
-	})-- +21 DW is needed to cap
-	sets.engaged.DW.Haste_43 = set_combine(sets.engaged,  { -- 45% Magic Haste 
-		ear2="Suppanomimi"
-	}) -- 1% DW Needed
 ------------------------------
 --	Weaponskill Gearsets	--
 ------------------------------
@@ -280,17 +230,17 @@ include('augments.lua')
     -- 	Rudra's Storm	--
     ----------------------
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
-		ammo="Seething bomblet",
 		head="Lustratio cap +1",
-		body="Adhemar Jacket +1",
-		hands="Meg. Gloves +2",
-		legs="Samnuha tights",
+		body="Bihu justaucorps +3",
+		hands="Lustratio mittens +1",
+		legs="Lustr. subligar +1",
 		feet="Lustratio leggings +1",
 		neck="Fotia Gorget",
+		waist="Grunfeld Rope",
 		ear1="Ishvara Earring",
-		ear2="Mache earring +1",
-		waist="Fotia belt",
-		back="Toutatis's capes"
+		ear2="Moonshade Earring", 
+		ring1="Apate Ring",
+		ring2="Zilant Ring",
 	}) 
     ------------------------
     -- 	Evisceration sets --

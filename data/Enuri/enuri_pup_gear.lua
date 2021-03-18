@@ -24,6 +24,11 @@ include('augments.lua')
 			{Name='Light Maneuver',	  Amount=1},
 			{Name='Dark Maneuver',	  Amount=0},
 		},
+		Btank = { 
+			{Name='Water Maneuver',	  Amount=0},
+			{Name='Light Maneuver',	  Amount=1},
+			{Name='Fire Maneuver',	  Amount=2},
+		},
 		Skillup = { 
 			{Name='Water Maneuver',	  Amount=2},
 			{Name='Light Maneuver',	  Amount=0},
@@ -100,13 +105,14 @@ include('augments.lua')
     -- Pet Sets for idle while pet is out (eg: pet regen gear)	--
 	--------------------------------------------------------------
     sets.idle.Pet = {
-        head="Anwig Salade",
+        main="Midnights",
+		head="Anwig Salade",
         body="Tali'ah manteel +1",
 		hands="Rao kote +1",
 		waist="Isa Belt",
 		legs="Rao haidate +1",
 		feet="Rao sune-ate +1",
-		neck="Loricate Torque +1",
+		neck="Empath necklace",
 		ear1="Handler's earring",
 		ear2="Handler's earring +1",
 		ring1="Defending ring",
@@ -115,7 +121,8 @@ include('augments.lua')
 	}
     -- Idle sets to wear while pet is engaged
     sets.idle.Pet.Engaged = {
-        head="Anwig Salade",
+		main="Ohtas",
+		head="Anwig Salade",
         body="Tali'ah manteel +1",
 		hands="Rao kote +1",
 		waist="Isa Belt",
@@ -134,6 +141,10 @@ include('augments.lua')
 		waist="Isa Belt",
 		ear2="Handler's Earring +1"
 	})
+	sets.idle.Pet.Engaged.Btank = set_combine(sets.idle.Pet.Engaged, {
+		waist="Isa Belt",
+		ear2="Handler's Earring +1"
+	})
 	sets.idle.Pet.Engaged.LightTank = set_combine(sets.idle.Pet.Engaged, {
 		waist="Isa Belt",
 		ear2="Handler's Earring +1"
@@ -146,16 +157,19 @@ include('augments.lua')
 ------------------
 	sets.weapons.PetWeapons = {
 		main="Ohtas",
-		range="Animator P +1",
-		ammo="Automation Oil +3"
+		range="Animator P +1"
 	}
 	sets.weapons.Godhands = {
-		main="Godhands",
-		range="Animator P +1",
+		main="Midnights",
+		range="Animator P +1"
 	}
 	sets.weapons.Tokko = {
-		main="Tokko knuckles",
-		range="Animator P +1",
+		main="Godhands",
+		range="Animator P +1"
+	}
+	sets.weapons.Kenkonken = {
+		main="Kenkonken",
+		range="Animator P +1"
 	}
 --------------------------------------
 -- 	Pre-cast Job Ability Gear-sets 	--	
@@ -172,15 +186,12 @@ include('augments.lua')
 	sets.precast.JA['Maintenance'] = {
 		ammo="Automat. Oil +3"
 	}
-	sets.precast.JA.Maneuver = {
-		main="Tokko knuckles",
+	sets.precast.JA['Maneuver'] = {
+		main="Midnights",
 		neck="Buffoon's collar",
-		body="Cirque Farsetto +2",
+		body="Taeon tabard",
 		hands="Foire Dastanas",
 		back="Dispersal Mantle"
-	}
-	sets.midcast.Pet['Fire Maneuver'] = { 
-		neck="Buffoon's Collar",
 	}
 ----------------------------------
 -- 	Pre-cast Magic Gear-sets 	--	
@@ -199,7 +210,6 @@ include('augments.lua')
 		legs="Rawhide Trousers",
 		feet="Regal Pumps +1"
 	}
-
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads"})
 ----------------------------------
 -- 	Mid-cast Magic Gear-Sets 	--
@@ -252,21 +262,21 @@ include('augments.lua')
 -- 	engaged gear=sets 	--
 --------------------------
 	sets.engaged = {
-        head="Anwig salade",
+        head="Tali'ah Turban +1",
 		neck="Shulmanu Collar",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
         body="Tali'ah manteel +1",
-		hands="Rao kote +1",
+		hands="Tali'ah gages +1",
 		ring1="Chirich ring +1",
 		ring2="Chirich ring +1",
         back="Visucius's Mantle",
 		waist="Incarnation sash",
-		legs="Rao haidate +1",
-		feet="Rao sune-ate +1"
+		legs="Tali'ah seraweels +1",
+		feet="Tali'ah crackows +1"
 	}
 	sets.engaged.Fodder = {
-        head="Tali'ah Turban +2",
+        head="Tali'ah Turban +1",
 		neck="Shulmanu Collar",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
@@ -308,7 +318,23 @@ include('augments.lua')
 		feet=""
 	}
     sets.engaged.Pet = {
-        head="Tali'ah Turban +2",
+		main="Ohtas",
+        head="Tali'ah Turban +1",
+		neck="Shulmanu Collar",
+		ear1="Cessance Earring",
+		ear2="Telos Earring",
+        body="Sayadio's Kaftan",
+		hands="Ryuo Tekko",
+		ring1="Niqmaddu Ring",
+		ring2="Epona's Ring",
+        back="Visucius's Mantle",
+		waist="Klouskap Sash",
+		legs="Ryuo Hakama",
+		feet=""
+	}
+    sets.engaged.Pet.Btank = {
+		main="Ohtas",
+        head="Tali'ah Turban +1",
 		neck="Shulmanu Collar",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -341,7 +367,8 @@ include('augments.lua')
 	}
 	sets.midcast.Pet.PetEnmityGear = {
 		neck="",
-		body="Sayadio's kaftan",
+		body="Heyoka harness",
+		legs="Heyoka subligar",
 	}
 	sets.midcast.Pet.PetEnmityGear2 = {
 		neck="",
@@ -356,8 +383,8 @@ include('augments.lua')
 		neck="Shulmanu collar",
 		ear1="",
 		ear2="",
-		ring1="",
-		ring2="",
+		ring1="Varar ring +1",
+		ring2="Varar ring +1",
 		waist="Incarnation sash",
 		back="Visucius's mantle"
 		

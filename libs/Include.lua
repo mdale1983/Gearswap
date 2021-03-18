@@ -87,6 +87,7 @@ function init_include()
 	state.AutoHolyWaterMode   = M(true, 'Auto Holy Water Mode')
 	state.AutoRemoveDoomMode  = M(true, 'Auto Remove Doom Mode')
 	state.AutoWSMode		  = M(false, 'Auto Weaponskill Mode')
+	state.RangedAutoWSMode	  = M(false, 'Auto Ranged Weaponskill Mode')
 	state.AutoWSRestore		  = M(true, 'Auto Weaponskill Restore Mode')
 	state.AutoFoodMode		  = M(false, 'Auto Food Mode')
 	state.AutoSubMode 		  = M(false, 'Auto Sublimation Mode')
@@ -225,6 +226,7 @@ function init_include()
 	sets.element = {}
 	sets.passive = {}
 	sets.weapons = {}
+	sets.Shields = {}
 
 	sets.DuskIdle = {}
 	sets.DayIdle = {}
@@ -355,6 +357,7 @@ function init_include()
 		state.AutoRuneMode:reset()
 		state.AutoFoodMode:reset()
 		state.AutoWSMode:reset()
+		state.RangedAutoWSMode:reset()
 		state.AutoNukeMode:reset()
 		useItem = false
 		useItemName = ''
@@ -1450,7 +1453,7 @@ function get_idle_set(petStatus)
 			idleSet = set_combine(idleSet, sets.Kiting, sets.idle.Town)
 		elseif sets.Town then
 			idleSet = set_combine(idleSet, sets.Kiting, sets.Town)
-		else 
+		else
 			idleSet = set_combine(idleSet, sets.Kiting)
 		end
 
@@ -1905,9 +1908,14 @@ end
 -- Function to add kiting gear on top of the base set if kiting state is true.
 -- @param baseSet : The gear set that the kiting gear will be applied on top of.
 function apply_kiting(baseSet)
-	if sets.Kiting and (state.Kiting.value or (player.status == 'Idle' and moving and state.DefenseMode.value == 'None' and state.Passive.value == 'None' and (state.IdleMode.value == 'Normal' or state.IdleMode.value == 'Sphere' or not (player.in_combat or being_attacked)))) then
+	if sets.Kiting and not (world.time >= 17*60 or world.time < 7*60) and (state.Kiting.value or (player.status == 'Idle' and moving and state.DefenseMode.value == 'None' and state.Passive.value == 'None' and (state.IdleMode.value == 'Normal' or state.IdleMode.value == 'Sphere' or not (player.in_combat or being_attacked)))) then
 		baseSet = set_combine(baseSet, sets.Kiting)
 	end
+	--if player.main_job_full == "Ninja" then 
+		if sets.Kiting and (world.time >= 17*60 or world.time < 7*60) and (state.Kiting.value or (player.status == 'Idle' and moving and state.DefenseMode.value == 'None' and state.Passive.value == 'None' and (state.IdleMode.value == 'Normal' or state.IdleMode.value == 'Sphere' or not (player.in_combat or being_attacked)))) then 
+			baseSet = set_combine(baseSet, sets.Kiting.night)
+		end
+	--end 
 	
 	if user_customize_kiting_set then
 		baseSet = user_customize_kiting_set(baseSet)

@@ -8,8 +8,7 @@ info.ExtraSongInstrument = 'Daurdabla'
 		--sub="Taming Sari",
 		range="Linos",
 		head="Inyanga tiara +2",
-		--neck="Loricate torque +1",
-		neck="Bard\'s Charm +1",
+		neck="Loricate torque +1",
 		ear1="Infused Earring",
 		ear2="Genmei Earring",
 		body="Bihu jstcorps. +3",
@@ -51,6 +50,29 @@ info.ExtraSongInstrument = 'Daurdabla'
 	})
 	sets.Kiting = {
 		feet="Fili cothurnes +1"
+	}
+	sets.Kiting.night = {
+		feet="Fili cothurnes +1"
+	}
+	sets.weapons.Tauret = { 
+		main="Tauret",
+		sub="Taming Sari"
+	}
+	sets.weapons.Carnwenhan = { 
+		main="Carnwenhan",
+		sub="Taming Sari"
+	}
+	sets.weapons.Twashtar = { 
+		main="Twashtar",
+		sub="Taming Sari"
+	}
+	sets.weapons.Mandau = { 
+		main="Mandau",
+		sub="Taming Sari"
+	}
+	sets.weapons.Aeneas = { 
+		main="Aeneas",
+		sub="Taming Sari"
 	}
 --------------------------------------
 -- 	Pre-cast Job Ability Gear-sets 	--	
@@ -383,24 +405,24 @@ info.ExtraSongInstrument = 'Daurdabla'
 --------------------------
 	sets.engaged = {
 		range="Linos",
-		head="Aya. Zucchetto",
-		body="Ayanmo corazza +1",
+		head="Aya. Zucchetto +2",
+		body="Ayanmo corazza +2",
 		hands="Chironic gloves",
 		legs="Chironic Hose",
-		feet="Ayanmo gambieras +1",
-		neck="Clotharius torque",
-		waist="Dynamic Belt",
-		ear1="Mache Earring",
-		ear2="Brutal Earring",
-		ring1="Chirich Ring",
-		ring2="Chirich Ring",
-		back="Solemnity cape",
+		feet="Ayanmo gambieras +2",
+		neck="Bard's Charm +1",
+		waist="Reiki yotai",
+		ear1="Eabani Earring",
+		ear2="Mache Earring",
+		ring1="Chirich ring",
+		ring2="Chirich ring",
+		back=Intara.ACC,
 	}	
 	sets.engaged.DW = {
 		range="Linos",
 		head="Aya. Zucchetto +2",
-		body="Bihu justaucorps +3",
-		hands="Chironic gloves",
+		body="Ayanmo corazza +2",
+		hands="Ayanmo manopolas +2",
 		legs="Chironic Hose",
 		feet="Ayanmo gambieras +2",
 		neck="Bard's Charm +1",

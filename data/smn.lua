@@ -11,7 +11,7 @@
 --          this to work properly           --
 ----------------------------------------------
 function get_sets()
-	include('Include.lua')
+    include('Include.lua')
 	include('organizer-lib')
 end 
 ------------------------------------------
@@ -111,13 +111,17 @@ function job_setup()
 	ConduitLock = true
 	ConduitLocked = nil
 	state.PactSpamMode = M(false, 'Pact Spam Mode')
-	state.AutoFavor = M(true, 'Auto Favor')
+	state.AutoFavor = M(false, 'Auto Favor')
 	state.AutoConvert = M(true, 'Auto Convert')
 	
 	autows = 'Spirit Taker'
 	autofood = 'Akamochi'
 	
-	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoNukeMode","PactSpamMode","AutoWSMode","AutoShadowMode","AutoFoodMode","AutoStunMode","AutoDefenseMode"},{"AutoBuffMode","Weapons","OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","ElementalMode","CastingMode","TreasureMode",})
+	init_job_states({
+		"Capacity","AutoRuneMode","AutoTrustMode","AutoNukeMode","PactSpamMode","AutoWSMode","AutoShadowMode","AutoFoodMode","AutoStunMode","AutoDefenseMode"
+	},{
+		"AutoBuffMode","Weapons","OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","ElementalMode","CastingMode","TreasureMode",
+	})
 end 
 --------------------------
 --  User Setup Section  --
@@ -126,7 +130,7 @@ function user_setup()
 	state.OffenseMode:options('Normal','Acc')
     state.CastingMode:options('Normal','Resistant','OccultAcumen')
     state.IdleMode:options('Normal', 'PDT','TPEat')
-	state.Weapons:options('None','Gridarvor','Khatvanga','Nirvana')
+	state.Weapons:options('None','Gridarvor','Grioavolr','Espiritus','Nirvana')
 --[[ User Created states ]]
 	state.CapacityMode = M(false, 'Capacity Point Mantle')
 	gear.perp_staff = {name="Gridarvor"}
@@ -214,6 +218,12 @@ function job_customize_idle_set(idleSet)
     if player.mpp < 51 and (state.IdleMode.value == 'Normal' or state.IdleMode.value == 'Sphere') and state.DefenseMode.value == 'None' then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
+	if state.CapacityMode.value then 
+		idleSet = set_combine(idleSet, sets.CapacityMantle)
+	end
+	if S{"Eastern Adoulin","Western Adoulin"}:contains(world.area) then
+		idleSet = set_combine(idleSet,{body="Councilor's Garb"})
+	end
 	return idleSet
 end 
 -------------------------------
@@ -227,11 +237,9 @@ function job_customize_melee_set(meleeSet)
 	else 
 		state.WeaponskillMode:reset()
 	end 
-	if state.HybridMode.value == "Reraise" then 
-		meleeSet = set_combine(meleeSet, sets.Reraise)
-	elseif state.HybridMode.value == "MagicEva" then 
-		meleeSet = set_combine(meleeSet, sets.idle.MagicEva)
-	end 
+	if state.CapacityMode.value then 
+		meleeSet = set_combine(meleeSet, sets.CapacityMantle)
+	end  
 	if state.CapacityMode.value then 
 		meleeSet = set_combine(meleeSet, sets.CapacityMantle)
 	end
@@ -275,7 +283,7 @@ function get_combat_weapon()
 	end	
 	return get_combat_weapon
 end 
-function job_state_change(cmdParams, eventArgs) 
+function job_state_change(commandArgs, eventArgs) 
 --[[ Can use this to create your own custom Template ]]
 	if commandArgs[1]:lower() == 'petweather' then
         handle_petweather()
@@ -909,8 +917,8 @@ function check_buff()
 	if state.AutoBuffMode.value and not areas.Cities:contains(world.area) then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		for i in pairs(buff_spell_lists['Auto']) do
-			if not buffactive[buff_spell_lists[state.AutoBuffMode.Value][i].Buff] and (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Always' or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Combat' and (player.in_combat or being_attacked)) or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Engaged' and player.status == 'Engaged') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Idle' and player.status == 'Idle') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'OutOfCombat' and not (player.in_combat or being_attacked))) and spell_recasts[buff_spell_lists[state.AutoBuffMode.Value][i].SpellID] < spell_latency and silent_can_use(buff_spell_lists[state.AutoBuffMode.Value][i].SpellID) then
-				windower.chat.input('/ma "'..buff_spell_lists[state.AutoBuffMode.Value][i].Name..'" <me>')
+			if not buffactive[buff_spell_lists['Auto'][i].Buff] and (buff_spell_lists['Auto'][i].When == 'Always' or (buff_spell_lists['Auto'][i].When == 'Combat' and (player.in_combat or being_attacked)) or (buff_spell_lists['Auto'][i].When == 'Engaged' and player.status == 'Engaged') or (buff_spell_lists['Auto'][i].When == 'Idle' and player.status == 'Idle') or (buff_spell_lists['Auto'][i].When == 'OutOfCombat' and not (player.in_combat or being_attacked))) and spell_recasts[buff_spell_lists['Auto'][i].SpellID] < latency and silent_can_use(buff_spell_lists['Auto'][i].SpellID) then
+				windower.chat.input('/ma "'..buff_spell_lists['Auto'][i].Name..'" <me>')
 				tickdelay = os.clock() + 2
 				return true
 			end
@@ -957,7 +965,7 @@ buff_spell_lists = {
 		--{Name='Reraise',	Buff='Reraise',		SpellID=113,	When='Always'},
 		--{Name='Haste',		Buff='Haste',		SpellID=57,		When='Always'},
 		{Name='Refresh',	Buff='Refresh',		SpellID=109,	When='Always'},
-		{Name='Stoneskin',	Buff='Stoneskin',	SpellID=54,		When='Always'},
+		{Name='Phalanx',	Buff='Phalanx',		SpellID=106,	When='Combat'},
 	},
 	
 	Default = {

@@ -1,15 +1,21 @@
 --[[
-	Runefencer v2.1.3
+	Ninja: v2.0.2
 	Creator: Enuri
 	Server:	 Asura
-	Funcitons: 
-		Ability to swap weapons on the fly Currently setup for REMA only
-		Cycle through Runes and what resistance each one gives
-		Ability to cancel a JA that is on CD and use alternative ability
-			IE Valiance is on CD you use Valiance GS forces Vallation to be used
-		AutoTankMode
-		AutoBuffMode
-		
+	Funcitons: 	This lua will allow the user to change main weapons on the fly
+				and gives the user the ability to maintain buffs and perform 
+				weaponskills and auto eat food.
+				
+				This lua requires my libs which are based on Selindrile's LIBS
+				There are a few modifications that have been made. 
+		Auto Functions 
+			Weapon Skill 
+			Tanking
+			Buffs
+			Job Abilites
+		Display has been setup to the bottom of the screen using a resolution of 2560x1440
+			the display bar is used to display the current states of the various functions
+			not all functions have been displayed; only certain ones are allowed. 
 ]]
 ----------------------------------------------
 --  Initialization function required for    --
@@ -17,6 +23,7 @@
 ----------------------------------------------
 function get_sets()
 	include('Include.lua')
+	include('organizer-lib')
 end 
 ------------------------------------------
 -- Initialization of the various job 	--
@@ -27,27 +34,29 @@ function job_binds()
 	send_command('bind f9 gs c cycle IdleMode')
 	send_command('bind f10 gs c cycle OffenseMode')
 	send_command('bind f11 gs c cycle HybridMode')
-	send_command('bind f12 gs c cycle DefenseMode')
+	send_command('bind f12 gs c cycle WeaponskillMode')
 --[[ AltF9-AltF12 keybinds ]]
-	send_command('bind !f9 gs c cycle AutoRuneMode')
-	send_command('bind !f10 gs c cycle AutoBuffMode')
-	send_command('bind !f11 gs c toggle autowsmode')
-	send_command('bind !f12 gs c toggle SouleaterMode')
+	send_command('bind !f9 gs c toggle AutoBuffMode')
+	send_command('bind !f10 gs c toggle AutoRuneMode')
+	send_command('bind !f11 gs c toggle AutoFoodMode')
+	send_command('bind !f12 gs c toggle autowsmode')
 	send_command('bind != gs c toggle CapacityMode')
-	send_command('bind !` input /ma "Geist Wall" <t>')
-	send_command('bind !q input /ma "Soporific" <t>')
+	send_command('bind !` input /ma "Utsusemi: Ni" <me>')
+	send_command('bind !q input /ma "Utsusemi: Ichi" <me>')
 --[[ CtrlF9-CtrlF12 keybinds ]]
 	send_command('bind ^f9 gs c cycle AutoTankMode')
-	send_command('bind ^f10 gs c cycle Empty')
-	send_command('bind ^f11 gs c cycle Empty')
-	send_command('bind ^f12 gs c cycle Empty')
-	send_command('bind ^` input //sat youtarget aelwulf; wait 1 //send aelwulf /attack')
-	send_command('bind ^q input /ma "Temper" <me>')
+	send_command('bind ^f10 gs c cycle SouleaterMode')
+	send_command('bind ^f11 gs c cycle Stance')
+	send_command('bind ^f12 gs c cycle SkillchainMode')
+	send_command('bind ^` input /ma "Tonko: Ni" <me>')
+	send_command('bind ^q input /ma "Monomi: Ichi" <me>')
 --[[ WindowsF9-WindowsF12 keybinds ]]
-	send_command('bind @f9 gs c set mainWeapon Lionheart')
-	send_command('bind @f10 gs c set mainWeapon Aettir')
-	send_command('bind @f11 gs c set mainWeapon Epeolatry')
-	send_command('bind @f12 gs c set mainWeapon Empty')
+	send_command('bind @f7 gs c set Weapons empty') 	
+	send_command('bind @f8 gs c set Weapons empty')			--Abuscade Weapon 
+	send_command('bind @f9 gs c set Weapons Lionheart')		--Aeonic Weapon
+	send_command('bind @f10 gs c set Weapons Aettir')		--Oboro Weapon
+	send_command('bind @f11 gs c set Weapons Epeolatry')	--Mythic Weapon 
+	send_command('bind @f12 gs c set Weapons empty')	
 	send_command('bind @` input /ma "Aquaveil" <me>')
 	send_command('bind @q input /ma "Sheep Song" <t>')
 end
@@ -55,77 +64,65 @@ end
 --  Job Setup Section   --
 --------------------------
 function job_setup()
-	state.Buff['Aftermath: Lv.3'] = buffactive['Aftermath: Lv.3'] or false
+	state.mainWeapon = M{'None', 'Gungnir', 'Aettir', 'Lionheart', 'Epeolatry'}
+	state.Weapons = M{'None', 'Aettir', 'Lionheart', 'Epeolatry'}
+	oneHandList = S{'replace with your weapons'}
+	gsList = S{'replace with your weapons'}
+	scytheList = S{'replace with your weapons'}
+	ktList = S{'Umaru', 'Kurikaranotachi'}
+	
+	state.crafting = M(false)
+	state.Stance = M{['description']='Stance','Hasso','Seigan'}
 	state.Buff['Valiance'] = buffactive['Valiance'] or false
 	state.Buff['Vallation'] = buffactive['Vallation'] or false
 	state.Buff['Embolden'] = buffactive['Embolden'] or false
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
-	state.Stance = M{['description']='Stance','Hasso','Seigan','None'}
+	
+	
+	autowstp = 1200
 	autows = 'Resolution'
 	autofood = 'Miso Ramen'
-	--update_melee_groups()
+	
+	Breath_HPP = 60
+	
+--[[ Initialization of auto job functions ]]
 	init_job_states({
-		"Capacity","AutoRuneMode","AutoTrustMode","AutoTankMode",
-		"AutoWSMode","AutoShadowMode","AutoFoodMode","AutoNukeMode",
-		"AutoStunMode","AutoDefenseMode","AutoBuffMode",
+		"Capacity","AutoRuneMode","AutoTankMode",
+		"AutoWSMode","AutoShadowMode","AutoFoodMode","AutoBuffMode",
 		},{
-		"AutoSambaMode","Weapons","OffenseMode","WeaponskillMode",
-		"Stance","IdleMode","Passive","RuneElement","PhysicalDefenseMode",
-		"MagicalDefenseMode","ResistDefenseMode","TreasureMode",
+		"Weapons","AutoWSMode","AutoFoodMode","AutoBuffMode","Stance",
+		"AutoRuneMode","OffenseMode","WeaponskillMode","IdleMode","AutoTankMode"
 	})
-	state.mainWeapon = M{'None', 'Lionheart', 'Aettir', 'Epeolatry', 'Empty'}
-	oneHandList = S{'replace with your weapons'}
-  	gsList = S{'Macbain', 'Crobaci +1'}
-  	scytheList = S{'Cronus', 'Raetic Scythe'}
-	bowList = S{'Bow1', 'Bow2'}
-	gunList = S{'Doomsday', 'Holliday', 'Lionsquall'}
-	state.rangedWeapon = M{'None', 'Fomalhaut', 'Annihilator', 'Yoichinoyumi', 'Gandiva'}
-	  --[[Correction to errors in Mote Libs]]
-  	absorbs = S{ 
-			'Absorb-STR', 'Absorb-DEX', 'Absorb-VIT', 
-			'Absorb-AGI', 'Absorb-INT', 'Absorb-MND', 
-			'Absorb-CHR', 'Absorb-ACC', 'Absorb-TP',
-			'Absorb-Attri'
-		}
-  --[[ Moonshade earring and Gav. Helmet ]]
-		moonshade_WS = S{
-			"Resolution", "Dimidiation", 
-			"Savage Blade", "Vorpal Blade", 
-			"Requiescat", "Sanguine Blade"
-		}
-		gav_ws = S{
-			"Torcleaver","Resolution","Catastrophe",
-			"Scourge","Cross Reaper"
-		}
-  --[[ Nuking sets ]]
-		LowTierNuke = S{
-			'Stone', 'Stone II', 'Stone III', 
-			'Stonega', 'Stonega II',
-			'Water', 'Water II', 'Water III', 
-			'Waterga', 'Waterga II',
-			'Aero', 'Aero II', 'Aero III', 
-			'Aeroga', 'Aeroga II',
-			'Fire', 'Fire II', 'Fire III', 
-			'Firaga', 'Firaga II',
-			'Blizzard', 'Blizzard II', 'Blizzard III', 
-			'Blizzaga', 'Blizzaga II',
-			'Thunder', 'Thunder II', 'Thunder III', 
-			'Thundaga', 'Thundaga II'
-		}
-	--[[ Ninja Tools Section ]]
-		ninjaTools = {
-			Utsusemi = S{"Shihei",},--"Shikanofuda" 
-			Hojo = S{"Kaginawa",},--"Chonofuda"
-			Migawari = S{"Mokujin",},
-			Kakka = S{"Ryuno",},
-			Tonko = S{"Shinobi-tabi",},
-			Kurayami = S{"Sairui-Ran",},
-			Raiton = S{"Hiraishin",},
-			Hyoton = S{"Tsurara",},
-			Monomi = S{"Sanjaku-Tenugui",},
-		}
-		BlueMagic = {}
+--[[ Moonshade earring and Gav. Helmet ]]
+	moonshade_WS = S{
+		"Resolution", "Dimidiation", 
+		"Savage Blade", "Vorpal Blade", 
+		"Requiescat", "Sanguine Blade"
+	}
+	gav_ws = S{
+		"Resolution", "Dimidiation", 
+		"Savage Blade", "Vorpal Blade", 
+		"Requiescat", "Sanguine Blade"
+	}
+	utsusemi_ni_cancel_delay = .1
+--[[ Ninja Tools Section ]]
+	ninjaTools = {
+		Utsusemi = S{"Shihei",},--"Shikanofuda" 
+		Hojo = S{"Kaginawa",},--"Chonofuda"
+		Migawari = S{"Mokujin",},
+		Kakka = S{"Ryuno",},
+		Tonko = S{"Shinobi-tabi",},
+		Kurayami = S{"Sairui-Ran",},
+		Raiton = S{"Hiraishin",},
+		Hyoton = S{"Tsurara",},
+		Monomi = S{"Sanjaku-Tenugui",},
+	}
+	state.warned = M(false)
+	state.crafting = M(false)
+	options.ammo_warning_limit = 10
+	state.ElementalMode = M{['description'] = 'Elemental Mode','Fire','Water','Lightning','Earth','Wind','Ice','Light','Dark',}
+	BlueMagic = {}
 		blue_magic_maps = {}
 		blue_magic_maps.Physical = S {
 			'Bludgeon', 'Body Slam', 'Feather Storm', 'Mandibular Bite', 
@@ -157,14 +154,13 @@ end
 --  User Setup Section  --
 --------------------------
 function user_setup()
-	state.IdleMode:options('PDT')
+	state.IdleMode:options('PDT', 'MagicEva')
   	state.OffenseMode:options('TankHyb', 'Normal')
   	state.HybridMode:options('Normal', 'MagicEva')
-	state.DefenseMode:options('None', 'Physical')
-  	state.WeaponskillMode:options('Normal', 'Mid', 'Acc')
+  	state.WeaponskillMode:options('Normal', 'Acc')
   	state.CastingMode:options('Normal', 'Resistant', 'Enmity')
 --[[ User Created states ]]
-  	state.SouleaterMode = M(false, 'Soul Eater Mode')
+	state.SouleaterMode = M(false, 'Soul Eater Mode')
 	state.LastResortMode = M(false, 'Last Resort Mode')
 	state.CapacityMode = M(false, 'Capacity Point Mantle')
 	state.Runes = M{['description']='Rune', 
@@ -196,9 +192,12 @@ function user_setup()
 		"Water", 
 		"Light", 
 		"Dark"
-		}
- --[[ Loading of various functions ]]
-  	job_update(cmdParams, eventArgs)
+	}
+	state.CapacityMode = M(false, 'Capacity Point Mantle')
+	state.HasteMode = M{['description']='Haste Mode', 'Hi', 'Normal'}
+    state.Buff['Aftermath'] = buffactive['Aftermath'] or false
+    state.Buff['Aftermath: Lv.3'] = buffactive['Aftermath: Lv.3'] or false
+--[[ Loading of various functions ]]
   	select_default_macro_book()
   	set_lockstyle()
 	get_player_name()
@@ -213,40 +212,40 @@ function get_player_name()
     	roll = windower.ffxi.get_player().main_job_full
     	windower.add_to_chat(7, 'Hello '..self..' your '..roll..' LUA is now loaded')
     	windower.add_to_chat(7, 'The gerbils are fetching your '..roll..' Lockstyle!')
-		send_command('gs c set mainWeapon Lionheart')
+		send_command('gs c Weapons Lionheart')
     end 
 end
 --------------------------------------------------
 --  This section is called when you change jobs --
 --------------------------------------------------
 function file_unload()
---[[ F9-F12 unbind's ]]
-	send_command('unbind f9')
-	send_command('unbind f10')
-	send_command('unbind f11')
-	send_command('unbind f12')
---[[ AltF9-AltF12 unbind's ]]
-	send_command('unbind !f9')
-	send_command('unbind !f10')
-	send_command('unbind !f11')
-	send_command('unbind !f12')
-	send_command('unbind !=')
-	send_command('unbind !`')
-	send_command('unbind !q')
---[[ CtrlF9-CtrlF12 unbind's ]]
-	send_command('unbind ^f9')
-	send_command('unbind ^f10')
-	send_command('unbind ^f11')
-	send_command('unbind ^f12')
-	send_command('unbind !`')
-	send_command('unbind !q')
---[[ WindowsF9-WindowsF12 unbind's ]]
-	send_command('unbind @f9')
-	send_command('unbind @f10')
-	send_command('unbind @f11')
-	send_command('unbind @f12')
-	send_command('unbind !`')
-	send_command('unbind !q')
+	--[[ F9-F12 unbind's ]]
+		send_command('unbind f9')
+		send_command('unbind f10')
+		send_command('unbind f11')
+		send_command('unbind f12')
+	--[[ AltF9-AltF12 unbind's ]]
+		send_command('unbind !f9')
+		send_command('unbind !f10')
+		send_command('unbind !f11')
+		send_command('unbind !f12')
+		send_command('unbind !=')
+		send_command('unbind !`')
+		send_command('unbind !q')
+	--[[ CtrlF9-CtrlF12 unbind's ]]
+		send_command('unbind ^f9')
+		send_command('unbind ^f10')
+		send_command('unbind ^f11')
+		send_command('unbind ^f12')
+		send_command('unbind ^`')
+		send_command('unbind ^q')
+	--[[ WindowsF9-WindowsF12 unbind's ]]
+		send_command('unbind @f7')
+		send_command('unbind @f8')
+		send_command('unbind @f9')
+		send_command('unbind @f10')
+		send_command('unbind @f11')
+		send_command('unbind @f12')
 end 
 ----------------------------------------------
 --  This tells Gear swap what sets to fetch --
@@ -289,7 +288,7 @@ function useRunes(cmdParams, eventArgs)
 end
 ---------------------------
 --  Custom Idle Gear set --
----------------------------	
+---------------------------	 
 function job_customize_idle_set(idleSet)
 	if state.IdleMode.value == "PDT" then 
 		idleSet = set_combine(idleSet, sets.idle.PDT)
@@ -311,7 +310,7 @@ end
 -------------------------------
 --  Custom Melee Gear set    --
 -------------------------------
-function job_customize_melee_set(meleeSet)
+function job_customize_melee_set(meleeSet) 
 	if state.OffenseMode.value == "TankHyb" then 
 		meleeSet = set_combine(meleeSet, sets.engaged.TankHyb)
 	end 
@@ -344,6 +343,7 @@ function job_update(cmdParams, eventArgs)
 	get_combat_form()
 	get_combat_weapon()
 	job_state_change()
+	determine_haste_group()
 	update_melee_group()
 end 
 function job_status_change(newStatus, oldStatus, eventArgs)
@@ -357,79 +357,104 @@ function job_status_change(newStatus, oldStatus, eventArgs)
 			state.CombatWeapon:set('Lionheart')
 		elseif player.equipment.main == 'Aettir' then
 			state.CombatWeapon:set('Aettir')
-		elseif player.equipment.main == 'Caladbolg' then
-			state.CombatWeapon:set('Caladbolg')
 		end
 	end 
 end 
+function get_combat_form() 
+	if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+		state.CombatForm:set("DW")
+	else
+		state.CombatForm:reset()
+	end
+	if buffactive['Samurai Roll'] then
+		classes.CustomRangedGroups:append('SamRoll')
+	end
+end 
 function get_combat_weapon()
-	if state.mainWeapon.value == "Aettir" then 
-		equip({main="Aettir", sub="Refined grip +1"})
-		set_macro_page(1, 9)
-	elseif state.mainWeapon.value == "Lionheart" then 
-		equip({main="Lionheart", sub="Utu grip"})
-		set_macro_page(1, 9)
-	elseif state.mainWeapon.value == "Epeolatry" then 
-		equip({main="Epeolatry", sub="Utu grip"})
-		set_macro_page(1, 9)
-	end	
+	if state.Weapons.value == "Aettir" then 
+		equip({main="Aettir", sub="Utu Grip"})
+	elseif state.Weapons.value == "Lionheart" then 
+		equip({main="Lionheart", sub="Aettir"})
+	elseif state.Weapons.value == "Epeolatry" then 
+		equip({main="Epeolatry", sub="Utu Grip"})
+	end
 	return get_combat_weapon
 end 
-function job_state_change(spell, spellMap, eventArgs) 
-	
+function job_state_change(cmdParams, eventArgs) 
+	--[[	Left empty for now	]]
+end 
+function determine_haste_group(buff, gain)
+	classes.CustomMeleeGroups:clear()
+		--[[
+			Haste (white magic) 15%  [33]
+			Haste Samba (Sub) 5%		[370]
+			Mighty Guard - 15%		[604]
+			Victory March +3/+4/+5     14%/15.6%/17.1%
+		 	Advancing March +3/+4/+5   10.9%/12.5%/14%
+			Embrava 25%
+		]]
+	if (buffactive[604] and buffactive[33]) or buffactive.March == 2 then
+		classes.CustomMeleeGroups:append('Haste_43')
+	elseif buffactive.haste and state.HasteMode.Value == "Hi" then
+		classes.CustomMeleeGroups:append('Haste_30')
+	elseif buffactive.haste then
+		classes.CustomMeleeGroups:append('Haste_15')
+	else 
+		classes.CustomMeleeGroups:append('DW')
+	end
 end 
 function update_melee_group()
---[[ Can use this to create your own custom Template ]]
+	--[[ Can use this to create your own custom Template ]]
 	classes.CustomMeleeGroups:clear()
 	-- mythic AM	
-	if player.equipment.main == 'Liberator' then
+	if player.equipment.main == 'Epeolatry' then
 		if buffactive['Aftermath: Lv.3'] then
 			classes.CustomMeleeGroups:append('AM3')
 		end
 	elseif buffactive['Aftermath'] then
 		classes.CustomMeleeGroups:append('AM')
 	end
-	if player.equipment.main == 'Apocalypse' then 
-		if buffactive['Aftermath'] then 
-			classes.CustomMeleeGroups:append('AM')
-			add_to_chat(8, '***Apocalypse haste is active. Switching to AM set***')
-		end 
-	end 
+	if player.equipment.main == 'Rhongomiant' then 
+		if buffactive['Aftermath: Lv.3'] then 
+			classes.CustomMeleeGroups:append('AM3')
+			add_to_chat(8, '***Rhongomiant AM active. 50% Triple Damage***')
+		end
+	elseif buffactive['Aftermath'] then
+		classes.CustomMeleeGroups:append('AM')
+	end
+	if player.equipment.main == 'Lionheart' then 
+		if buffactive['Aftermath: Lv.3'] then 
+			classes.CustomMeleeGroups:append('AM3')
+			add_to_chat(8, '***Lionheart AM active. Ultimate SC Available***')
+		end
+	elseif buffactive['Aftermath'] then
+		classes.CustomMeleeGroups:append('AM')
+	end
+	if player.equipment.main == 'Gungnir' then 
+		if buffactive['Aftermath: Lv.3'] then 
+			classes.CustomMeleeGroups:append('AM3')
+			add_to_chat(8, '*** Gungnir AM active. Attack +5% DA +5% ***')
+		end
+	elseif buffactive['Aftermath'] then
+		classes.CustomMeleeGroups:append('AM')
+	end		
 	if buffactive['Samurai Roll'] then
 		classes.CustomRangedGroups:append('SamRoll')
 	end
 end
-function get_combat_form() 
-	if CombatForm == 'DW' and player.in_combat then 
-		-- Haste (white magic) 15%  [33]
-		-- Haste Samba (Sub) 5%		[370]
-		-- Mighty Guard - 15%		[604]
-		-- Victory March +3/+4/+5     14%/15.6%/17.1%
-		-- Advancing March +3/+4/+5   10.9%/12.5%/14%
-		-- Embrava 25%
-		-- Last Resort 25% JA Haste
-		-- Hasso 10%
-		if (buffactive[604] and buffactive[33]) or buffactive.march == 2 then
-			classes.CustomMeleeGroups:append('Haste_43')
-			add_to_chat(8, '---43% Haste Detected---')
-		elseif buffactive[51] and buffactive.march ==2 then
-			classes.CustomMeleeGroups:append('Haste_43x')
-			add_to_chat(8, '---43% Haste Detected---')
-		elseif buffactive.embrava and buffactive.haste then
-			classes.CustomMeleeGroups:append('Haste_40')
-			add_to_chat(8, '---40% Haste Detected---')
-		elseif buffactive.haste then
-			classes.CustomMeleeGroups:append('Haste_30')
-			add_to_chat(8, '---30% Haste Detected---')
-		else 
-			add_to_chat(8, '---No Haste Detected---')
-		end
-	end 
-end 
 -------------------------------------
 --  Creating a custom spellMap,    --
 -------------------------------------
 function job_get_spell_map(spell, default_spell_map)
+	if spell.skill == "Ninjutsu" then
+		if not default_spell_map then
+			if spell.target.type == 'SELF' then
+				return 'NinjutsuBuff'
+			else
+				return 'NinjutsuDebuff'
+			end
+		end
+	end
 	if spell.skill == 'Dark Magic' and absorbs:contains(spell.english) then
 		return 'Absorb'
 	end
@@ -441,7 +466,10 @@ end
 -- Pre-Target section  --
 -------------------------
 function job_pretarget(spell, action, spellMap, eventArgs)
-
+	if spell.type:endswith('Magic') and buffactive.silence then
+		eventArgs.cancel = true
+		send_command('input /item "Echo Drops" <me>')
+	end
 end
 -----------------------
 -- Pre-cast section  --
@@ -494,13 +522,17 @@ function job_precast(spell, action, spellMap, eventArgs)
 		send_command('input /item "Echo Drops" <me>')
 	end
 end 
-function job_post_precast(spell, action, spellMap, eventArgs)
+function job_post_precast(spell, spellMap, eventArgs)
+	if spell.type == 'WeaponSkill' then
+		if world.time >= 17*60 or world.time < 7*60 then -- Dusk to Dawn time.
+			equip({ear1="Lugra Earring +1", ear2="Lugra Earring"})
+		end
+	end
 	if spell.type=='WeaponSkill' then
 		if moonshade_WS:contains(spell.english) and player.tp < 2850 then
 			equip({ear2="Moonshade Earring"})
 		end
 	end
---[[ Lock Weaponskill if you are to far from the mob  ]]
 	if spell.type == 'WeaponSkill' then 
 		if spell.target.distance > 5 then 
 			cancel_spell()
@@ -513,10 +545,19 @@ end
 --  Mid-cast Section --
 -----------------------
 function job_midcast(spell, spellMap, eventArgs)
-	
+	if spell.type == 'CorsairShot' or spell.action_type == 'Ranged Attack' then
+		if state.CapacityMode.value then
+			equip(sets.CapacityMantle)
+		end
+	end
 end
 function job_post_midcast(spell, spellMap, eventArgs)
-    if spell.skill == 'Enhancing Magic' and state.Buff.Embolden and sets.buff.Embolden then
+	if spell.type == 'WeaponSkill' then 
+		if gav_ws:contains(spell.english) and (spell.element==world.day_element or spell.element==world.weather_element) then
+			equip({head="Gavialis Helm"})
+		end
+	end	
+	if spell.skill == 'Enhancing Magic' and state.Buff.Embolden and sets.buff.Embolden then
         equip(sets.buff.Embolden)
     end
 	if spell.skill == 'Elemental Magic' then
@@ -524,12 +565,12 @@ function job_post_midcast(spell, spellMap, eventArgs)
 				equip(sets.midcast['Elemental Magic'], {waist="Hachirin-no-Obi"})
 			end
 		end
-		if spell.type == 'WeaponSkill' then 
-			if gav_ws:contains(spell.english) and (spell.element==world.day_element or spell.element==world.weather_element) then
-				equip({head="Gavialis Helm"})
-			end
+	if spell.type == 'WeaponSkill' then 
+		if gav_ws:contains(spell.english) and (spell.element==world.day_element or spell.element==world.weather_element) then
+			equip({head="Gavialis Helm"})
 		end
-end
+	end
+end 
 -------------------------
 --  after-cast Section --
 -------------------------
@@ -543,7 +584,7 @@ function job_aftercast(spell, spellMap, eventArgs)
    end
 end 
 function job_post_aftercast(spell, spellMap, eventArgs)
-
+ 
 end 
 --------------------------------------
 -- 	Called when a player gains 		--
@@ -553,10 +594,58 @@ end
 --	if it was lost.   				--
 --------------------------------------
 function job_buff_change(buff, gain)	
-	if state.Buff[buff] ~= nil then
-		state.Buff[buff] = gain
+	if S{'haste','march','embrava','haste samba'}:contains(buff:lower()) then
+		determine_haste_group()
 		handle_equipping_gear(player.status)
-	end 
+	elseif state.Buff[buff] ~= nil then
+		handle_equipping_gear(player.status)
+	end
+	if buff:startswith('Aftermath') then
+		if player.equipment.main == 'Epeolatry' then
+			classes.CustomMeleeGroups:clear()
+			if (buff == "Aftermath: Lv.3" and gain) or buffactive['Aftermath: Lv.3'] then
+				classes.CustomMeleeGroups:append('AM3')
+				add_to_chat(8, '*** Epeolatry AM3 active: Increased Acc. and Atk. 40%-DA 20%-TA ***')
+				send_command('timers create "Aftermath: Lv. 3" 180 down')
+				send_command('gs c autows Resolution')
+			elseif (buff == "Aftermath: Lv.2" and gain) then
+				add_to_chat(8, '*** Epeolatry AM2 active: Increased Acc. and Atk. ***')
+				send_command('timers create "Aftermath: Lv. 2" 120 down')
+			elseif (buff == "Aftermath: Lv.1" and gain) then
+				add_to_chat(8, '*** Epeolatry AM1 active: Increased Acc. ***')
+				send_command('timers create "Aftermath: Lv. 1" 60 down')
+			else 
+				send_command('gs c autows Dimidiation')
+			end
+			if not midaction() then
+				handle_equipping_gear(player.status)
+			end
+		elseif player.equipment.main =="Lionheart" then 
+			classes.CustomMeleeGroups:clear()
+			if (buff == "Aftermath: Lv.3" and gain) or buffactive['Aftermath: Lv.3'] then
+				classes.CustomMeleeGroups:append('AM3')
+				add_to_chat(8, '*** Lionheart AM3 active: Ultimate SC Available ***')
+				send_command('timers create "Aftermath: Lv. 3" 180 down')
+			elseif (buff == "Aftermath: Lv.2" and gain) then
+				add_to_chat(8, '*** Lionheart AM2 active: Ultimate SC Available ***')
+				send_command('timers create "Aftermath: Lv. 2" 120 down')
+			elseif (buff == "Aftermath: Lv.1" and gain) then
+				add_to_chat(8, '*** Lionheart AM1 active: Ultimate SC Available ***')
+				send_command('timers create "Aftermath: Lv. 1" 60 down')
+			end
+			if not midaction() then
+				handle_equipping_gear(player.status)
+			end
+		else
+			classes.CustomMeleeGroups:clear()
+			if buff == "Aftermath" and gain or buffactive.Aftermath then
+				classes.CustomMeleeGroups:append('AM')
+			end
+			if not midaction() then
+				handle_equipping_gear(player.status)
+			end
+		end
+	end
 	if buff:lower()=='terror' or buff:lower()=='petrification' or buff:lower()=='stun' then
 		if gain then
 			equip(sets.DT)
@@ -567,10 +656,10 @@ function job_buff_change(buff, gain)
 	end
 	if buff:lower()=='sleep' then
 		if gain and player.hp > 120 and player.status == "Engaged" then 
--- Equip Berserker's Torque / Frenzy Sallet 
+		-- Equip Berserker's Torque / Frenzy Sallet 
 			equip(sets.Asleep)
 		elseif not gain then 
--- Remove Berserker's Torque / Frenzy Sallet
+		-- Remove Berserker's Torque / Frenzy Sallet
 			handle_equipping_gear(player.status)
 		end
 	end
@@ -590,13 +679,7 @@ function job_buff_change(buff, gain)
 		else
 			enable('neck')
 	end
---[[ Job Specific Buff handling ]]
-	if state.LastResortMode.value == true then 
-		send_command('@wait 1; cancel Last Resort')
-	end 
-	if state.SouleaterMode.value == true then 
-		send_command('@wait 1; cancel Souleater')
-	end 
+	--[[ Job Specific Buff handling ]]
 end 
 ----------------------------------
 --  Sub job section for Ninja   --
@@ -614,28 +697,49 @@ function check_tools(spell)
 		end
 	end
 end
+--------------------------
+--	Checking for Haste	--
+--------------------------
+windower.register_event('action',
+function(act)
+--check if you are a target of spell
+    local actionTargets = act.targets
+		playerId = windower.ffxi.get_player().id
+		isTarget = false
+    for _, target in ipairs(actionTargets) do
+        if playerId == target.id then
+            isTarget = true
+        end
+    end
+	if isTarget == true then
+        if act.category == 4 then
+            local param = act.param
+            if param == 57 then
+				add_to_chat(122, 'Haste Status: Haste I')
+				state.HasteMode:set('Normal')
+                haste = 1
+            elseif param == 511 then
+				add_to_chat(122, 'Haste Status: Haste II')
+				state.HasteMode:set('Hi')
+                haste = 2
+            end
+        end
+    end
+end)
 ----------------------------------------
 --  Selecting and Setting the default --
 --	Macro book and Lock style 		  --
 ----------------------------------------
 function select_default_macro_book()
-	-- Default macro set/book
-	if player.sub_job == 'WAR' then 
-		set_macro_page(1, 9)
-	elseif player.sub_job == 'BLU' then 
-		set_macro_page(1, 9)
-	elseif player.sub_job == 'SAM' then 
-		set_macro_page(1, 9)
-	else 
-		set_macro_page(1, 9)
-	end 
+	set_macro_page(1, 9)
+	send_command('wait 4; input //gs org get')
 end
 function set_lockstyle()
 	send_command('wait 4; input /lockstyleset 3')
 end
---
---
---
+------------------------------
+--	Auto ability section	--
+------------------------------
 function job_self_command(commandArgs, eventArgs)
 	if commandArgs[1]:lower() == 'rune' then
 			send_command('@input /ja '..state.Runes.value..' <me>')
@@ -708,7 +812,7 @@ function job_self_command(commandArgs, eventArgs)
 	end
 end
 function job_tick()
-	--if check_hasso() then return true end
+	if check_hasso() then return true end
 	if check_buff() then return true end
 	if check_buffup() then return true end
 	if state.AutoTankMode.value and player.in_combat and player.target.type == "MONSTER" and not moving then
@@ -717,6 +821,31 @@ function job_tick()
 		tickdelay = os.clock() + 1.5
 		return true
 	end
+	return false
+end
+function check_hasso()
+	if player.in_combat and player.sub_job == "SAM" then
+		
+		local abil_recasts = windower.ffxi.get_ability_recasts()
+		
+		if state.Stance.value == 'Hasso' and not buffactive['Hasso'] and abil_recasts[138] < latency then
+			--send_command('input //cancel seigan')
+			windower.chat.input('/ja "Hasso" <me>')
+			tickdelay = os.clock() + 1.8
+			return true
+		elseif state.Stance.value == 'Seigan' and not buffactive['Seigan'] and abil_recasts[139] < latency then
+			windower.chat.input('/ja "Seigan" <me>')
+			tickdelay = os.clock() + 1.8
+			return true
+		elseif state.Stance.value == 'Seigan' and not buffactive['Third Eye'] and abil_recasts[133] < latency then 
+			windower.chat.input('/ja "Third Eye" <me>')
+			tickdelay = os.clock() + 1.8
+			return true
+		else
+			return false
+		end
+	end
+
 	return false
 end
 function check_flash_foil()
@@ -846,4 +975,6 @@ buff_spell_lists = {
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
+	include('telecmds')
+	include('follow')
 end

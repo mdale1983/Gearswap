@@ -10,6 +10,7 @@
 ----------------------------------------------
 function get_sets()
 	include('Include.lua')
+	include('organizer-lib')
 end 
 ------------------------------------------
 -- Initialization of the various job 	--
