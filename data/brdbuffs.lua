@@ -19,4 +19,16 @@ windower.register_event('chat message', function(message,sender,mode,gm)
         windower.send_command('input //lua r singer')
 		windower.send_command('wait 2; input //sing')
     end
+	if sender == 'Ironhound' and message:contains('songs') then
+        windower.send_command('input //lua r singer')
+		windower.send_command('wait 2; input //sing')
+    end
 end)
+--[[function user_job_self_command(commandArgs, eventArgs)
+	if commandArgs:get(1) == 'assist' then 
+		send_command('input //hb on')
+	end 
+	if commandArgs:get(1) == 'stopAssist' then
+		send_command('input //hb off')
+	end 
+end]]

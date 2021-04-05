@@ -13,13 +13,12 @@ WeaponType =  {
 	}
 	DefaultAmmo = {
 		['Gun']  = {
-			['Default'] = 		"Chrono Bullet",
-			['WS'] = 			"Chrono Bullet",
-			['MagicWS'] =		"Chrono Bullet",
-			['Acc'] = 			"Chrono Bullet",
-			['Magic'] = 		"Chrono Bullet",
-			['MagicAcc'] = 		"Chrono Bullet",
-			['CorsairShot'] = 	"Chrono Bullet"
+			['Default'] = "Chrono Bullet",
+			['WS'] = "Chrono Bullet",
+			['MagicWS'] = "Orichalc. Bullet",
+			['Acc'] = "Adlivun Bullet",
+			['Magic'] = "Orichalcum Bullet",
+			['MagicAcc'] = "Orichalcum Bullet"
 		}
 	}
 ----------------------
@@ -61,14 +60,6 @@ WeaponType =  {
 		ring1="Vengeful ring",
 		ear2="Etiolation earring",
 	})
-	sets.Weapons = {
-		main="Fettering Blade",
-		sub="Blurred knife +1",
-		range="Anarchy +3",
-		--ammo="Fomalhaut",
-		head="Compensator",
-		waist="Chrono bullet pouch"
-	}
 	sets.Kiting = {
 		legs="Carmine Cuisses +1"
 	}
@@ -80,7 +71,7 @@ WeaponType =  {
 ------------------
 	sets.weapons.Fomalhaut = {
 		main="Naegling",
-		sub="Nusku shield",
+		sub="Fettering blade",
 		range="Fomalhaut",
 		ammo=DefaultAmmo.Gun.Default,
 		waist="Chrono bullet pouch"
@@ -94,7 +85,7 @@ WeaponType =  {
 	}
 	sets.weapons.Anarchy = {
 		main="Naegling",
-		sub="Fettering blade",
+		sub="Blurred knife +1",
 		range="Anarchy +3",
 		ammo=DefaultAmmo.Gun.Default,
 		waist="Chrono bullet pouch"
@@ -159,9 +150,6 @@ WeaponType =  {
         back="Camulus's mantle",
         feet="Lanun Bottes"
     }
-	sets.precast.CorsairRoll.idle = set_combine(sets.precast.CorsairRoll, { 
-		range="Fomalhaut"
-	})
 	sets.precast.CorsairRoll["Samurai Roll"] = set_combine(sets.precast.CorsairRoll, {
 		--legs="Navarch's Culottes +1"
 	})
@@ -314,7 +302,7 @@ WeaponType =  {
 ----------------------------------	
 	sets.engaged = {
         --ammo=gear.RAbullet,
-        head="Adhemar bonnet",
+        head="Adhemar bonnet +1",
         neck="Lissome Necklace",
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -388,7 +376,7 @@ WeaponType =  {
 		neck="Fotia Gorget",
 		ear1="Ishvara earring",
 		ear2="Brutal earring",
-		ring1="Karieyh ring",
+		ring1="Ilabrat ring",
 		ring2="Regal ring",
 		waist="Fotia belt",
 		back=Cam.TP

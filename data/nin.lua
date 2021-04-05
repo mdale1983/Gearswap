@@ -308,7 +308,7 @@ function determine_haste_group(buff, gain)
 end 
 function update_melee_group()
 	--[[ Can use this to create your own custom Template ]]
-	classes.CustomMeleeGroups:clear()
+	--classes.CustomMeleeGroups:clear()
 	-- mythic AM	
 	if player.equipment.main == 'Nagi' then
 		if buffactive['Aftermath: Lv.3'] then
@@ -633,145 +633,7 @@ function(act)
             end
         end
     end
-end)--[[
---------------------------
--- Define Roll Values	--
---------------------------
-	function define_roll_values()
-		rolls = {
-			["Corsair's Roll"]   = {lucky=5, unlucky=9, bonus="Experience Points"},
-			["Ninja Roll"]       = {lucky=4, unlucky=8, bonus="Evasion"},
-			["Hunter's Roll"]    = {lucky=4, unlucky=8, bonus="Accuracy"},
-			["Chaos Roll"]       = {lucky=4, unlucky=8, bonus="Attack"},
-			["Magus's Roll"]     = {lucky=2, unlucky=6, bonus="Magic Defense"},
-			["Healer's Roll"]    = {lucky=3, unlucky=7, bonus="Cure Potency Received"},
-			["Puppet Roll"]      = {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
-			["Choral Roll"]      = {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
-			["Monk's Roll"]      = {lucky=3, unlucky=7, bonus="Subtle Blow"},
-			["Beast Roll"]       = {lucky=4, unlucky=8, bonus="Pet Attack"},
-			["Samurai Roll"]     = {lucky=2, unlucky=6, bonus="Store TP"},
-			["Evoker's Roll"]    = {lucky=5, unlucky=9, bonus="Refresh"},
-			["Rogue's Roll"]     = {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
-			["Warlock's Roll"]   = {lucky=4, unlucky=8, bonus="Magic Accuracy"},
-			["Fighter's Roll"]   = {lucky=5, unlucky=9, bonus="Double Attack Rate"},
-			["Drachen Roll"]     = {lucky=3, unlucky=7, bonus="Pet Accuracy"},
-			["Gallant's Roll"]   = {lucky=3, unlucky=7, bonus="Defense"},
-			["Wizard's Roll"]    = {lucky=5, unlucky=9, bonus="Magic Attack"},
-			["Dancer's Roll"]    = {lucky=3, unlucky=7, bonus="Regen"},
-			["Scholar's Roll"]   = {lucky=2, unlucky=6, bonus="Conserve MP"},
-			["Bolter's Roll"]    = {lucky=3, unlucky=9, bonus="Movement Speed"},
-			["Caster's Roll"]    = {lucky=2, unlucky=7, bonus="Fast Cast"},
-			["Courser's Roll"]   = {lucky=3, unlucky=9, bonus="Snapshot"},
-			["Blitzer's Roll"]   = {lucky=4, unlucky=9, bonus="Attack Delay"},
-			["Tactician's Roll"] = {lucky=5, unlucky=8, bonus="Regain"},
-			["Allies's Roll"]    = {lucky=3, unlucky=10, bonus="Skillchain Damage"},
-			["Miser's Roll"]     = {lucky=5, unlucky=7, bonus="Save TP"},
-			["Companion's Roll"] = {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
-			["Avenger's Roll"]   = {lucky=4, unlucky=8, bonus="Counter Rate"},
-		}
-	end
-	function display_roll_info(spell)
-		rollinfo = rolls[spell.english]
-		local rollsize = 'Small'
-		if state.LuzafRing then
-			rollsize = 'Large'
-		end
-		if rollinfo then
-			add_to_chat(36, spell.english..' provides a bonus to '..rollinfo.bonus..'.  Roll size: '..rollsize)
-			add_to_chat(217, 'Lucky roll is '..tostring(rollinfo.lucky)..', Unlucky roll is '..tostring(rollinfo.unlucky)..'.')
-		end
-	end
-----------------------------
---	Bullet Check Function --
-----------------------------
-function do_bullet_checks(spell, spellMap, eventArgs)
-	local bullet_name
-	local bullet_min_count = 1
-	if spell.type == 'WeaponSkill' then
-		if spell.skill == "Marksmanship" then
-			if spell.element == 'None' then
-				-- physical weaponskills
-				bullet_name = gear.WSbullet
-			else
-				-- magical weaponskills
-				bullet_name = gear.MAbullet
-			end
-		else
--- Ignore non-ranged weaponskills
-			return
-		end
-	elseif spell.type == 'CorsairShot' then
-		bullet_name = gear.QDbullet
-	elseif spell.action_type == 'Ranged Attack' then
-		bullet_name = gear.RAbullet
-		if buffactive['Triple Shot'] then
-			bullet_min_count = 3
-		end
-	end
-	local available_bullets = player.inventory[bullet_name] or player.wardrobe2[bullet_name]
--- If no ammo is available, give appropriate warning and end.
-	if not available_bullets then
-		if spell.type == 'CorsairShot' and player.equipment.ammo ~= 'empty' then
-			add_to_chat(104, 'No Quick Draw ammo left.  Using what\'s currently equipped ('..player.equipment.ammo..').')
-			return
-		elseif spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then
-			add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
-			return
-		else
-			add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')
-			eventArgs.cancel = true
-			return
-		end
-	end
--- Don't allow shooting or weaponskilling with ammo reserved for quick draw.
-	if spell.type ~= 'CorsairShot' and bullet_name == gear.QDbullet and available_bullets.count <= bullet_min_count then
-		add_to_chat(104, 'No ammo will be left for Quick Draw.  Cancelling.')
-		eventArgs.cancel = true
-		return
-	end
--- Low ammo warning.
-	if spell.type ~= 'CorsairShot' and not state.warned
-		and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
-		local msg = '**** LOW AMMO WARNING: '..bullet_name..' ****'
-		local border = ""
-		for i = 1, #msg do
-			border = border .. "*"
-		end
-		add_to_chat(104, border)
-		add_to_chat(104, msg)
-		add_to_chat(104, border)
-		state.warned = true
-	elseif available_bullets.count > options.ammo_warning_limit and state.warned then
-		state.warned = false
-	end
-end
---------------------------
---	Checking for flurry	--
---------------------------
-windower.register_event('action',
-function(act)
---check if you are a target of spell
-    local actionTargets = act.targets
-		playerId = windower.ffxi.get_player().id
-		isTarget = false
-    for _, target in ipairs(actionTargets) do
-        if playerId == target.id then
-            isTarget = true
-        end
-    end
-	if isTarget == true then
-        if act.category == 4 then
-            local param = act.param
-            if param == 845 and flurry ~= 2 then
-    add_to_chat(122, 'Flurry Status: Flurry I')
-                flurry = 1
-            elseif param == 846 then
-    add_to_chat(122, 'Flurry Status: Flurry II')
-                flurry = 2
-            end
-        end
-    end
-end)]]
+end)
 ----------------------------------------
 --  Selecting and Setting the default --
 --	Macro book and Lock style 		  --
@@ -1055,5 +917,5 @@ buff_spell_lists = {
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
 	include('telecmds')
-	include('follow')
+	include('htmbki')
 end

@@ -22,9 +22,28 @@ include('augments.lua')
 		body="Emet harness +1",
 		ring1="Gelatinous ring +1",
 	})
-	sets.weapons = {
-		main="Vampirism",
+------------------
+--	Weapon sets	--
+------------------
+	sets.weapons.Naegling = {
+		main="Naegling",
+		sub="Colada",
+	}
+	sets.weapons.Vampirism = {
+		main="Naegling",
 		sub="Vampirism",
+	}
+	sets.weapons.Almace = {
+		main="Almace",
+		sub="Colada",
+	}
+	sets.weapons.Sequence = { 
+		main="Sequence",
+		sub="Colada",
+	}
+	sets.weapons.Tizona = { 
+		main="Tizona",
+		sub="Colada",
 	}
 ----------------------------------
 --      Job Ability sets        --
@@ -423,12 +442,12 @@ include('augments.lua')
 		legs="Samnuha tights",
         feet=Herc.Feet.WS,
 		neck="Lissome necklace",
-        ear1="Brutal earring",
-        ear2="Telos earring",
-        ring1="Chirich ring",
+        ear1="Telos earring",
+        ear2="Cessance earring",
+        ring1="Chirich ring +1",
         ring2="Epona's ring",
         back=Rosmerta.TP,
-        waist="Grunfeld rope",
+        waist="Kentarch belt +1",
 	}
 	sets.engaged.DW = set_combine(sets.engaged, {
 	-- No Magic Haste 
@@ -436,8 +455,8 @@ include('augments.lua')
 		ear2="Suppanomimi",			--5
 		legs="Carmine Cuisses +1",	--6
 		feet=Taeon.Feet.DW,			--9
-		back=gear.RNG_DW_Cape, 		--10
 		ear1="Eabani Earring", 		--4
+		
     })-- 49% DW Needed
     sets.engaged.DW.Haste_25 = set_combine(sets.engaged,  {
 	-- 15% Magic Haste 
@@ -468,8 +487,8 @@ include('augments.lua')
     }) -- 27% DW Needed
     sets.engaged.DW.Haste_43 = set_combine(sets.engaged,  {
 	-- 45% Magic Haste 
-        body="Adhemar jacket +1",	--5
-		legs="Carmine Cuisses +1",	--6
+        body="Adhemar jacket +1",	--6
+		ear2="Suppanomimi",			--5
 	}) -- 11% DW Needed
 	sets.engaged.MagicEva = { 
 		ammo=gear.RAbullet,

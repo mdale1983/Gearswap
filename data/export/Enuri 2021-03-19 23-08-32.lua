@@ -1,0 +1,17 @@
+sets.exported={
+    main="Gungnir",
+    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Flam. Zucchetto +2",
+    body={ name="Valorous Mail", augments={'Accuracy+25','"Dbl.Atk."+2','DEX+10','Attack+12',}},
+    hands="Vis. Fng. Gaunt. +2",
+    legs={ name="Ptero. Brais +2", augments={'Enhances "Strafe" effect',}},
+    feet="Flam. Gambieras +2",
+    neck="Anu Torque",
+    waist="Ioskeha Belt +1",
+    left_ear="Telos Earring",
+    right_ear="Cessance Earring",
+    left_ring="Chirich Ring +1",
+    right_ring="Chirich Ring +1",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+}

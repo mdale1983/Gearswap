@@ -73,11 +73,11 @@ include('augments.lua')
 		ammo="Angon",
 		hands="Ptero. Fin. G. +1"
 	} 
-	sets.precast.JA.Jump = {
+	sets.precast.JA['Jump'] = {
 		ammo="Ginsen",
 		head="Flamma zucchetto +2",
 		body="Vishap mail +1",
-		hands="Vishap finger gauntlets +2",
+		hands="Vis. Fng. Gaunt. +2",
 		legs="Pteroslaver brais +2",
 		feet="Flamma gambieras +2",
 		ear1="Telos Earring",

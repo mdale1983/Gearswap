@@ -74,6 +74,8 @@ function job_setup()
 	
 	state.crafting = M(false)
 	
+	state.CompensatorMode = M{'Always','300','1000','Never'}
+	state.LuzafRing = M(true, "Luzaf's Ring")
 	state.AutoAmmoMode = M(true,'Auto Ammo Mode')
 	state.UseDefaultAmmo = M(true,'Use Default Ammo')
 	state.Buff['Aftermath'] = buffactive['Aftermath'] or false
@@ -100,6 +102,9 @@ function job_setup()
 	}
 	magicWS = S{
 		'Leaden Salute', 'Wildfire', 'Hot Shot'
+	}
+	physWS = S{
+		'Last Stand'
 	}
 	gav_ws = S{
 		"Leaden Salute", "Wildfire", "Last Stand",
@@ -129,13 +134,12 @@ function job_setup()
 	}
 	DefaultAmmo = {
 		['Gun']  = {
-			['Default'] = 		"Chrono Bullet",
-			['WS'] = 			"Chrono Bullet",
-			['MagicWS'] =		"Chrono Bullet",
-			['Acc'] = 			"Chrono Bullet",
-			['Magic'] = 		"Chrono Bullet",
-			['MagicAcc'] = 		"Chrono Bullet",
-			['CorsairShot'] = 	"Chrono Bullet"
+			['Default'] = "Chrono Bullet",
+			['WS'] = "Chrono Bullet",
+			['MagicWS'] = "Orichalc. Bullet",
+			['Acc'] = "Adlivun Bullet",
+			['Magic'] = "Orichalc. Bullet",
+			['MagicAcc'] = "Orichalc. Bullet"
 		}
 	}
 end 
@@ -173,7 +177,7 @@ function get_player_name()
     	roll = windower.ffxi.get_player().main_job_full
     	windower.add_to_chat(7, 'Hello '..self..' your '..roll..' LUA is now loaded')
     	windower.add_to_chat(7, 'The gerbils are fetching your '..roll..' Lockstyle!')
-		state.Weapons:set('Fomalhaut')
+		send_command('gs c Weapons Fomalhaut')
     end 
 end
 --------------------------------------------------
@@ -294,17 +298,18 @@ function get_combat_form()
 end 
 function get_combat_weapon()
 	if state.Weapons.value == "Fomalhaut" then 
-		set_macro_page(1, 16)
+		----set_macro_page(1, 16)
+		enable('ammo')
 	elseif state.Weapons.value == "Anarchy" then 
-		set_macro_page(1, 16)
+		enable('ammo')
 	elseif state.Weapons.value == "DP" then 
-		set_macro_page(1, 16)
+		enable('ammo')
 	elseif state.Weapons.value == "Armageddon" then 
-		set_macro_page(2, 16)
+		enable('ammo')
 	elseif state.Weapons.value == "Molybdosis" then 
-		set_macro_page(2, 16)
+		enable('ammo')
 	elseif state.Weapons.value == "Doomsday" then 
-		set_macro_page(3, 16)
+		enable('ammo')
 	end
 	return get_combat_weapon
 end 
@@ -385,9 +390,10 @@ function check_ammo_precast(spell, action, spellMap, eventArgs)
 			equip({ammo=DefaultAmmo[WeaponType[player.equipment.range]].Default})
 		end			
 	end
+	
 	if magicWS:contains(spell.english) then 
 		equip({ammo=DefaultAmmo[WeaponType[player.equipment.range]].Magic})
-	elseif spell.type == "Weaponskill" then 
+	elseif physWS:contains(spell.english) then 
 		equip({ammo=DefaultAmmo[WeaponType[player.equipment.range]].WS})
 	end	
 	if count_available_ammo(player.equipment.ammo) < 15 then
@@ -429,6 +435,16 @@ function job_post_precast(spell, spellMap, eventArgs)
 	if spell.type=='WeaponSkill' then
 		if moonshade_WS:contains(spell.english) and player.tp < 2750 then
 			equip({ear2="Moonshade Earring"})
+		end
+	end
+	if spell.type == 'CorsairRoll' and state.CompensatorMode.value ~= 'Never' and (state.CompensatorMode.value == 'Always' or tonumber(state.CompensatorMode.value) > player.tp) then
+		if item_available("Compensator") then
+			enable('range')
+			equip({range="Compensator"})
+		end
+		if sets.precast.CorsairRoll.main and sets.precast.CorsairRoll.main ~= player.equipment.main then
+			enable('main')
+			equip({main=sets.precast.CorsairRoll.main})
 		end
 	end
 -- Equip obi if weather/day matches for WS.
@@ -493,6 +509,18 @@ end
 function job_aftercast(spell, spellMap, eventArgs)
 	if state.UseDefaultAmmo.value and player.equipment.range and DefaultAmmo[WeaponType[player.equipment.range]].Default then
 		equip({ammo=DefaultAmmo[WeaponType[player.equipment.range]].Default})
+	end
+	if spell.type == 'CorsairRoll' and not spell.interrupted then
+		if state.CompensatorMode.value ~= 'Never' then
+			if (player.equipment.range and player.equipment.range == 'Compensator') and sets.weapons[state.Weapons.value] and sets.weapons[state.Weapons.value].range then
+				equip({range=sets.weapons[state.Weapons.value].range})
+				disable('range')
+			end
+			if sets.precast.CorsairRoll.main and sets.weapons[state.Weapons.value] and sets.weapons[state.Weapons.value].main then
+				equip({main=sets.weapons[state.Weapons.value].main})
+				disable('main')
+			end
+		end
 	end
 end 
 function job_post_aftercast(spell, spellMap, eventArgs)

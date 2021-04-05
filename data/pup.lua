@@ -750,4 +750,5 @@ end
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
+	include('htmbki')
 end

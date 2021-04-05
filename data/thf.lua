@@ -625,5 +625,5 @@ end
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
 	include('telecmds')
-	include('follow')
+	include('htmbki')
 end

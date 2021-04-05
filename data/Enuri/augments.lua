@@ -72,7 +72,7 @@
 	}
 	Cich.VitWS = {
 		name="Cichol's Mantle", 
-		augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%'}
+		augments={'VIT+20','Accuracy+20 Attack+20','"Dbl.Atk."+10'}
 	}
 ----------------------
 --  Warrior Capes   --
@@ -511,7 +511,7 @@
 		name="Merlinic Crackows", 
 		augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+8%','INT+8','Mag. Acc.+12'}
 	} 
- Chir = {}
+	Chir = {}
     Chir.Head = {}
     Chir.Body = {}
     Chir.Hands = {}

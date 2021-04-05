@@ -154,7 +154,7 @@ end
 --  User Setup Section  --
 --------------------------
 function user_setup()
-	state.IdleMode:options('PDT', 'MagicEva')
+	state.IdleMode:options('Normal', 'MagicEva')
   	state.OffenseMode:options('TankHyb', 'Normal')
   	state.HybridMode:options('Normal', 'MagicEva')
   	state.WeaponskillMode:options('Normal', 'Acc')
@@ -372,11 +372,11 @@ function get_combat_form()
 end 
 function get_combat_weapon()
 	if state.Weapons.value == "Aettir" then 
-		equip({main="Aettir", sub="Utu Grip"})
+		--equip({main="Aettir", sub="Utu Grip"})
 	elseif state.Weapons.value == "Lionheart" then 
-		equip({main="Lionheart", sub="Aettir"})
+		--equip({main="Lionheart", sub="Aettir"})
 	elseif state.Weapons.value == "Epeolatry" then 
-		equip({main="Epeolatry", sub="Utu Grip"})
+		--equip({main="Epeolatry", sub="Utu Grip"})
 	end
 	return get_combat_weapon
 end 
@@ -733,6 +733,9 @@ end)
 function select_default_macro_book()
 	set_macro_page(1, 9)
 	send_command('wait 4; input //gs org get')
+	if player.sub_job == "BLU" then 
+		send_command('wait 5; input //asets spellset subtank')
+	end
 end
 function set_lockstyle()
 	send_command('wait 4; input /lockstyleset 3')
@@ -869,6 +872,15 @@ function check_flash_foil()
 	end
 end
 function check_buff()
+	--[[if player.in_combat and not assisted then 
+		assisted = true
+		windower.chat.input('/t Aelwulf assist')
+		return
+	elseif not player.in_combat and assisted then 
+		assisted = false
+		windower.chat.input('/t Aelwulf stopAssist')
+		return
+	end]]
 	if state.AutoBuffMode.value and not areas.Cities:contains(world.area) then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		for i in pairs(buff_spell_lists['Auto']) do
@@ -941,13 +953,13 @@ end
 buff_spell_lists = {
 	Auto = {--Options for When are: Always, Engaged, Idle, OutOfCombat, Combat
 		{Name='Crusade',	Buff='Enmity Boost',	SpellID=476,	When='Always'},
-		--{Name='Cocoon',		Buff='Defense Boost',	SpellID=547,	When='Combat'},
+		{Name='Cocoon',		Buff='Defense Boost',	SpellID=547,	When='Combat'},
 		{Name='Temper',		Buff='Multi Strikes',	SpellID=493,	When='Engaged'},
 		{Name='Phalanx',	Buff='Phalanx',			SpellID=106,	When='Always'},
 		{Name='Refresh',	Buff='Refresh',			SpellID=109,	When='Idle'},
-		--{Name='Aquaveil',	Buff='Aquaveil',		SpellID=55,		When='Idle'},
+		{Name='Aquaveil',	Buff='Aquaveil',		SpellID=55,		When='Idle'},
 		--{Name='Stoneskin',	Buff='Stoneskin',		SpellID=54,		When='Idle'},
-		--{Name='Blink',		Buff='Blink',			SpellID=53,		When='Idle'},
+		{Name='Blink',		Buff='Blink',			SpellID=53,		When='Idle'},
 	},
 
 	Default = {
@@ -975,6 +987,7 @@ buff_spell_lists = {
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
-	include('telecmds')
-	include('follow')
+	--include('telecmds')
+	--include('htmbki')
+	include('testing')
 end

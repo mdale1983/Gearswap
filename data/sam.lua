@@ -31,15 +31,16 @@ end
 ------------------------------------------
 function job_binds()
  --[[ F9-F12 keybinds ]]
+	send_command('bind f7 gs c cycle empty')
 	send_command('bind f9 gs c cycle IdleMode')
 	send_command('bind f10 gs c cycle OffenseMode')
 	send_command('bind f11 gs c cycle HybridMode')
 	send_command('bind f12 gs c cycle WeaponskillMode')
 --[[ AltF9-AltF12 keybinds ]]
 	send_command('bind !f9 gs c toggle AutoBuffMode')
-	send_command('bind !f10 gs c toggle AutoRuneMode')
+	send_command('bind !f10 gs c toggle AutoWSMode')
 	send_command('bind !f11 gs c toggle AutoFoodMode')
-	send_command('bind !f12 gs c toggle autowsmode')
+	send_command('bind !f12 gs c toggle empty')
 	send_command('bind != gs c toggle CapacityMode')
 	send_command('bind !` input /ma "Utsusemi: Ni" <me>')
 	send_command('bind !q input /ma "Utsusemi: Ichi" <me>')
@@ -81,8 +82,8 @@ function job_setup()
     state.Buff.Seigan = buffactive.Seigan or false
 	
 	
-	autowstp = 1200
-	autows = 'Tachi: Fudo'
+	autowstp = 3000
+	autows = 'Tachi: Shoha'
 	autofood = 'Soy Ramen'
 	
 	Breath_HPP = 60
@@ -315,7 +316,7 @@ function job_update(cmdParams, eventArgs)
 	update_melee_group()
 end 
 function job_status_change(newStatus, oldStatus, eventArgs)
-	if newStatus == "Engaged" then 
+	--[[if newStatus == "Engaged" then 
 	-- handle weapon sets
 		if gsList:contains(player.equipment.main) then
 			state.CombatWeapon:set('GreatSword')
@@ -332,7 +333,7 @@ function job_status_change(newStatus, oldStatus, eventArgs)
 		elseif player.equipment.main == 'Liberator' then
 			state.CombatWeapon:set('Liberator')
 		end
-	end 
+	end ]]
 end 
 function get_combat_form() 
 	if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
@@ -604,6 +605,8 @@ function job_buff_change(buff, gain)
 				add_to_chat(8, '*** Dojikiri AM3 active: Ultimate SC Available ***')
 				send_command('timers create "Aftermath: Lv. 3" 180 down')
 				send_command('timers delete "Aftermath: Lv. 2"')
+				send_command('gs c autows Tachi: Fudo')
+				send_command('gs c autows tp 1200')
 			elseif (buff == "Aftermath: Lv.2" and gain) then
 				add_to_chat(8, '*** Dojikiri AM2 active: Ultimate SC Available ***')
 				send_command('timers create "Aftermath: Lv. 2" 120 down')
@@ -611,6 +614,9 @@ function job_buff_change(buff, gain)
 			elseif (buff == "Aftermath: Lv.1" and gain) then
 				add_to_chat(8, '*** Dojikiri AM1 active: Ultimate SC Available ***')
 				send_command('timers create "Aftermath: Lv. 1" 60 down')
+			else 
+				send_command('gs c autows Tachi: Shoha')
+				send_command('gs c autows tp 3000')
 			end
 			if not midaction() then
 				handle_equipping_gear(player.status)
@@ -753,8 +759,12 @@ function check_buff()
 	if state.AutoBuffMode.value and player.in_combat then
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
-
-		if player.sub_job == 'DRK' and not buffactive['Last Resort'] and abil_recasts[87] < latency then
+		
+		if not buffactive['Meditate'] and abil_recasts[134] < latency then
+				windower.chat.input('/ja "Meditate" <me>')
+				tickdelay = os.clock() + 1.8
+				return true
+		elseif player.sub_job == 'DRK' and not buffactive['Last Resort'] and abil_recasts[87] < latency then
 			windower.chat.input('/ja "Last Resort" <me>')
 			tickdelay = os.clock() + 1.8
 			return true

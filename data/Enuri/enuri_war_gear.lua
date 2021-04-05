@@ -38,31 +38,35 @@ include('augments.lua')
         back=Cich.TP,
 		waist="Flume belt"
 	}
-	sets.weapons.Minos = { 
-		main="Minos",
+	sets.weapons.Lycurgos = { 
+		main="Lycurgos",
 		sub="Utu Grip"
 	}
 	sets.weapons.Ukonvasara = { 
-		main="Ukonvasara",
+		main="Mercurial Sword",
 		sub="Utu grip"
 	}
 	sets.weapons.Ragnarok = { 
 		main="Ragnarok",
+		sub="Utu Grip"
 	}
 	sets.weapons.Chango = { 
-		main="Chango",
+		main="Quint Spear",
+		sub="Utu Grip"
 	}
 	sets.weapons.Conqueror = { 
-		main="Conqueror",
+		main="Autarch's axe",
+		sub="Utu Grip"
 	}
 	sets.weapons.Bravura = { 
 		main="Bravura",
+		sub="Utu Grip"
 	}
 ----------------------------------
 --		Job Ability sets		--
 ----------------------------------
 	sets.precast.JA['Aggressor '] = {
-		hands="Fallen's Finger Gauntlets"
+		body="Agoge lorica"
 	}
     sets.precast.JA['Blood Rage']  = {
 		legs="Bale Flanchard +2"
@@ -71,16 +75,10 @@ include('augments.lua')
 		head="Fallen's burgeonet"
 	}
     sets.precast.JA['Berserk']    = {
-		head="Ignominy burgeonet +2"
+		body="Pumm. Lorica +2"
 	}
     sets.precast.JA['Blood Weapon'] = {
 		body="Fallen's Cuirass +1"
-	}
-    sets.precast.JA['Last Resort']  = {
-		back="Ankou's mantle"
-	}
-	sets.precast.JA['Weapon Bash'] = {
-		hands="Ignominy gauntlets"
 	}
 --------------------------------------
 --		Casting Gear sets			--
@@ -115,16 +113,15 @@ include('augments.lua')
 		feet="Dornen schuhs"
 	}
 ------------------------------------------
---		Greataxe Engaged sets			--
+--		Normal base Engaged sets		--
 ------------------------------------------	
---[[ Non-REMA Greataxe Set]]
 	sets.engaged = {
         ammo="Ginsen",
 		head="Flamma zucchetto +2",
         body=Valor.Body.TP,
 		hands="Flamma Manopolas +2",
 		legs=Odyssean.Legs.TP,
-        feet=Valor.Feet.TP,
+        feet="Flamma gambieras +2",
 		neck="Lissome necklace",
         ear1="Telos earring",
 		ear2="Cessance earring",
@@ -148,17 +145,22 @@ include('augments.lua')
         back=Ankou.TP,
 		waist="Flume belt"
 	}
-	--------------------------
-	--	Minos Engaged Gear 	--
-	--------------------------
+	------------------------------
+	--	Great Axe Engaged Gear 	--
+	------------------------------
 		----------------------
 		--	 1170 Accuracy 	--
 		----------------------
-	sets.engaged.Minos = set_combine(sets.engaged, { 
+	sets.engaged.GreatAxe = set_combine(sets.engaged, { 
 		head="Flamma zucchetto +2",
-		hands="Sulevia's gauntlets +2",
 		body=Valor.Body.TP,
-		feet="Flamma gambieras +2"
+		hands="Sulevia's gauntlets +2",
+		legs="Pummeler's cuisses +2",
+		feet="Pummeler's calligae +2",
+		ring2="Niqmaddu ring",
+	})
+	sets.engaged.Chango = set_combine(sets.engaged, { 
+		
 	})
 --------------------------
 -- AfterMath Gearsets	--
@@ -218,25 +220,73 @@ include('augments.lua')
 	--------------------------------------
 	--		Greataxe Weaponskill		--
 	--------------------------------------		
-	sets.precast.WS['Upheavel'] = set_combine(sets.precast.WS, {
+	sets.precast.WS['Upheaval'] = set_combine(sets.precast.WS, { --VIT 73% | 76% | 79% | 82% | 85%
 		ammo="Knobkierrie",
-		head=Odyssean.Helm.VitWS,
-		body=Odyssean.Body.WS,
+		head="Hjarrandi helm",
+		body="Hjarrandi breastplate",
 		hands=Odyssean.Hands.VitWS,
 		legs=Odyssean.Legs.VitWS,
 		feet="Sulev. Leggings +2", 
-		ear1="Ishvara earring",
+		ear1="Telos earring",
 		ring1="Regal ring",
-		ring2="Karieyh ring",
+		ring2="Niqmaddu ring",
 		back=Cich.VitWS
+	})
+	sets.precast.WS['Ukko\'s Fury'] = set_combine(sets.precast.WS, { --STR 80%
+		ammo="Knobkierrie",
+		head="Lustratio cap +1",
+		body="Hjarrandi breastplate",
+		hands=Valor.Hands.WS,
+		legs="Argosy breeches +1",
+		feet="Lustratio leggings +1", 
+		ear1="Telos earring",
+		ring1="Regal ring",
+		ring2="Niqmaddu ring",
+		back=Cich.WS
+	})
+	sets.precast.WS['King\'s Justice'] = set_combine(sets.precast.WS, { --STR 50%
+		ammo="Knobkierrie",
+		head="Lustratio cap +1",
+		body="Hjarrandi breastplate",
+		hands=Valor.Hands.WS,
+		legs="Argosy breeches +1",
+		feet="Lustratio leggings +1", 
+		ear1="Telos earring",
+		ring1="Regal ring",
+		ring2="Niqmaddu ring",
+		back=Cich.WS
+	})
+	sets.precast.WS['Raging Rush'] = set_combine(sets.precast.WS, { --STR 50%
+		ammo="Knobkierrie",
+		head="Lustratio cap +1",
+		body="Hjarrandi breastplate",
+		hands=Valor.Hands.WS,
+		legs="Argosy breeches +1",
+		feet="Lustratio leggings +1", 
+		ear1="Telos earring",
+		ring1="Regal ring",
+		ring2="Niqmaddu ring",
+		back=Cich.WS
+	})
+	sets.precast.WS['Steel Cyclone'] = set_combine(sets.precast.WS, { --STR 60% | VIT60%
+		ammo="Knobkierrie",
+		head="Lustratio cap +1",
+		body="Pumm. Lorica +2",
+		hands=Valor.Hands.WS,
+		legs="Argosy breeches +1",
+		feet="Lustratio leggings +1", 
+		ear1="Telos earring",
+		ring1="Regal ring",
+		ring2="Niqmaddu ring",
+		back=Cich.WS
 	})
 	--------------------------------------
 	--		Greatsword Weaponskill		--
 	--------------------------------------
-	sets.precast.WS['Scourge'] = set_combine(sets.precast.WS, {
+	sets.precast.WS['Scourge'] = set_combine(sets.precast.WS, { --STR 40% | VIT 40%
 		ammo="Knobkierrie",
 		head=Odyssean.Helm.VitWS,
-		body="Ignominy cuirass +3",
+		body="Pumm. Lorica +2",
 		hands=Odyssean.Hands.VitWS,
 		legs=Odyssean.Legs.VitWS,
 		feet="Sulev. Leggings +2", 
@@ -245,7 +295,7 @@ include('augments.lua')
 		ring2="Karieyh ring",
 		back=Cich.VitWS
 	})
-	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, { 
+	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, { --STR 73% | 76% | 79% | 82% | 85%
 		ammo="Knobkierrie",
 		head="Argosy celata +1",	
 		body="Argosy hauberk +1",

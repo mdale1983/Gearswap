@@ -1,6 +1,10 @@
 function user_job_self_command(commandArgs, eventArgs) 
+			if commandArgs:get(1) == 'assist' then 
+				send_command('input //hb on')
+			elseif commandArgs:get(1) == 'stopAssist' then
+				send_command('input //hb off')
 --[[ Mea Ring ]]
-			if commandArgs:get(1) == 'mea3' then
+			elseif commandArgs:get(1) == 'mea3' then
                 send_command('input //gs c mea1; wait 10; input //gs c mea2; wait 10; input //gs c mea1')
 				send_command('input /equip Ring1 "Dim. Ring (Mea)"')
                 add_to_chat(158,'Warp to Mea')

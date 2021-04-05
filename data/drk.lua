@@ -375,27 +375,21 @@ function get_combat_weapon()
 	if state.Weapons.value == "Apocalypse" then 
 		equip({main="Apocalypse", sub="Utu Grip"})
 		set_macro_page(3, 2)
-		send_command('gs c autows Catastrophe')
 	elseif state.Weapons.value == "Ragnarok" then 
 		equip({main="Ragnarok", sub="Utu Grip"})
 		set_macro_page(1, 2)
-		send_command('gs c autows Resolution')
 	elseif state.Weapons.value == "Caladbolg" then 
 		equip({main="Caladbolg", sub="Utu Grip"})
 		set_macro_page(2, 2)
-		send_command('gs c autows Torcleaver')
 	elseif state.Weapons.value == "Liberator" then 
 		equip({main="Liberator", sub="Utu Grip"})
 		set_macro_page(4, 2)
-		send_command('gs c autows Insurgency')
 	elseif state.Weapons.value == "Anguta" then 
 		equip({main="Anguta", sub="Utu Grip"})
 		set_macro_page(4, 2)
-		send_command('gs c autows Entropy')
 	elseif state.Weapons.value == "Redemption" then 
 		equip({main="Redemption", sub="Utu Grip"})
 		set_macro_page(4, 2)
-		send_command('gs c autows Quietus')
 	end	
 	return get_combat_weapon
 end 
@@ -544,9 +538,6 @@ function job_post_precast(spell, spellMap, eventArgs)
 		elseif spell.english == "Catastrophe" and (player.tp >= 3000) then 
 			add_to_chat(8, '*** Apocalypse AM active: Acc +15 haste +10% ***')
 			send_command('timers create "Aftermath" 180 down')
-			send_command('gs c autows Cross Reaper')
-		else 
-			send_command('gs c autows Catastrophe')
 		end
 	end
 	if player.equipment.main =="Ragarok" then 
@@ -561,9 +552,6 @@ function job_post_precast(spell, spellMap, eventArgs)
 		elseif spell.english == "Scourge" and (player.tp >= 3000) then 
 			add_to_chat(8, '*** Ragarok AM active: Acc +15 Crit Hit +10% ***')
 			send_command('timers create "Aftermath" 180 down')
-			send_command('gs c autows Resolution')
-		else 
-			send_command('gs c autows Scourge')
 		end
 	end
 	if player.equipment.main =="Redemption" then 
@@ -578,9 +566,6 @@ function job_post_precast(spell, spellMap, eventArgs)
 		elseif spell.english == "Quietus" and (player.tp >= 3000) then 
 			add_to_chat(8, '*** Redemption AM active. 50% Triple Damage ***')
 			send_command('timers create "Aftermath" 180 down')
-			send_command('gs c autows Cross Reaper')
-		else 
-			send_command('gs c autows Quietus')
 		end
 	end
 	if player.equipment.main =="Caladbolg" then 
@@ -943,5 +928,5 @@ buff_spell_lists = {
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
 	include('telecmds')
-	include('follow')
+	include('htmbki')
 end

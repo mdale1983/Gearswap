@@ -107,7 +107,7 @@ include('augments.lua')
     sets.idle.Pet = {
         main="Midnights",
 		head="Anwig Salade",
-        body="Tali'ah manteel +1",
+        body="Rao togi +1",
 		hands="Rao kote +1",
 		waist="Isa Belt",
 		legs="Rao haidate +1",

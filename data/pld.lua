@@ -34,7 +34,7 @@ function job_binds()
 	send_command('bind f9 gs c cycle IdleMode')
 	send_command('bind f10 gs c cycle OffenseMode')
 	send_command('bind f11 gs c cycle HybridMode')
-	send_command('bind f12 gs c cycle DefenseMode')
+	send_command('bind f12 gs c cycle CastingMode')
 --[[ AltF9-AltF12 keybinds ]]
 	send_command('bind !f9 gs c toggle AutoBuffMode')
 	send_command('bind !f10 gs c toggle AutoWSMode')
@@ -138,10 +138,11 @@ end
 --  User Setup Section  --
 --------------------------
 function user_setup()
-	state.IdleMode:options('Tanking')
-	state.DefenseMode:options('None', 'Physical')
+	state.IdleMode:options('Normal', 'Breath')
+	state.DefenseMode:options('None', 'Physical', 'Breath')
   	state.HybridMode:options('Normal', 'Reraise')
   	state.OffenseMode:options('Normal', 'TankHyb')
+	state.CastingMode:options('Normal', 'SIRD')
 --[[ User Created states ]]
 	state.SouleaterMode = M(false, 'Soul Eater Mode')
 	state.LastResortMode = M(false, 'Last Resort Mode')
@@ -671,6 +672,7 @@ end)
 function select_default_macro_book()
 	set_macro_page(1, 8)
 	send_command('wait 4; input //gs org get')
+	send_command('wait 5; input //asets spellset subtank')
 end
 function set_lockstyle()
 	send_command('wait 4; input /lockstyleset 2')
@@ -863,5 +865,5 @@ buff_spell_lists = {
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
 	include('telecmds')
-	include('follow')
+	include('htmbki')
 end

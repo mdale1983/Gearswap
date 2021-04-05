@@ -1,0 +1,3 @@
+function user_job_self_command(commandArgs, eventArgs)
+	
+end 

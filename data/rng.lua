@@ -104,6 +104,13 @@ function job_setup()
 		"Refulgent Arrow", "Wildfire", "Namas Arrow", "Jishnu's Radiance", 
 		"Apex Arrow", "Savage Blade", "Requiescat", 'Sanguine Blade'
 	}
+	
+	magicWS = S{
+		'Leaden Salute', 'Wildfire', 'Hot Shot'
+	}
+	physWS = S{
+		'Last Stand'
+	}
 	gav_ws = S{
 		"Trueflight", "Coronach", "Hot Shot", "Last Stand", 
 		"Refulgent Arrow", "Wildfire", "Namas Arrow", "Jishnu's Radiance", 
@@ -985,5 +992,5 @@ end
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
 	include('telecmds')
-	include('follow')
+	include('htmbki')
 end

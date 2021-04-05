@@ -307,7 +307,7 @@ include('augments.lua')
 		neck="Abyssal bead necklace +2",
 		ear1="Telos Earring",
 		ear2="Cessance earring",
-		ring1="Regal ring",
+		ring1="Chirich ring +1",
         ring2="Niqmaddu ring",
 	})
 	sets.engaged.MagicEva.Caladbolg = { 

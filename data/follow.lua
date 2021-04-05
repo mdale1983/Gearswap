@@ -7,13 +7,17 @@ windower.register_event('chat message', function(message,sender,mode,gm)
      
     message = message:lower()
 	
-	if sender == 'Enuri' and message:contains('follow') then
+	if sender == 'Enuri' and message:contains('mountfollow') then
         windower.send_command('input /mount "Raptor" <me>')
 		windower.send_command('wait 1; input //hb follow ' .. sender)
 		windower.send_command('wait 1; input //hb follow dist 1')
     end
+	if sender == 'Enuri' and message:contains('follow') then
+		windower.send_command('wait 1; input //hb follow ' .. sender)
+		windower.send_command('wait 1; input //hb follow dist 1')
+    end
 	if sender == 'Enuri' and message:contains('folbat') then
-        windower.send_command('input //hb follow dist 5')
+        windower.send_command('input //hb follow dist 2')
     end
 	if sender == 'Enuri' and message:contains('foloff') then
         windower.send_command('input //hb follow off')

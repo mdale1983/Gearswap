@@ -52,7 +52,7 @@ function job_binds()
 	send_command('bind ^q input /ma "Monomi: Ichi" <me>')
 --[[ WindowsF9-WindowsF12 keybinds ]]
 	send_command('bind @f7 gs c set Weapons Conqueror') 		--Mythic Weapon 
-	send_command('bind @f8 gs c set Weapons Minos')			--Empy Scythe Weapon 
+	send_command('bind @f8 gs c set Weapons Lycurgos')			--Empy Scythe Weapon 
 	send_command('bind @f9 gs c set Weapons Ragnarok')			--Relic Weapon
 	send_command('bind @f10 gs c set Weapons Bravura')			--Relic Weapon
 	send_command('bind @f11 gs c set Weapons Ukonvasara')		--Empy GSD Weapon
@@ -64,8 +64,7 @@ end
 --  Job Setup Section   --
 --------------------------
 function job_setup()
-	state.mainWeapon = M{'None', 'Ukonvasara', 'Chango', 'Bravura', 'Ragnarok'}
-	state.Weapons = M{'None', 'Ukonvasara', 'Chango', 'Bravura', 'Ragnarok','Minos','Conqueror'}
+	state.Weapons = M{'None', 'Ukonvasara', 'Chango', 'Bravura', 'Ragnarok','Lycurgos','Conqueror'}
 	oneHandList = S{'replace with your weapons'}
 	gsList = S{'Macbain', 'Crobaci +1'}
   	scytheList = S{'Cronus', 'Raetic Scythe'}
@@ -100,14 +99,16 @@ function job_setup()
 	})
 --[[ Moonshade earring and Gav. Helmet ]]
 	moonshade_WS = S{
-		"Resolution", "Upheaval", "King's Justice", "Cross Reaper", 
-		"Scourge", "Metatron Torment", "Savage Blade", 
-		"Vorpal Blade", "Requiescat", 'Sanguine Blade'
+		"Upheaval", "King's Justice",  'Raging Rush',
+		'Raging Rush', 'Ukko\'s Fury', "Cross Reaper", 
+		"Resolution", "Scourge", "Metatron Torment", 
+		"Savage Blade", "Requiescat", 'Sanguine Blade'
 	}
 	gav_ws = S{
-		"Resolution", "Upheaval", "King's Justice", "Cross Reaper", 
-		"Scourge", "Metatron Torment", "Savage Blade", 
-		"Vorpal Blade", "Requiescat", 'Sanguine Blade'
+		"Upheaval", "King's Justice",  'Raging Rush',
+		'Raging Rush', 'Ukko\'s Fury', "Cross Reaper", 
+		"Resolution", "Scourge", "Metatron Torment", 
+		"Savage Blade", "Requiescat", 'Sanguine Blade'
 	}
 	utsusemi_ni_cancel_delay = .1
 --[[ Ninja Tools Section ]]
@@ -184,7 +185,7 @@ function get_player_name()
     	roll = windower.ffxi.get_player().main_job_full
     	windower.add_to_chat(7, 'Hello '..self..' your '..roll..' LUA is now loaded')
     	windower.add_to_chat(7, 'The gerbils are fetching your '..roll..' Lockstyle!')
-		send_command('gs c Weapons Chango')
+		send_command('gs c Weapons Lycurgos')
     end 
 end
 --------------------------------------------------
@@ -247,17 +248,6 @@ function display_rune_info(spell)
 		add_to_chat(122, '*'..spell.english..' is '..runeinfo.damage..'-based dmg. and '..runeinfo.resistance..' resistance*')
 	end
 end
-function useRunes(cmdParams, eventArgs)
-	if cmdParams[1] == 'buffWatcher' then
-		buffWatch(cmdParams[2])
-	end
-	if cmdParams[1] == 'stopBuffWatcher' then
-		stopBuffWatcher()
-	end
-	if cmdParams[1]:lower() == 'rune' then
-		send_command('@input /ja '..state.Runes.value..' <me>')
-	end
-end
 ---------------------------
 --  Custom Idle Gear set --
 ---------------------------	 
@@ -316,8 +306,7 @@ function job_update(cmdParams, eventArgs)
 	update_melee_group()
 end 
 function job_status_change(newStatus, oldStatus, eventArgs)
-	if newStatus == "Engaged" then 
-	-- handle weapon sets
+	if player.status == "Engaged" then 
 		if gsList:contains(player.equipment.main) then
 			state.CombatWeapon:set('GreatSword')
 		elseif scytheList:contains(player.equipment.main) then
@@ -325,19 +314,19 @@ function job_status_change(newStatus, oldStatus, eventArgs)
 		elseif oneHandList:contains(player.equipment.main) then
 			state.CombatWeapon:set('Engaged')
 		elseif player.equipment.main == 'Ragnarok' then
-			state.CombatWeapon:set('Ragnarok')
-		elseif player.equipment.main == 'Minos' then
-			state.CombatWeapon:set('Minos')
+			state.CombatWeapon:set('GreatSword')
+		elseif player.equipment.main == 'Lycurgos' then
+			state.CombatWeapon:set('GreatAxe')
 		elseif player.equipment.main == 'Ukonvasara' then
-			state.CombatWeapon:set('Ukonvasara')
+			state.CombatWeapon:set('GreatAxe')
 		elseif player.equipment.main == 'Chango' then
 			state.CombatWeapon:set('Chango')
 		elseif player.equipment.main == 'Bravura' then
-			state.CombatWeapon:set('Bravura')
+			state.CombatWeapon:set('GreatAxe')
 		elseif player.equipment.main == 'Conqueror' then
-			state.CombatWeapon:set('Conqueror')
+			state.CombatWeapon:set('GreatAxe')
 		end
-	end 
+	end
 end 
 function get_combat_form() 
 	if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
@@ -351,31 +340,21 @@ function get_combat_form()
 end 
 function get_combat_weapon()
 	if state.Weapons.value == "Ukonvasara" then 
-		equip({main="Ukonvasara", sub="Utu Grip"})
-		set_macro_page(3, 2)
+		set_macro_page(2, 6)
 	elseif state.Weapons.value == "Ragnarok" then 
-		equip({main="Ragnarok", sub="Utu Grip"})
-		set_macro_page(1, 2)
+		set_macro_page(1, 6)
 	elseif state.Weapons.value == "Chango" then 
-		equip({main="Chango Yasutsuna", sub="Utu Grip"})
-		set_macro_page(2, 2)
+		set_macro_page(2, 6)
 	elseif state.Weapons.value == "Bravura" then 
-		equip({main="Bravura", sub="Utu Grip"})
-		set_macro_page(3, 2)
-	elseif state.Weapons.value == "Minos" then 
-		equip({main="Minos", sub="Utu Grip"})
-		set_macro_page(3, 2)
+		set_macro_page(3, 6)
+	elseif state.Weapons.value == "Lycurgos" then 
+		set_macro_page(2, 6)
 	elseif state.Weapons.value == "Conqueror" then 
-		equip({main="Conqueror", sub="Utu Grip"})
-		set_macro_page(3, 2)
+		set_macro_page(4, 6)
 	end	
 	return get_combat_weapon
 end 
 function job_state_change(cmdParams, eventArgs) 
-	--[[	Left empty for now	]]
-	if buffactive['Samurai Roll'] then
-		classes.CustomRangedGroups:append('SamRoll')
-	end
 	if player then
 		classes.CustomMeleeGroups:clear()
 		
@@ -393,7 +372,7 @@ function job_state_change(cmdParams, eventArgs)
 	end
 end 
 function determine_haste_group(buff, gain)
-	classes.CustomMeleeGroups:clear()
+	--classes.CustomMeleeGroups:clear()
 		--[[
 			Haste (white magic) 15%  [33]
 			Haste Samba (Sub) 5%		[370]
@@ -414,7 +393,6 @@ function determine_haste_group(buff, gain)
 end 
 function update_melee_group()
 --[[ Can use this to create your own custom Template ]]
-	classes.CustomMeleeGroups:clear()
 	-- mythic AM	
 	if player.equipment.main == 'Kogarasumaru' then
 		if buffactive['Aftermath: Lv.3'] then
@@ -431,10 +409,10 @@ function update_melee_group()
 	elseif buffactive['Aftermath'] then
 		classes.CustomMeleeGroups:append('AM')
 	end
-	if player.equipment.main == 'Chango Yasutsuna' then 
+	if player.equipment.main == 'Chango' then 
 		if buffactive['Aftermath: Lv.3'] then 
 			classes.CustomMeleeGroups:append('AM3')
-			add_to_chat(8, '***Chango Yasutsuna AM active. Ultimate SC Available***')
+			add_to_chat(8, '***Chango AM active. Ultimate SC Available***')
 		end
 	elseif buffactive['Aftermath'] then
 		classes.CustomMeleeGroups:append('AM')
@@ -735,155 +713,17 @@ function(act)
             end
         end
     end
-end)--[[
---------------------------
--- Define Roll Values	--
---------------------------
-	function define_roll_values()
-		rolls = {
-			["Corsair's Roll"]   = {lucky=5, unlucky=9, bonus="Experience Points"},
-			["Ninja Roll"]       = {lucky=4, unlucky=8, bonus="Evasion"},
-			["Hunter's Roll"]    = {lucky=4, unlucky=8, bonus="Accuracy"},
-			["Chaos Roll"]       = {lucky=4, unlucky=8, bonus="Attack"},
-			["Magus's Roll"]     = {lucky=2, unlucky=6, bonus="Magic Defense"},
-			["Healer's Roll"]    = {lucky=3, unlucky=7, bonus="Cure Potency Received"},
-			["Puppet Roll"]      = {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
-			["Choral Roll"]      = {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
-			["Monk's Roll"]      = {lucky=3, unlucky=7, bonus="Subtle Blow"},
-			["Beast Roll"]       = {lucky=4, unlucky=8, bonus="Pet Attack"},
-			["Samurai Roll"]     = {lucky=2, unlucky=6, bonus="Store TP"},
-			["Evoker's Roll"]    = {lucky=5, unlucky=9, bonus="Refresh"},
-			["Rogue's Roll"]     = {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
-			["Warlock's Roll"]   = {lucky=4, unlucky=8, bonus="Magic Accuracy"},
-			["Fighter's Roll"]   = {lucky=5, unlucky=9, bonus="Double Attack Rate"},
-			["Drachen Roll"]     = {lucky=3, unlucky=7, bonus="Pet Accuracy"},
-			["Gallant's Roll"]   = {lucky=3, unlucky=7, bonus="Defense"},
-			["Wizard's Roll"]    = {lucky=5, unlucky=9, bonus="Magic Attack"},
-			["Dancer's Roll"]    = {lucky=3, unlucky=7, bonus="Regen"},
-			["Scholar's Roll"]   = {lucky=2, unlucky=6, bonus="Conserve MP"},
-			["Bolter's Roll"]    = {lucky=3, unlucky=9, bonus="Movement Speed"},
-			["Caster's Roll"]    = {lucky=2, unlucky=7, bonus="Fast Cast"},
-			["Courser's Roll"]   = {lucky=3, unlucky=9, bonus="Snapshot"},
-			["Blitzer's Roll"]   = {lucky=4, unlucky=9, bonus="Attack Delay"},
-			["Tactician's Roll"] = {lucky=5, unlucky=8, bonus="Regain"},
-			["Allies's Roll"]    = {lucky=3, unlucky=10, bonus="Skillchain Damage"},
-			["Miser's Roll"]     = {lucky=5, unlucky=7, bonus="Save TP"},
-			["Companion's Roll"] = {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
-			["Avenger's Roll"]   = {lucky=4, unlucky=8, bonus="Counter Rate"},
-		}
-	end
-	function display_roll_info(spell)
-		rollinfo = rolls[spell.english]
-		local rollsize = 'Small'
-		if state.LuzafRing then
-			rollsize = 'Large'
-		end
-		if rollinfo then
-			add_to_chat(36, spell.english..' provides a bonus to '..rollinfo.bonus..'.  Roll size: '..rollsize)
-			add_to_chat(217, 'Lucky roll is '..tostring(rollinfo.lucky)..', Unlucky roll is '..tostring(rollinfo.unlucky)..'.')
-		end
-	end
-----------------------------
---	Bullet Check Function --
-----------------------------
-function do_bullet_checks(spell, spellMap, eventArgs)
-	local bullet_name
-	local bullet_min_count = 1
-	if spell.type == 'WeaponSkill' then
-		if spell.skill == "Marksmanship" then
-			if spell.element == 'None' then
-				-- physical weaponskills
-				bullet_name = gear.WSbullet
-			else
-				-- magical weaponskills
-				bullet_name = gear.MAbullet
-			end
-		else
--- Ignore non-ranged weaponskills
-			return
-		end
-	elseif spell.type == 'CorsairShot' then
-		bullet_name = gear.QDbullet
-	elseif spell.action_type == 'Ranged Attack' then
-		bullet_name = gear.RAbullet
-		if buffactive['Triple Shot'] then
-			bullet_min_count = 3
-		end
-	end
-	local available_bullets = player.inventory[bullet_name] or player.wardrobe2[bullet_name]
--- If no ammo is available, give appropriate warning and end.
-	if not available_bullets then
-		if spell.type == 'CorsairShot' and player.equipment.ammo ~= 'empty' then
-			add_to_chat(104, 'No Quick Draw ammo left.  Using what\'s currently equipped ('..player.equipment.ammo..').')
-			return
-		elseif spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then
-			add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
-			return
-		else
-			add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')
-			eventArgs.cancel = true
-			return
-		end
-	end
--- Don't allow shooting or weaponskilling with ammo reserved for quick draw.
-	if spell.type ~= 'CorsairShot' and bullet_name == gear.QDbullet and available_bullets.count <= bullet_min_count then
-		add_to_chat(104, 'No ammo will be left for Quick Draw.  Cancelling.')
-		eventArgs.cancel = true
-		return
-	end
--- Low ammo warning.
-	if spell.type ~= 'CorsairShot' and not state.warned
-		and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
-		local msg = '**** LOW AMMO WARNING: '..bullet_name..' ****'
-		local border = ""
-		for i = 1, #msg do
-			border = border .. "*"
-		end
-		add_to_chat(104, border)
-		add_to_chat(104, msg)
-		add_to_chat(104, border)
-		state.warned = true
-	elseif available_bullets.count > options.ammo_warning_limit and state.warned then
-		state.warned = false
-	end
-end
---------------------------
---	Checking for flurry	--
---------------------------
-windower.register_event('action',
-function(act)
---check if you are a target of spell
-    local actionTargets = act.targets
-		playerId = windower.ffxi.get_player().id
-		isTarget = false
-    for _, target in ipairs(actionTargets) do
-        if playerId == target.id then
-            isTarget = true
-        end
-    end
-	if isTarget == true then
-        if act.category == 4 then
-            local param = act.param
-            if param == 845 and flurry ~= 2 then
-    add_to_chat(122, 'Flurry Status: Flurry I')
-                flurry = 1
-            elseif param == 846 then
-    add_to_chat(122, 'Flurry Status: Flurry II')
-                flurry = 2
-            end
-        end
-    end
-end)]]
+end)
 ----------------------------------------
 --  Selecting and Setting the default --
 --	Macro book and Lock style 		  --
 ----------------------------------------
 function select_default_macro_book()
-	set_macro_page(2, 4)
+	set_macro_page(2, 6)
 	send_command('wait 4; input //gs org get')
 end
 function set_lockstyle()
-	send_command('wait 4; input /lockstyleset 26')
+	send_command('wait 4; input /lockstyleset 7')
 end
 ------------------------------
 --	Auto ability section	--
@@ -954,4 +794,6 @@ function user_job_self_command(commandArgs, eventArgs)
 	include('commands')
 	include('telecmds')
 	include('follow')
+	include('testing')
+	include('htmbki')
 end

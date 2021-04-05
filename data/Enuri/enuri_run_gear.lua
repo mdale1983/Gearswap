@@ -2,76 +2,56 @@ include('augments.lua')
 ----------------------
 --  Field/Town Idle --
 ----------------------
-	sets.idle = {
-	    ammo="Staunch Tathlum",
-        head="Futhark bandeau +2",
-		neck="Loricate torque +1",
-		ear1="Odnowa earring",
-		ear2="Odnowa Earring +1",
-		body="Erilaz surcoat +1",
-		hands=Herc.Hands.PDT,
-		ring1="Defending Ring",
-		ring2="Moonbeam ring", 
-        back=Ogma.ENM,
-		waist="Flume Belt",
-		legs="Carmine Cuisses +1",
-		feet="Erilaz greaves +1",
+	sets.idle = { --[[	50% PDT | 27% MDT | 547 MagicEva	]]
+	    ammo={ name="Staunch Tathlum", priority=1},
+        head={ name="Futhark bandeau +2", priority=6},
+		body={ name="Futhark coat +3", priority=15},
+		hands={ name="Turms mittens +1", priority=7},
+		legs={ name="Erilaz leg guards +1", priority=9},
+		feet={ name="Turms leggings +1", priority=8},
+		neck={ name="Futhark torque +1", priority=5},
+		ear1={ name="Odnowa earring", priority=13},
+		ear2={ name="Odnowa Earring +1", priority=14},
+		ring1={ name="Moonbeam Ring", priority=12},
+		ring2={ name="Moonbeam Ring", priority=11}, 
+		waist={ name="Flume Belt", priority=1},
+		back={ name="Ogma's cape", augments={'HP+60','Eva.+20/Mag. Eva.+20','HP+20','Enmity+10','Phys. dmg. taken-10%'}, priority=10},
 	}
-	sets.idle.PDT = set_combine(sets.idle, {
-		ammo="Staunch Tathlum",
-        head="Futhark bandeau +2",
-		neck="Loricate torque +1",
-		ear1="Odnowa earring",
-		ear2="Odnowa Earring +1",
-		body="Erilaz surcoat +1",
-		hands=Herc.Hands.PDT,
-		ring1="Defending Ring",
-		ring2="Moonbeam ring",
-        back=Ogma.ENM,
-		waist="Flume Belt",
-		legs="Erilaz leg guards +1",
-		feet="Erilaz greaves +1",
-	})
-	sets.MagicEva = set_combine(sets.idle, {
-		ammo="Staunch Tathlum",
-        head="Turms cap",
-		neck="Warder's charm +1",
-		ear1="Odnowa earring",
-		ear2="Odnowa Earring +1",
-		body="Futhark coat +3",
-		hands="Turms mittens",
-		ring1="Defending Ring",
-		ring2="Moonbeam ring",
-		back=Ogma.ENM,
-		waist="Carrier's sash",
-		legs="Erilaz leg guards +1",
-		feet="Turms leggings",
-	})
-	sets.Tanking = set_combine(sets.idle.PDT,{
-		--24% MDT | 50% PDT | 12% Enemy Critical down 
-		body="Erilaz surcoat +1",
-		hands="Turms mittens",
-		ring2="Fortified ring",
-		back=Ogma.ENM
+	sets.idle.MagicEva = set_combine(sets.idle, { --[[	45% PDT | 27% MDT | 593 MagicEva	]]
+		ammo={ name="Staunch Tathlum", priority=1},
+        head={ name="Turms cap +1", priority=11},
+		body={ name="Futhark coat +3", priority=15},
+		hands={ name="Turms mittens +1", priority=7},
+		legs={ name="Erilaz leg guards +1", priority=9},
+		feet={ name="Turms leggings +1", priority=8},
+		ear1={ name="Odnowa earring", priority=13},
+		ear2={ name="Odnowa Earring +1", priority=14},
+		ring1={ name="Moonbeam Ring", priority=12},
+		ring2={ name="Moonbeam Ring", priority=11}, 
+		waist={ name="Flume Belt", priority=1},
+		back={ name="Ogma's cape", augments={'HP+60','Eva.+20/Mag. Eva.+20','HP+20','Enmity+10','Phys. dmg. taken-10%'}, priority=10},
 	})
 	sets.idle.BuffDuration = set_combine(sets.idle, {
-		head = "Erilaz Galea +1",
-		ring2 = "Defending Ring",
-		legs = "Futhark trousers +1",
+		head={ name="Erilaz Galea +1", priority=1},
+		ring2={ name="Moonbeam Ring", priority=11}, 
+		legs={ name="Futhark trousers +1", priority=1},
 	})
 	sets.Kiting = { 
-		legs="Carmine cuisses +1"
+		legs={ name="Carmine cuisses +1", priority=1},
 	}
 	sets.Kiting.night = { 
-		legs="Carmine cuisses +1"
+		legs={ name="Carmine cuisses +1", priority=1},
 	}
+------------------
+--	Weapon Sets	--
+------------------
 	sets.weapons.Lionheart = { 
 		main="Lionheart",
 		sub="Utu Grip"
 	}
 	sets.weapons.Aettir = { 
 		main="Aettir",
-		sub="Refined grip +1"
+		sub="Mensch strap +1"
 	}
 	sets.weapons.Epeolatry = { 
 		main="Epeolatry",
@@ -81,87 +61,91 @@ include('augments.lua')
 -- 	Enmity Gear-set 	--
 --------------------------
 	sets.Enmity = {
-		head="Halitus helm",
-		body="Emet harness +1",
-		hands="Kurys gloves",
-		legs="Erilaz leg guards +1",
-		feet="Rager ledelsens +1",
-		ammo="Aqreaqa bomblet",
-		neck="Unmoving Collar",
-		ear1="Cryptic earring",
-		ear2="Pluto's pearl",
-		ring1="Supershear ring",
-		ring2="Eihwaz ring",
-		back=Ogma.ENM,
-		waist="Goading belt"
+		head={ name="Halitus helm", priority=12},
+		body={ name="Emet harness +1", priority=9},
+		hands={ name="Kurys gloves", priority=6},
+		legs={ name="Erilaz leg guards +1", priority=11},
+		feet={ name="Erilaz greaves +1", priority=5},
+		ammo={ name="Sapience orb", priority=1},
+		neck={ name="Moonlight necklace", priority=1},
+		ear1={ name="Cryptic earring", priority=8},
+		ear2={ name="Odnowa Earring +1", priority=15},
+		ring1={ name="Moonbeam Ring", priority=14},
+		ring2={ name="Eihwaz ring", priority=10},
+		back={ name="Ogma's cape", augments={'HP+60','Eva.+20/Mag. Eva.+20','HP+20','Enmity+10','Phys. dmg. taken-10%'}, priority=12},
+		waist={ name="Kasiri belt", priority=7},
 	}
-	sets.SIR = {
-		ammo="Impatiens", 			--10%
-		hands="Taeon gloves",		--10%
-		legs="Carmine cuisses +1",	--20%
-		feet="Taeon boots",			--09%
-		ear2="Halasz earring",		--05%
-		ring1="Evanescence ring",	--05%
-		waist="Resolute belt"		--08%
-	}
+------------------------------
+--	Spell Interuption Down	--
+------------------------------
+	--[[sets.SIR = {
+		ammo={ name="Impatiens", priority=1}, 			--10%
+		hands={ name="Taeon gloves", priority=1},		--10%
+		legs={ name="Carmine cuisses +1", priority=1},	--20%
+		feet={ name="Taeon boots", priority=1},			--09%
+		ear2={ name="Halasz earring", priority=1},		--05%
+		ring1={ name="Evanescence ring", priority=1},	--05%
+		waist={ name="Oneiros belt", priority=1},		--08%
+	}]]
 --------------------------------------
 -- 	Pre-cast Job Ability Gear-sets 	--	
 --------------------------------------
 	sets.precast.JA['Lunge'] = set_combine(sets.Enmity, {
-		head=Herc.Head.MAB,
-		body="Samnuha coat",
-		hands=Herc.Hands.MAB,
-		legs=Herc.Legs.MAB,
-		feet="Adhemar gamashes",
-		ammo="Seething bomblet",
-		neck="Sanctity necklace",
-		ring1="Acumen ring",
-		ear1="Hecate's earring",
-		ear2="Friomisi earring",
-		back="Evasionist's cape",
-		waist="Eschan stone"
+		head={ name="Herculean Helm",augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Weapon skill damage +3%','STR+6','"Mag.Atk.Bns."+7'}, priority=1},
+		body={ name="Samnuha coat", priority=1},
+		hands={ name="Herculean Gloves",augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Magic dmg. taken -1%','Mag. Acc.+10','"Mag.Atk.Bns."+12'}, priority=1},
+		legs={ name="Herculean Trousers",augments={'Mag. Acc.+16 "Mag.Atk.Bns."+16','Weapon skill damage +2%','Mag. Acc.+9','"Mag.Atk.Bns."+11'}, priority=1},
+		feet={ name="Adhemar gamashes", priority=1},
+		ammo={ name="Seething bomblet", priority=1},
+		neck={ name="Sanctity necklace", priority=1},
+		ring1={ name="Acumen ring", priority=1},
+		ring2={ name="Moonbeam Ring", priority=11}, 
+		ear1={ name="Hecate's earring", priority=1},
+		ear2={ name="Friomisi earring", priority=1},
+		back={ name="Evasionist's cape", priority=1},
+		waist={ name="Eschan stone", priority=1},
 	})
 	sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
 	sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {
-		body="Runeist coat",
-		legs="Futhark trousers +1",
-		back=Ogma.TP
+		body={ name="Runeist coat +1", priority=15},
+		legs={ name="Futhark trousers +1", priority=14},
+		back={ name="Ogma's cape",augments={'HP+60','Accuracy+20 Attack+20','HP+10','"Dbl.Atk."+10','Phys. dmg. taken-10%'}, priority=13},
 	})
 	sets.precast.JA['Valiance'] = set_combine(sets.Enmity, {
-		body="Runeist coat",
-		legs="Futhark trousers +1",
-		back=Ogma.TP
+		body={ name="Runeist coat +1", priority=15},
+		legs={ name="Futhark trousers +1", priority=14},
+		back={ name="Ogma's cape",augments={'HP+60','Accuracy+20 Attack+20','HP+10','"Dbl.Atk."+10','Phys. dmg. taken-10%'}, priority=13},
 	})
 	sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {
-		head="Futhark bandeau +2",
+		head={ name="Futhark bandeau +2", priority=15},
 	})
 	sets.precast.JA['Gambit'] = set_combine(sets.Enmity, {
-		hands="Runeist mitons"
+		hands={ name="Runeist mitons +1", priority=1},
 	})
 	sets.precast.JA['Rayke'] = set_combine(sets.Enmity, {
-		feet="Futhark boots"
+		feet={ name="Futhark boots", priority=1},
 	})
 	sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {
-		feet="Runeist bottes"
+		feet={ name="Runeist bottes +1", priority=1},
 	})
 	sets.precast.JA['Embolden'] = set_combine(sets.Enmity, {
-		back="Evasionist's cape"
+		back={ name="Evasionist's cape", priority=1},
 		
 	})
 	sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {
-		head="Erilaz Galea +1",
-		legs="Runeist trousers",
-		neck="Incanter's torque",
+		head={ name="Erilaz Galea +1", priority=1},
+		legs={ name="Runeist trousers +1", priority=1},
+		neck={ name="Incanter's torque", priority=1},
 		
 	})
 	sets.precast.JA['Liement'] = set_combine(sets.Enmity, {
-		body="Futhark coat +3",
+		body={ name="Futhark coat +3", priority=15},
 	})
 	sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {
-		body="Futhark coat +3",
+		body={ name="Futhark coat +3", priority=15},
 	})
 	sets.precast.JA['Swordplay'] =set_combine(sets.Enmity, {
-		hands="Futhark mitons"
+		hands={ name="Futhark mitons", priority=1},
 	})
 	sets.precast.JA['One For All'] = sets.Enmity
 	sets.precast.JA['Provoke'] = set_combine(sets.Enmity, { })
@@ -173,223 +157,195 @@ include('augments.lua')
 	sets.precast.JA['Unda'] = sets.Enmity
 	sets.precast.JA['Lux'] = sets.Enmity
 	sets.precast.JA['Tenebrae'] = sets.Enmity
-	sets.midcast.JA = {}
-	sets.midcast.JA['Liement'] = sets.Enmity
-	sets.midcast.JA['Swordplay'] = sets.Enmity
-	sets.midcast.JA['Pflug'] = sets.Enmity
-	sets.midcast.JA['Rayke'] = sets.Enmity
-	sets.midcast.JA['Gambit'] = sets.Enmity
-	sets.midcast.JA['Valiance'] = sets.Enmity
-	sets.midcast.JA['Vallation'] = sets.Enmity
 ----------------------------------
 -- 	Pre-cast Magic Gear-sets 	--	
 ----------------------------------
 	sets.precast.FC = { --67% Fast Cast
-		head="Carmine mask +1",
-		body="Taeon tabard",
-		hands="Leyline gloves",
-		legs="Ayanmo cosciales +2",
-		feet="Carmine greaves +1",
-		ammo="Impatiens",
-		neck="Voltsurge torque",
-		ear1="Etiolation earring",
-		ear2="Loquacious earring",
-		ring1="Prolix ring",
-		ring2="Kishar ring",
-		back=Ogma.FC,
-		waist="Resolute belt"
+		ammo={ name="Sapience orb", priority=1},
+		head={ name="Runeist's bandeau +2", priority=14},
+		body={ name="Taeon tabard", priority=12},
+		hands={ name="Leyline gloves", priority=9},
+		legs={ name="Ayanmo cosciales +2", priority=10},
+		feet={ name="Carmine greaves +1", priority=13},
+		neck={ name="Voltsurge torque", priority=1},
+		ring1={ name="Weatherspoon ring", priority=1},
+		back={ name="Moonbeam cape", priority=15},
+		waist={ name="Oneiros belt", priority=11},
 	}
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-		hands="Runeist mitons",
-		legs="Futhark trousers +1",
-		waist="Siegel sash"
+		hands={ name="Runeist mitons", priority=1},
+		legs={ name="Futhark trousers +1", priority=1},
+		waist={ name="Siegel sash", priority=1},
 	})
 	sets.precast.Foil = sets.precast.FC
 ----------------------------------
 -- 	Mid-cast Magic Gear-Sets 	--
 ----------------------------------
-	sets.midcast.FastRecast = sets.precast.FC
 	sets.midcast.EnhancingDuration = set_combine(sets.idle, {
-		head="Erilaz Galea +1",
-		body="Futhark coat +3",
-		hands="Runeist's Mitons",
-		legs="Futhark trousers +1",
-		feet="Erilaz greaves +1",
-		waist="Flume Belt",
-		neck="Incanter's Torque",
-		ear2="Loquacious Earring",
-		ring1="Defending Ring",
-		back="Solemnity cape",
+		head={ name="Erilaz Galea +1", priority=1},
+		body={ name="Futhark coat +3", priority=14},
+		hands={ name="Runeist Mitons +1", priority=1},
+		legs={ name="Futhark trousers +1", priority=1},
+		feet={ name="Erilaz greaves +1", priority=1},
+		neck={ name="Incanter's Torque", priority=1},
+		back={ name="Moonbeam cape", priority=15},
 	})
 	sets.midcast['Enhancing Magic'] = {
-		ammo="Impatiens", 			--10%
-		head="Carmine mask +1",
-		body="Futhark coat +3",
-		hands="Runeist mitons",
-		legs="Futhark trousers +1",
-		feet=Taeon.Feet.Phalanx,
-		waist="Siegel sash",
-		neck="Incanter's torque",
-		ear1="Etiolation earring",
-		ear2="Halasz earring",		--05%
-		ring1="Defending ring",
-		ring2="Evanescence ring",
-		back="Merciful cape"
+		ammo={ name="Impatiens", priority=1}, 			--10%
+		head={ name="Carmine mask +1", priority=1},
+		body={ name="Futhark coat +3", priority=15},
+		hands={ name="Runeist mitons", priority=1},
+		legs={ name="Futhark trousers +1", priority=1},
+		feet={ name="Taeon.feet.Phalanx", priority=1},
+		waist={ name="Siegel sash", priority=1},
+		neck={ name="Incanter's torque", priority=1},
+		ear1={ name="Odnowa earring", priority=13},
+		ear2={ name="Odnowa Earring +1", priority=14},		--05%
+		ring1={ name="Moonbeam Ring", priority=12},
+		ring2={ name="Moonbeam Ring", priority=11},
+		back={ name="Merciful cape", priority=1},
 	}
 	sets.midcast['Temper'] = set_combine(sets.midcast['Enhancing Magic'], {
-        head="Carmine Mask +1",
-        body="Manasa Chasuble",
-        hands="Runeist Mitons +1",
-        legs="Carmine Cuisses +1",
-		ear1="Andoaa earring",
+        head={ name="Carmine Mask +1", priority=1},
+        body={ name="Futhark coat +3", priority=15},
+        hands={ name="Runeist Mitons +1", priority=1},
+        legs={ name="Carmine Cuisses +1", priority=1},
+		ear1={ name="Andoaa earring", priority=1},
+		ammo={ name="Staunch tathlum", priority=1},
+		waist={ name="Oneiros belt", priority=1},
 		
     })
 	sets.midcast['Cocoon'] = set_combine(sets.SIR, {
-		head="Futhark bandeau +2",
-		body="Futhark coat +3",
-		ring2="Defending ring",
-		back="Solemnity cape",
-		neck="Loricate torque +1",
+		head={ name="Futhark bandeau +2", priority=6},
+		body={ name="Futhark coat +3", priority=15},
+		ring1={ name="Moonbeam Ring", priority=12}, 
+		ring2={ name="Moonbeam Ring", priority=11}, 
+		back={ name="Ogma's cape", augments={'HP+60','Eva.+20/Mag. Eva.+20','HP+20','Enmity+10','Phys. dmg. taken-10%'}, priority=1},
+		neck={ name="Futhark torque +1", priority=1},
 	})
 	sets.midcast.Phalanx = set_combine(sets.midcast['Enhancing Magic'], {
-		head="Futhark bandeau +2",
-		body="Taeon tabard",
-		hands="Taeon gloves",
-		legs="Taeon tights",
-		feet="Taeon boots"
+		head={ name="Futhark bandeau +2", priority=9},
+		body={ name="Taeon tabard", priority=8},
+		hands={ name="Taeon gloves", priority=6},
+		legs={ name="Taeon tights", priority=7},
+		feet={ name="Taeon boots", priority=5},
+		ring1={ name="Moonbeam Ring", priority=12},
+		ring2={ name="Moonbeam Ring", priority=11},
+		ear1={ name="Odnowa earring", priority=13},
+		ear2={ name="Odnowa Earring +1", priority=14},
+		back={ name="Moonbeam cape", priority=15},
+		waist={ name="Oneiros belt",  priority=10},
 	})
 	sets.midcast.Regen = set_combine(sets.SIR, {
-		head="Runeist bandeau +2",
+		head={ name="Runeist bandeau +2", priority=15},
 	})
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
-		head="Erilaz Galea +1",
-		waist="Gishdubar sash"
+		head={ name="Erilaz Galea +1", priority=15},
+		waist={ name="Gishdubar sash",  priority=1},
 	})
 	sets.midcast.Flash = sets.Enmity
 	sets.midcast.Foil = sets.Enmity
 	sets.midcast.Stun = sets.Enmity
 	sets.midcast['Soporific'] = sets.Enmity
 	sets.midcast['Sheep Song'] = sets.Enmity
-	--sets.midcast['Soporific'] = sets.Enmity
+	sets.midcast['Soporific'] = sets.Enmity
 	sets.midcast['Blank Gaze'] = sets.Enmity
     sets.midcast['Geist Wall'] = sets.Enmity
     sets.midcast['Jettatura'] = sets.Enmity
 	sets.midcast['Wild Carrot'] = set_combine(sets.SIR, { 
-		head="Futhark bandeau +2",
-		body="Futhark coat +3", 
-		ring1="Moonbeam ring",
-		ring2="Kunaji ring",
-		back="Solemnity cape"
+		head={ name="Futhark bandeau +2", priority=6},
+		body={ name="Futhark coat +3", priority=15}, 
+		ring1={ name="Moonbeam Ring", priority=12},
+		ring2={ name="Kunaji ring", priority=1},
+		back={ name="Ogma's cape", augments={'HP+60','Eva.+20/Mag. Eva.+20','HP+20','Enmity+10','Phys. dmg. taken-10%'},  priority=1},
 	})
 	sets.midcast['Pollen'] = sets.midcast['Wild Carrot']
 --------------------------
 -- 	engaged gear=sets 	--
 --------------------------
 	sets.engaged = {
-		ammo="Ginsen",
-		head="Adhemar bonnet +1",
-		body="Adhemar jacket +1",
-		hands=Herc.Hands.WS,
-		legs="Samnuha tights",
-		feet=Herc.Feet.WS,
-		--neck="Lissome --necklace",
-		ear1="Telos earring",
-		ear2="Cessance Earring",
-		ring1="Chirich Ring +1",
-		ring2="Chirich Ring +1",
-		back=Ogma.TP,
-		waist="Ioskeha belt +1",
+		ammo={ name="Ginsen", priority=1},
+		head={ name="Adhemar bonnet +1", priority=1},
+		body={ name="Adhemar jacket +1", priority=1},
+		hands={ name="Herc.hands.WS",  priority=1},
+		legs={ name="Samnuha tights", priority=1},
+		feet={ name="Herculean Boots", augments={'Accuracy+23 Attack+23','"Triple Atk."+3','STR+10','Accuracy+10'},  priority=1},
+		neck={ name="Lissome necklace", priority=1},
+		ear1={ name="Telos earring", priority=1},
+		ear2={ name="Cessance Earring", priority=1},
+		ring1={ name="Chirich Ring +1", priority=1},
+		ring2={ name="Chirich Ring +1", priority=1},
+		back={ name="Ogma's cape",augments={'HP+60','Accuracy+20 Attack+20','HP+10','"Dbl.Atk."+10','Phys. dmg. taken-10%'}, priority=1},
+		waist={ name="Ioskeha belt +1", priority=1},
 	}
-	sets.engaged.PDT = set_combine(sets.idle, {
-	--[[ PDT caps at 50% and MDT 24% (with shell V]]
-		ammo="Staunch Tathlum",
-		body="Erilaz surcoat +1",
-		legs="Meghanada chausses +2",
-		feet="Erilaz greaves +1",
-		ring1="Defending ring",
-		waist="Ioskeha belt +1",
-		back=Ogma.TP
-	})
-	sets.engaged.MagicEva = set_combine(sets.idle, {
-		ammo="Staunch Tathlum",
-		head="Turms Cap",
-		body="Futhark coat +3",
-		hands="Turms mittens",
-		legs="Erilaz leg guards +1",
-		feet="Turms leggings",
-		ring1="Defending ring",
-		back=Ogma.ENM,
-		neck="Warder's charm +1",
-	})
-	--Capped DT with DD Gear
-	sets.engaged.TankHyb = set_combine(sets.engaged.PDT, {
-		ammo="Ginsen",
-		head="Futhark Bandeau +2",
-		neck="Loricate Torque +1",
-		ear1="Telos Earring",
-		ear2="Cessance Earring",
-		body="Futhark coat +3",
-		hands="Turms mittens",
-		ring1="Defending Ring",
-		ring2="Moonbeam ring",
-		back=Ogma.TP,
-		waist="Ioskeha belt +1",
-		legs="Erilaz leg guards +1",
-		feet="Turms leggings"
+	sets.engaged.TankHyb = set_combine(sets.engaged.PDT, { --[[ 45% PDT | 27% MDT | 593 MagicEva	]]
+		ammo={ name="Staunch tathlum", priority=1},
+		head={ name="Turms cap +1", priority=1},
+		neck={ name="Futhark torque +1", priority=5},
+		ear1={ name="Odnowa earring", priority=13},
+		ear2={ name="Odnowa Earring +1", priority=14},
+		body={ name="Futhark coat +3", priority=15},
+		hands={ name="Turms mittens +1", priority=7},
+		ring1={ name="Moonbeam Ring", priority=12},
+		ring2={ name="Moonbeam Ring", priority=11},
+		back={ name="Ogma's cape",augments={'HP+60','Accuracy+20 Attack+20','HP+10','"Dbl.Atk."+10','Phys. dmg. taken-10%'}, priority=1},
+		waist={ name="Flume belt", priority=1},
+		legs={ name="Erilaz leg guards +1", priority=9},
+		feet={ name="Turms leggings +1",  priority=1},
 	})
 ------------------------------
 -- 	Weaponskill Gear-Sets 	--
 ------------------------------
 	sets.precast.WS['Dimidiation'] = {
-		head="Lustratio cap +1",
-		body="Adhemar jacket +1",
-		hands="Meg. gloves +2",
-		legs="Meghanada chausses +2",
-		feet="Lustratio leggings +1",
-		ammo="Knobkierrie",
-		neck="Fotia gorget",
-		ring1="Regal ring",
-		ring2="Karieyh ring",
-		ear1="Ishvara earring",
-		ear2="Brutal earring",
-		back=Ogma.TP,
-		waist="Fotia belt"
+		head={ name="Lustratio cap +1", priority=1},
+		body={ name="Adhemar jacket +1", priority=1},
+		hands={ name="Meg. gloves +2", priority=1},
+		legs={ name="Meghanada chausses +2", priority=1},
+		feet={ name="Lustratio leggings +1", priority=1},
+		ammo={ name="Knobkierrie", priority=1},
+		neck={ name="Fotia gorget", priority=1},
+		ring1={ name="Regal ring", priority=1},
+		ring2={ name="Karieyh ring", priority=1},
+		ear1={ name="Ishvara earring", priority=1},
+		ear2={ name="Brutal earring", priority=1},
+		back={ name="Ogma's cape",augments={'HP+60','Accuracy+20 Attack+20','HP+10','"Dbl.Atk."+10','Phys. dmg. taken-10%'}, priority=1},
+		waist={ name="Fotia belt", priority=1},
 	}
 	sets.precast.WS['Resolution'] = {
-		head="Adhemar bonnet +1",
-		body="Adhemar Jacket +1",
-		hands="Adhemar wristbands +1",
-		legs="Samnuha tights",
-		feet=Herc.Feet.WS,
-		ammo="Knobkierrie",
-		--neck="Anu torque", 
-		ring1="Regal ring",
-		ring2="Niqmaddu ring",
-		ear1="Brutal earring",
-		ear2="Cessance earring",
-		back=Ogma.TP,
-		waist="Fotia belt"
+		head={ name="Adhemar bonnet +1", priority=1},
+		body={ name="Adhemar Jacket +1", priority=1},
+		hands={ name="Adhemar wristbands +1", priority=1},
+		legs={ name="Samnuha tights", priority=1},
+		feet={ name="Herculean Boots", augments={'Accuracy+23 Attack+23','"Triple Atk."+3','STR+10','Accuracy+10'}, priority=1},
+		ammo={ name="Knobkierrie", priority=1},
+		neck={ name="Anu torque", priority=1}, 
+		ring1={ name="Regal ring", priority=1},
+		ring2={ name="Niqmaddu ring", priority=1},
+		ear1={ name="Brutal earring", priority=1},
+		ear2={ name="Cessance earring", priority=1},
+		back={ name="Ogma's cape",augments={'HP+60','Accuracy+20 Attack+20','HP+10','"Dbl.Atk."+10','Phys. dmg. taken-10%'}, priority=1},
+		waist={ name="Fotia belt", priority=1},
 	}
 ----------------------
 -- 	Misc Gear-sets 	--
 ----------------------
 	sets.Reive = {
-		neck="Ygna's resolve +1"
+		neck={ name="Ygna's resolve +1", priority=1},
 	}
 	sets.buff.Doom = {
-		ring1="Purity Ring",
-		ring2="Saida Ring",
-		waist="Gishdubar sash",
+		ring1={ name="Purity Ring", priority=1},
+		ring2={ name="Saida Ring", priority=1},
+		waist={ name="Gishdubar sash", priority=1},
 	}
 	sets.Asleep = set_combine(sets.engaged.PDT, {
-		head="Frenzy Sallet"
+		head={ name="Frenzy Sallet", priority=1},
 	})
 	sets.DT = sets.idle.PDT
 	sets.CapacityMantle = {
-		back="Mecisto. Mantle"
+		back={ name="Mecisto. Mantle", priority=1},
 	}
 	sets.Reive = {
-		neck="Ygna's resolve +1"
+		neck={ name="Ygna's resolve +1", priority=1},
 	}
 	sets.Protect = { 
 	

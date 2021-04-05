@@ -1,0 +1,17 @@
+sets.exported={
+    main="Lycurgos",
+    sub="Utu Grip",
+    ammo="Knobkierrie",
+    head="Hjarrandi Helm",
+    body="Pumm. Lorica +2",
+    hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+    legs={ name="Odyssean Cuisses", augments={'Accuracy+23','Phys. dmg. taken -4%','VIT+9','Attack+4',}},
+    feet={ name="Amm Greaves", augments={'HP+50','VIT+10','Accuracy+15','Damage taken-2%',}},
+    neck="Loricate Torque +1",
+    waist="Flume Belt",
+    left_ear="Telos Earring",
+    right_ear="Cessance Earring",
+    left_ring="Defending Ring",
+    right_ring="Gelatinous Ring +1",
+    back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
+}
