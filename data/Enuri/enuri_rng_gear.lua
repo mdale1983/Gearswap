@@ -51,7 +51,7 @@ include('augments.lua')
 ----------------------
 	sets.idle = {
         head="Meghanada visor +2",
-		--neck="Loricate torque +1",
+		neck="Loricate torque +1",
         body="Meghanada cuirie +2",
         hands="Malignance gloves",
 		legs="Arcadian braccae +3",
@@ -147,7 +147,7 @@ include('augments.lua')
 		hands="Leyline gloves",
 		-- legs="Rawhide Trousers",
 		feet="Carmine greaves +1",
-		--neck="Voltsurge torque",
+		neck="Voltsurge torque",
 		ear1="Loquacious earring",
 		ear2="Etiolation earring",
 		ring1="Prolix ring",
@@ -157,7 +157,7 @@ include('augments.lua')
 	}
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         --body="Passion Jacket",
-        --neck="Magoraga Beads",
+        neck="Magoraga Beads",
         --ring2="Lebeche Ring",
     })
 	sets.precast.RA = {-- (60% snapshot needed)
@@ -166,7 +166,7 @@ include('augments.lua')
 		hands="Carmine Fin. Ga. +1",
         legs="Orion Braccae +3",
         feet="Adhemar gamashes +1",
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
         waist="Impulse Belt",
 		back=Bele.MagicEva
     }
@@ -179,7 +179,7 @@ include('augments.lua')
 		hands="Carmine Fin. Ga. +1",
 		legs="Orion Braccae +3",
         feet="Arcadian socks +3",
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
         waist="Impulse Belt",
 		back=Bele.MagicEva
     }
@@ -189,7 +189,7 @@ include('augments.lua')
 		hands="Carmine Fin. Ga. +1",
         legs="Adhemar Kecks +1",
         feet="Arcadian socks +3",
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
         waist="Impulse Belt",
 		back=Bele.MagicEva
     }
@@ -199,7 +199,7 @@ include('augments.lua')
 		hands="Carmine Fin. Ga. +1",
 		legs="Pursuer's pants",
         feet="Arcadian socks +3",
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
         waist="Impulse Belt",
 		back=Bele.MagicEva
     }
@@ -209,7 +209,7 @@ include('augments.lua')
 		hands="Carmine Fin. Ga. +1",
 		legs="Pursuer's pants",
         feet="Arcadian socks +3",
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
         waist="Yemaya Belt",
 		back=Bele.MagicEva
     }
@@ -226,7 +226,7 @@ include('augments.lua')
 		sets.midcast.RA = {
 		-- 17sTP from weapons/Shield
 			head="Arcadian beret +3",
-			--neck="Scout's gorget +2",		--4sTP
+			neck="Scout's gorget +2",		--4sTP
 			body="Orion jerkin +2",				--6sTP
 			hands="Malignance gloves",		--12sTP
 			legs="Adhemar kecks +1",		--7sTP
@@ -241,7 +241,7 @@ include('augments.lua')
 		sets.midcast.RA.Acc = {
 		-- 17sTP from weapons/Shield
 			head="Arcadian beret +3",
-			--neck="Scout's gorget +2",		--4sTP
+			neck="Scout's gorget +2",		--4sTP
 			body="Orion jerkin +2",			--4sTP
 			hands="Malignance gloves",		--12sTP
 			legs="Orion braccae +3",		--7sTP
@@ -256,7 +256,7 @@ include('augments.lua')
 		sets.midcast.RA.Gastraphetes = {
 		-- 17sTP from weapons/Shield
 			head="Arcadian beret +3",
-			--neck="Scout's gorget +2",		--4sTP
+			neck="Scout's gorget +2",		--4sTP
 			body="Oshosi vest",				--6sTP
 			hands="Malignance gloves",		--12sTP
 			legs="Adhemar kecks +1",		--7sTP
@@ -271,7 +271,7 @@ include('augments.lua')
 		sets.midcast.RA.Gastraphetes.Acc = {
 		-- 17sTP from weapons/Shield
 			head="Arcadian beret +3",
-			--neck="Scout's gorget +2",		--4sTP
+			neck="Scout's gorget +2",		--4sTP
 			body="Orion jerkin +2",				--6sTP
 			hands="Malignance gloves",		--12sTP
 			legs="Orion braccae +3",		--7sTP
@@ -288,7 +288,7 @@ include('augments.lua')
 	----------------------------------
 		sets.midcast.Barrage = {
 			head="Orion beret +3",
-			--neck="Iskur gorget",			--
+			neck="Iskur gorget",			--
 			body="Orion jerkin +2",			
 			hands="Orion Bracers +2",		--6sTP
 			legs="Adhemar kecks +1",		--7sTP
@@ -318,39 +318,42 @@ include('augments.lua')
 --		Engaged sets			--
 ----------------------------------	
 	sets.engaged = {
-        head="Adhemar bonnet +1",
-        --neck="Lissome --necklace",
-        ear1="Cessance Earring",
-        ear2="Telos Earring",
-        body="Adhemar jacket +1",
+        head="Carmine mask +1",
+        body="Mummu jacket +2",
         hands=Herc.Hands.WS,
-        ring1="Regal Ring",
-        ring2="Ilabrat Ring",
-        back=Bele.TP,
-        waist="Grunfeld rope",
         legs="Samnuha tights",
-        feet=Herc.Feet.WS
-    }
-	sets.engaged.DW = {
-        head="Adhemar bonnet +1",
-        --neck="Lissome --necklace",
+        feet=Herc.Feet.WS,
+        ring1="Regal ring",
+        ring2="Chirich ring +1",
+        neck="Lissome necklace",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        body="Adhemar jacket +1",
-        hands=Herc.Hands.WS,
-        ring1="Regal Ring",
-        ring2="Ilabrat Ring",
         back=Bele.TP,
         waist="Grunfeld rope",
-        legs="Carmine Cuisses +1",
-        feet=Herc.Feet.WS
     }
+	sets.engaged.DW = set_combine(sets.engaged, {
+	-- No Magic Haste 
+		body="Adhemar jacket +1",	--6
+		ear1="Suppanomimi",			--5
+		ear2="Eabani earring",		--4
+    })-- 49% DW Needed-- 39% DW Needed
+	sets.engaged.DW.Haste_15 = set_combine(sets.engaged, { 
+		ear1="Suppanomimi",			--5
+		ear2="Eabani earring",		--4
+	})-- +32 DW is needed to cap
+	sets.engaged.DW.Haste_30 = set_combine(sets.engaged, { 
+		ear1="Suppanomimi",			--5
+	})-- +21 DW is needed to cap
+	sets.engaged.DW.Haste_43 = set_combine(sets.engaged,  { -- 45% Magic Haste 
+		legs="Carmine cuisses +1",
+		ear2="Suppanomimi"
+	}) -- 1% DW Needed
 ----------------------------------------------
 --			Weaponskill Gearsets			--
 ----------------------------------------------
 	sets.precast.WS = {
         head="Orion beret +3",
-        --neck="Fotia Gorget",
+        neck="Fotia Gorget",
         ear1="Ishvara earring",
         ear2="Sherida earring",
         body=Herc.Body.RWS,
@@ -368,7 +371,7 @@ include('augments.lua')
 		hands="Meghanada gloves +2",
 		legs="Arcadian braccae +3",
 		feet=Herc.Feet.RWS,
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
 		ring1="Ilabrat Ring",
 		ring2="Regal ring",
         ear1="Ishvara Earring",
@@ -381,7 +384,7 @@ include('augments.lua')
 		hands="Meghanada gloves +2",
 		legs="Arcadian braccae +3",
 		feet=Herc.Feet.RWS,
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
 		ring1="Ilabrat Ring",
 		ring2="Regal ring",
         ear1="Ishvara Earring",
@@ -394,7 +397,7 @@ include('augments.lua')
 		hands="Meghanada gloves +2",
 		legs="Arcadian braccae +3",
 		feet=Herc.Feet.RWS,
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
 		ring1="Ilabrat Ring",
 		ring2="Regal ring",
         ear1="Ishvara Earring",
@@ -407,7 +410,7 @@ include('augments.lua')
 		hands="Mummu wrists +2",
 		legs="Jokushu haidate",
 		feet="Thereoid greaves",
-		--neck="Fotia gorget",
+		neck="Fotia gorget",
 		ring1="Begrudging Ring",
 		ring2="Regal ring",
         ear1="Sherida Earring",
@@ -426,7 +429,7 @@ include('augments.lua')
 		hands="Meghanada gloves +2",
 		legs="Arcadian braccae +3",
 		feet=Herc.Feet.RWS,
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
 		ring1="Dingir Ring",
 		ring2="Regal ring",
         ear1="Ishvara Earring",
@@ -439,7 +442,7 @@ include('augments.lua')
 		hands="Meghanada gloves +2",
 		legs="Arcadian braccae +3",
 		feet=Herc.Feet.RWS,
-		--neck="Scout's gorget +2",
+		neck="Scout's gorget +2",
 		ring1="Dingir Ring",
 		ring2="Regal ring",
         ear1="Ishvara Earring",
@@ -451,7 +454,7 @@ include('augments.lua')
         ear2="Moonshade Earring",
     })
 	sets.precast.WS['Wildfire'] = {
-        --neck="Scout's gorget +2",
+        neck="Scout's gorget +2",
         ear1="Friomisi Earring",
 		ear2="Hecate's Earring",
 		body="Cohort cloak +1",
@@ -460,7 +463,7 @@ include('augments.lua')
         feet=Herc.Feet.MAB,
       	ring1="Weather. Ring",
 		ring2="Dingir ring",
-        waist="Eschan stone",
+        waist="K. kachina belt +1",
         back=Bele.MAB,
     }
 	sets.precast.WS['Hot Shot'] = set_combine(sets.precast.WS['Wildfire'], { 
@@ -469,6 +472,11 @@ include('augments.lua')
         waist="Fotia Belt",
 	})
 	sets.precast.WS['Trueflight'] = set_combine(sets.precast.WS['Wildfire'], { 
+		--[[123MAB with 21% wsD]]
+		body="Cohort cloak +1",
+		ear2="Hecate's earring",
+	})
+	sets.precast.WS['Aeolian edge'] = set_combine(sets.precast.WS['Wildfire'], { 
 		--[[123MAB with 21% wsD]]
 		body="Cohort cloak +1",
 		ear2="Hecate's earring",

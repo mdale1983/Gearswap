@@ -138,9 +138,9 @@ WeaponType =  {
         legs="Shneddick Tights +1",
         feet="Lanun Bottes"
 	}
-	--[[sets.precast.JA['Fold'] = {
-		hands="Commodore Gants +2"
-	}}]]
+	sets.precast.JA['Fold'] = {
+		hands="Chasseur's Gants +1",
+	}
 	sets.precast.CorsairRoll = {
         range="Compensator",
 		head="Lanun Tricorne +1",
@@ -302,7 +302,7 @@ WeaponType =  {
 ----------------------------------	
 	sets.engaged = {
         --ammo=gear.RAbullet,
-        head="Adhemar bonnet +1",
+        head="Carmine mask +1",
         neck="Lissome Necklace",
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -332,9 +332,28 @@ WeaponType =  {
     }
 	sets.engaged.DW = set_combine(sets.engaged, {
 	-- No Magic Haste 
-		body="Adhemar jacket +1",
-		legs="Carmine Cuisses +1",
-    })-- 49% DW Needed
+		--head="Ryuo somen +1",		--9
+		body="Adhemar jacket +1",	--6
+		ear1="Suppanomimi",			--5
+		ear2="Eabani earring",		--4
+		--feet="Hiza. sune-ate +1",	--7
+		waist="Reiki yotai",		--7
+    })-- 49% DW Needed-- 39% DW Needed
+	sets.engaged.DW.Haste_15 = set_combine(sets.engaged, { 
+		--head="Ryuo somen +1",		--9
+		ear1="Suppanomimi",			--5
+		ear2="Eabani earring",		--4
+		--feet="Hiza. sune-ate +1",	--7
+		waist="Reiki yotai",		--7
+	})-- +32 DW is needed to cap
+	sets.engaged.DW.Haste_30 = set_combine(sets.engaged, { 
+		--head="Ryuo somen +1",		--9
+		ear1="Suppanomimi",			--5
+		waist="Reiki yotai",		--7
+	})-- +21 DW is needed to cap
+	sets.engaged.DW.Haste_43 = set_combine(sets.engaged,  { -- 45% Magic Haste 
+		ear2="Suppanomimi"
+	}) -- 1% DW Needed
 	sets.engaged.MagicEva = { 
 		--ammo=gear.RAbullet,
         head="Meghanada visor +1",
@@ -417,7 +436,7 @@ WeaponType =  {
         ear1="Friomisi Earring",
 		ear2="Hecate's Earring",
 		body="Carmine scale mail +1",
-        hands=Herc.Hands.MAB,
+        hands="Carmine finger gauntlets +1",
 		legs=Herc.Legs.MAB,
         feet="Lanun bottes +2",
         ring1="Ilabrat Ring",

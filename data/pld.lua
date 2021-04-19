@@ -31,6 +31,7 @@ end
 ------------------------------------------
 function job_binds()
  --[[ F9-F12 keybinds ]]
+	send_command('bind f9 gs c cycle empty')
 	send_command('bind f9 gs c cycle IdleMode')
 	send_command('bind f10 gs c cycle OffenseMode')
 	send_command('bind f11 gs c cycle HybridMode')
@@ -835,9 +836,10 @@ function check_buffup()
 end
 
 buff_spell_lists = {
-	Auto = {--Options for When are: Always, Engaged, Idle, OutOfCombat, Combat
+	Auto = {--Options for When are: Always, Engaged, Idle, OutOfCombat, Combat 
+	--[[	//gs c buffup Default	]]
 		{Name='Crusade',	Buff='Enmity Boost',	SpellID=476,	When='Always'},
-		{Name='Cocoon',		Buff='Defense Boost',	SpellID=547,	When='Always'},
+		--{Name='Cocoon',		Buff='Defense Boost',	SpellID=547,	When='Always'},
 		{Name='Phalanx',	Buff='Phalanx',			SpellID=106,	When='Always'},
 		{Name='Reprisal',	Buff='Reprisal',		SpellID=97,		When='Combat'},
 		{Name='Enlight II',	Buff='Enlight',			SpellID=855,	When='Engaged'},
@@ -846,9 +848,6 @@ buff_spell_lists = {
 
 	Default = {
 		{Name='Crusade',	Buff='Enmity Boost',	SpellID=476,	Reapply=false},
-		{Name='Temper',		Buff='Multi Strikes',	SpellID=493,	Reapply=false},
-		{Name='Haste',		Buff='Haste',			SpellID=57,		Reapply=false},
-		{Name='Refresh',	Buff='Refresh',			SpellID=109,	Reapply=false},
 		{Name='Phalanx',	Buff='Phalanx',			SpellID=106,	Reapply=false},
 		{Name='Enlight II',	Buff='Enlight',			SpellID=855,	Reapply=false},
 	},
@@ -864,6 +863,6 @@ buff_spell_lists = {
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
-	include('telecmds')
-	include('htmbki')
+	--include('telecmds')
+	--include('htmbki')
 end

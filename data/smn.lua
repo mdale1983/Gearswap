@@ -984,5 +984,4 @@ buff_spell_lists = {
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
-	include('smnmands')
 end

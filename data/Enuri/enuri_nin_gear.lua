@@ -56,7 +56,8 @@ include('augments.lua')
 	}
 	sets.weapons.Kanaria = { 
 		main="Kanaria",
-		sub="Shuhansadamune"
+		sub="Shuhansadamune",
+		ammo="Suppa shuriken"
 	}
 ----------------------
 -- 	Enmity Gear set --
@@ -183,6 +184,11 @@ include('augments.lua')
 			ammo="Date Shuriken",
 			ring1="Kishar Ring"
 		})
+		sets.buff.Sange = { 
+			ammo="Suppa shuriken",
+			body="Mochizuki chainmail +1",
+			hands="Adhemar wristbands +1"
+		}
 ------------------------------
 -- 	Precast RA Gear-sets 	--	
 ------------------------------	

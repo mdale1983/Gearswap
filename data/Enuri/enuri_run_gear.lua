@@ -63,7 +63,7 @@ include('augments.lua')
 	sets.Enmity = {
 		head={ name="Halitus helm", priority=12},
 		body={ name="Emet harness +1", priority=9},
-		hands={ name="Kurys gloves", priority=6},
+		hands={ name="Kurys gloves", priority=6}, 
 		legs={ name="Erilaz leg guards +1", priority=11},
 		feet={ name="Erilaz greaves +1", priority=5},
 		ammo={ name="Sapience orb", priority=1},
@@ -289,7 +289,7 @@ include('augments.lua')
 		ring1={ name="Moonbeam Ring", priority=12},
 		ring2={ name="Moonbeam Ring", priority=11},
 		back={ name="Ogma's cape",augments={'HP+60','Accuracy+20 Attack+20','HP+10','"Dbl.Atk."+10','Phys. dmg. taken-10%'}, priority=1},
-		waist={ name="Flume belt", priority=1},
+		waist={ name="Ioskeha belt +1", priority=1},
 		legs={ name="Erilaz leg guards +1", priority=9},
 		feet={ name="Turms leggings +1",  priority=1},
 	})

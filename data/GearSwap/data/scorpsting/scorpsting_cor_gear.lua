@@ -130,9 +130,9 @@ WeaponType =  {
         legs="Shneddick Tights +1",
         feet="Lanun Bottes"
 	}
-	--[[sets.precast.JA['Fold'] = {
-		hands="Commodore Gants +2"
-	}}]]
+	sets.precast.JA['Fold'] = {
+		hands="Chasseur's gnats +1"
+	}}
 	sets.precast.CorsairRoll = {
         range="Compensator",
 		head="Lanun Tricorne +1",

@@ -74,7 +74,7 @@ include('augments.lua')
 		ring2={ name="Eihwaz ring", priority=7},
 		ear1={ name="Cryptic earring", priority=5},
 		ear2={ name="Pluto's pearl", priority=1},
-		back={ name="Rudianos's Mantle", augments={'HP+60','Accuracy+20 Attack+20','Enmity+10','Phys. dmg. taken-10%'}, priority=11},
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%'}, priority=11},
 		waist={ name="Creed baudrier", priority=6},
 	}
 --------------------------------------
@@ -106,26 +106,33 @@ include('augments.lua')
 	-- Mid cast Gear Sets --
 	------------------------
 	sets.midcast.SIRD = { 
-		ammo="Staunch Tathlum",
-		legs="Carmine cuisses +1",
-		feet=Odyssean.Feet.FC,
-		ear1="Knightly earring",
-		waist="Resolute Belt",
+		ammo={ name="Staunch Tathlum",  priority=1},
+		neck={ name="Moonlight necklace",  priority=1},
+		body={ name="Reverence surcoat +2",  priority=15},	--+244HP
+		legs={ name="Carmine cuisses +1",  priority=6},
+		feet={ name="Odyssean Greaves",augments={'"Fast Cast"+4','Mag. Acc.+15'},  priority=5},
+		ear1={ name="Knightly earring",  priority=1},
 	}
-	sets.midcast['Blue Magic'] = {}
+	sets.midcast['Blue Magic'] = set_combine(sets.Enmity, {
+		ammo={ name="Staunch Tathlum",  priority=1},
+		body={ name="Reverence surcoat +2",  priority=15},	--+244HP
+		legs={ name="Carmine cuisses +1",  priority=6},
+		feet={ name="Odyssean Greaves",augments={'"Fast Cast"+4','Mag. Acc.+15'},  priority=5},
+		ear1={ name="Knightly earring",  priority=1},
+	})
 	sets.midcast.Cure = set_combine(sets.idle.PDT, {
 		head={ name="Souveran schaller +1",  priority=14},
-		body={ name="Souveran cuirass +1", priority=15},
+		body={ name="Reverence surcoat +2", priority=15},
 		hands={ name="Souv. Handsch. +1",  priority=12},
-		legs={ name="Souveran diechlings +1",  priority=11},
-		feet={ name="Souveran schuhs +1",  priority=13},
-		neck={ name="Diemer gorget", priority=1},
-		waist={ name="Creed baudrier", priority=5},
-		ear1={ name="Odnowa earring", priority=8},
-		ear2={ name="Odnowa earring +1", priority=9},
-		ring1={ name="Moonbeam ring", priority=6},
-		ring2={ name="Moonbeam ring", priority=7},
-		back={ name="Rudianos's Mantle", augments={'HP+60','Accuracy+20 Attack+20','Enmity+10','Phys. dmg. taken-10%'}, priority=10},
+		legs={ name="Carmine suisses +1",  priority=7},
+		feet={ name="Odyssean greaves",  priority=5},
+		neck={ name="Moonlight necklace", priority=1},
+		waist={ name="Creed baudrier", priority=6},
+		ear1={ name="Knightly earring", priority=1},
+		ear2={ name="Odnowa earring +1", priority=11},
+		ring1={ name="Moonbeam ring", priority=10},
+		ring2={ name="Moonbeam ring", priority=9},
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%'}, priority=8},
 	})
 	sets.midcast['Flash'] = set_combine(sets.Enmity, {
 		ammo={ name="Sapience Orb", priority=1},
@@ -137,27 +144,31 @@ include('augments.lua')
 	})
 	sets.midcast['Phalanx'] = {
 		ammo={ name="Impatiens",priority=3},
-		body={ name="Reverence surcoat +2",priority=15},
-		hands={ name="Souveran handschuhs +1", priority=14},
-		feet={ name="Souveran schuhs +1", priority=13},
-		back={ name="Weard mantle",priority=12},
+		body={ name="Yorium cuirass",priority=13},
+		hands={ name="Souveran handschuhs +1", priority=15},
+		legs={ name="Yorium cuisses", priority=12},
+		feet={ name="Souveran schuhs +1", priority=14},
+		back={ name="Weard mantle",priority=11},
 		ear1={ name="Halasz earring",priority=2},
 		waist={ name="Siegel sash",priority=1},
 	}
 	sets.midcast['Reprisal'] = {
 		ammo="Staunch Tathlum",
-        head="Souveran schaller +1",
-        body="Rev. Surcoat +2",
-		hands="Souv. Handsch. +1",
-		legs="Souveran diechlings +1",
-        feet="Souveran schuhs +1",
-		neck="Sanctity necklace",
-		ear1="Odnowa earring",
-		ear2="Odnowa Earring +1",
-        ring1="Moonbeam ring",
-        ring2="Moonbeam ring",
-        back=Rudian.FC,
-		waist="Creed baudrier"
+        head={ name="Souveran schaller +1",  priority=14},
+        body={ name="Rev. Surcoat +2", priority=15},
+		hands={ name="Souv. Handsch. +1",  priority=12},
+		legs={ name="Souveran diechlings +1",  priority=11},
+		feet={ name="Souveran schuhs +1",  priority=13},
+		neck={ name="Unmoving collar +1",  priority=6},
+		ear1={ name="Odnowa earring", priority=8},
+		ear2={ name="Odnowa earring +1", priority=9},
+		ring1={ name="Moonbeam ring", priority=6},
+		ring2={ name="Moonbeam ring", priority=7},
+        back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}, priority=5},
+		waist={ name="Creed baudrier", priority=4},
+	}
+	sets.midcast['Enlight II'] = { 
+		
 	}
 	sets.midcast['Blue Magic'].Enmity = set_combine(sets.Enmity, { })
 	sets.midcast.Flash.SIRD = set_combine(sets.Enmity.SIRD, {})
@@ -177,33 +188,14 @@ include('augments.lua')
 		neck="Lissome necklace",
 		ring1="Moonbeam ring",
 		ring2="Moonbeam ring",
-		ear1="Cessance earring",
-		ear2="Telos earring",
-		waist="Phos belt",
+		ear1="Thureous earring",
+		ear2="Odnowa earring +1",
+		waist="Tempus fugit",
 		back=Rudian.DA,
 	}
-	sets.engaged.Ochain = set_combine(sets.idle.PDT, {
-		head="Souveran schaller +1",
-		body="Sulevia's breastplate +2",
-		hands="Souv. Handsch. +1"
-		
-	})
-	sets.engaged.Caladbolg = set_combine(sets.engaged.Ochain, { 
-		ammo="Ginsen",
-		head="Flam. Zucchetto +2",
-		body="Souveran cuirass",
-		hands="Flam. manopolas +2",
-		legs=Odyssean.Legs.TP,
-		feet="Flam. gambieras +2",
-		neck="Lissome necklace",
-		ear1="Telos earring",
-		ear2="Cessance earring",
-		ring1="Flamma ring",
-        ring2="Chirich Ring",
-	})
-	sets.engaged.Dynamis = set_combine(sets.idle.PDT, {
-		hands="Souv. Handsch. +1"
-	})
+	sets.engaged.MagicEva = { 
+	
+	}
 ------------------------------
 -- 	Weapon skill Gear-Sets 	--
 ------------------------------
@@ -237,21 +229,7 @@ include('augments.lua')
 		back=Rudian.DA,
 		waist="Fotia belt"
 	}
-	sets.precast.WS['Atonement'] = { 
-		head=Odyssean.Helm.VitWS,
-		body=Odyssean.Body.WS,
-		hands=Odyssean.Hands.VitWS,
-		legs=Odyssean.Legs.VitWS,
-		feet="Sulevia's Leggings +2",
-		ammo="Paeapua",
-		neck="Unmoving collar",
-		ear1="Ishvara earring",
-		ear2="Cryptic earring",
-		ring1="Apeile ring",
-		ring2="Apeile ring +1",
-		back=Rudian.Enm,
-		waist="Creed baudrier"
-	}
+	sets.precast.WS['Atonement'] = set_combine(sets.Enmity, { })
 	sets.precast.WS['Savage Blade'] = {
 		head="Hjarrandi helm",
 		body="Hjarrandi breastplate",

@@ -346,18 +346,14 @@ function get_combat_form()
 	end
 end 
 function get_combat_weapon()
-	if state.mainWeapon.value == "Masamune" then 
-		equip({main="Masamune", sub="Utu Grip"})
-		set_macro_page(3, 2)
-	elseif state.mainWeapon.value == "Amanomurakumo" then 
-		equip({main="Amanomurakumo", sub="Utu Grip"})
-		set_macro_page(1, 2)
-	elseif state.mainWeapon.value == "Dojikiri" then 
-		equip({main="Dojikiri Yasutsuna", sub="Utu Grip"})
-		set_macro_page(2, 2)
-	elseif state.mainWeapon.value == "Norifusa" then 
-		equip({main="Norifusa", sub="Utu Grip"})
-		set_macro_page(3, 2)
+	if state.Weapons.value == "Masamune" then 
+		set_macro_page(1, 5)
+	elseif state.Weapons.value == "Amanomurakumo" then 
+		set_macro_page(1, 5)
+	elseif state.Weapons.value == "Dojikiri" then 
+		set_macro_page(1, 5)
+	elseif state.Weapons.value == "Norifusa" then 
+		set_macro_page(1, 5)
 	end	
 	return get_combat_weapon
 end 

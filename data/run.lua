@@ -989,5 +989,5 @@ function user_job_self_command(commandArgs, eventArgs)
 	include('commands')
 	--include('telecmds')
 	--include('htmbki')
-	include('testing')
+	--include('testing')
 end

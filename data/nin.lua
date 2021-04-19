@@ -513,6 +513,12 @@ function job_buff_change(buff, gain)
 	elseif state.Buff[buff] ~= nil then
 		handle_equipping_gear(player.status)
 	end
+	if buffactive['Sange'] then
+		equip(sets.buff.Sange)
+		disable('ammo','body','hands')
+	else 
+		enable('ammo','body','hands')
+	end 
 	if buff:startswith('Aftermath') then
 		if player.equipment.main == 'Nagi' then
 			classes.CustomMeleeGroups:clear()

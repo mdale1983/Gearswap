@@ -1,5 +1,5 @@
 --[[
-	Ninja: v2.0.2
+	Ranger: v2.0.2
 	Creator: Enuri
 	Server:	 Asura
 	Funcitons: 	This lua will allow the user to change main weapons on the fly
@@ -10,7 +10,6 @@
 				There are a few modifications that have been made. 
 		Auto Functions 
 			Weapon Skill 
-			Tanking
 			Buffs
 			Job Abilites
 		Display has been setup to the bottom of the screen using a resolution of 2560x1440
@@ -992,5 +991,5 @@ end
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
 	include('telecmds')
-	include('htmbki')
+	--include('htmbki')
 end

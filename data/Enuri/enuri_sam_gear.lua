@@ -110,7 +110,7 @@ include('augments.lua')
 		--body=Valor.Body.TP,
 		hands="Wakido kote +3",
 		legs="Ken. hakama",
-		feet="Flamma gambieras +2",
+		feet="Tatena. sune. +1",
 		neck="Sam. nodowa +1",
 		waist="Ioskeha belt +1",
 		ear1="Cessance Earring",

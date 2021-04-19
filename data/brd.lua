@@ -816,7 +816,7 @@ function job_tick()
 	return false
 end
 function check_buff(spell)
-	if player.in_combat and not assisting then 
+	--[[if player.in_combat and not assisting then 
 		assisting = true 
 		target = windower.ffxi.get_party()
 		windower.chat.input('//gs c assist')
@@ -825,7 +825,7 @@ function check_buff(spell)
 		assisting = false 
 		windower.chat.input('//gs c stopAssist')	
 		return
-	end 
+	end]]
 	if state.AutoBuffMode.value and not areas.Cities:contains(world.area) then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		for i in pairs(buff_spell_lists['Auto']) do
@@ -887,13 +887,13 @@ buff_spell_lists = {
 -- Miscelanous Stuff --
 -----------------------
 function set_healbot()
-	send_command('wait 6; input //lua l healbot')
-	send_command('wait 7; input //hb disable cure')
+	--send_command('wait 6; input //lua l healbot')
+	--[[send_command('wait 7; input //hb disable cure')
 	send_command('wait 8; input //hb disable buff')
 	send_command('wait 9; input //hb disable debuff')
 	send_command('wait 10; input //hb disable curaga')
 	send_command('wait 11; input //hb assist Enuri')
-	send_command('wait 12; input //hb assist attack on')
+	send_command('wait 12; input //hb assist attack on')]]
 end 
 windower.raw_register_event('zone change',reset_timers)
 windower.raw_register_event('logout',reset_timers)
@@ -902,8 +902,4 @@ windower.raw_register_event('logout',reset_timers)
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
-	include('telecmds')
-	include('follow')
-	include('brdbuffs')
-	--include('htmbki')
 end

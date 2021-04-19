@@ -85,7 +85,6 @@ function job_setup()
 	autows = "Torcleaver"
 	autofood = 'Sublime Sushi'
 	
-	Breath_HPP = 60
 	
 --[[ Initialization of auto job functions ]]
 	init_job_states({
@@ -119,34 +118,13 @@ function job_setup()
 		Hyoton = S{"Tsurara",},
 		Monomi = S{"Sanjaku-Tenugui",},
 	}
+	
 	state.warned = M(false)
 	state.crafting = M(false)
-	options.ammo_warning_limit = 10
+	
 	state.ElementalMode = M{['description'] = 'Elemental Mode','Fire','Water','Lightning','Earth','Wind','Ice','Light','Dark',}
-	BlueMagic = {}
-		blue_magic_maps = {}
-		blue_magic_maps.Physical = S {
-			'Bludgeon', 'Body Slam', 'Feather Storm', 'Mandibular Bite', 
-			'Queasyshroom', 'Power Attack', 'Screwdriver', 'Sickle Slash', 
-			'Smite of Rage', 'Terror Touch', 'Battle Dance', 'Claw Cyclone',
-			'Foot Kick', 'Grand Slam', 'Sprout Smack', 'Helldive', 'Jet Stream',
-			'Pinecone Bomb', 'Wild Oats', 'Uppercut'
-		}		
-		blue_magic_maps.Buff = S {
-			'Refueling', 'Cocoon'
-		}
-		blue_magic_maps.Healing = S {
-			'Healing Breeze', 'Pollen', 'Wild Carrot'
-		}
-		blue_magic_maps.Enmity = S { 
-			'Blank Gaze', 'Jettatura', 'Geist Wall', 
-			'Sheep Song', 'Soporific', 'Stinking Gas'
-		}
 		RUNMagic_Enmity = S {
 			'Flash', 'Stun', 'Sleepga', 'Foil'
-		}
-		buffList = S { 
-			'Temper', 'Crusade', 'Phalanx', 'Shell V'
 		}
 		rayke_duration = 35
 		gambit_duration = 96
@@ -277,12 +255,6 @@ function display_rune_info(spell)
 	end
 end
 function useRunes(cmdParams, eventArgs)
-	if cmdParams[1] == 'buffWatcher' then
-		buffWatch(cmdParams[2])
-	end
-	if cmdParams[1] == 'stopBuffWatcher' then
-		stopBuffWatcher()
-	end
 	if cmdParams[1]:lower() == 'rune' then
 		send_command('@input /ja '..state.Runes.value..' <me>')
 	end
@@ -373,22 +345,16 @@ function get_combat_form()
 end 
 function get_combat_weapon()
 	if state.Weapons.value == "Apocalypse" then 
-		equip({main="Apocalypse", sub="Utu Grip"})
 		set_macro_page(3, 2)
 	elseif state.Weapons.value == "Ragnarok" then 
-		equip({main="Ragnarok", sub="Utu Grip"})
 		set_macro_page(1, 2)
 	elseif state.Weapons.value == "Caladbolg" then 
-		equip({main="Caladbolg", sub="Utu Grip"})
 		set_macro_page(2, 2)
 	elseif state.Weapons.value == "Liberator" then 
-		equip({main="Liberator", sub="Utu Grip"})
 		set_macro_page(4, 2)
 	elseif state.Weapons.value == "Anguta" then 
-		equip({main="Anguta", sub="Utu Grip"})
 		set_macro_page(4, 2)
 	elseif state.Weapons.value == "Redemption" then 
-		equip({main="Redemption", sub="Utu Grip"})
 		set_macro_page(4, 2)
 	end	
 	return get_combat_weapon
@@ -533,11 +499,11 @@ function job_post_precast(spell, spellMap, eventArgs)
 			send_command('gs c autows Cross Reaper')
 		elseif spell.english == "Catastrophe" and (player.tp >= 2000 and player.tp < 2999) then 
 			add_to_chat(8, '*** Apocalypse AM active: Acc +15 haste +10% ***')
-			send_command('timers create "Aftermath" 120 down')
+			send_command('timers create "Aftermath: Lv.2" 120 down')
 			send_command('gs c autows Cross Reaper')
 		elseif spell.english == "Catastrophe" and (player.tp >= 3000) then 
 			add_to_chat(8, '*** Apocalypse AM active: Acc +15 haste +10% ***')
-			send_command('timers create "Aftermath" 180 down')
+			send_command('timers create "Aftermath: Lv.3" 180 down')
 		end
 	end
 	if player.equipment.main =="Ragarok" then 
@@ -547,11 +513,11 @@ function job_post_precast(spell, spellMap, eventArgs)
 			send_command('gs c autows Resolution')
 		elseif spell.english == "Scourge" and (player.tp >= 2000 and player.tp < 2999) then 
 			add_to_chat(8, '*** Ragarok AM active: Acc +15 Crit Hit +10% ***')
-			send_command('timers create "Aftermath" 120 down')
+			send_command('timers create "Aftermath: Lv.2" 120 down')
 			send_command('gs c autows Resolution')
 		elseif spell.english == "Scourge" and (player.tp >= 3000) then 
 			add_to_chat(8, '*** Ragarok AM active: Acc +15 Crit Hit +10% ***')
-			send_command('timers create "Aftermath" 180 down')
+			send_command('timers create "Aftermath: Lv.3" 180 down')
 		end
 	end
 	if player.equipment.main =="Redemption" then 
@@ -561,11 +527,11 @@ function job_post_precast(spell, spellMap, eventArgs)
 			send_command('gs c autows Cross Reaper')
 		elseif spell.english == "Quietus" and (player.tp >= 2000 and player.tp < 2999) then 
 			add_to_chat(8, '*** Redemption AM active: AM active. 50% Triple Damage ***')
-			send_command('timers create "Aftermath" 120 down')
+			send_command('timers create "Aftermath: Lv.2" 120 down')
 			send_command('gs c autows Cross Reaper')
 		elseif spell.english == "Quietus" and (player.tp >= 3000) then 
 			add_to_chat(8, '*** Redemption AM active. 50% Triple Damage ***')
-			send_command('timers create "Aftermath" 180 down')
+			send_command('timers create "Aftermath: Lv.3" 180 down')
 		end
 	end
 	if player.equipment.main =="Caladbolg" then 
@@ -574,10 +540,10 @@ function job_post_precast(spell, spellMap, eventArgs)
 			send_command('timers create "Aftermath" 60 down')
 		elseif spell.english == "Torcleaver" and (player.tp >= 2000 and player.tp < 2999) then 
 			add_to_chat(8, '*** Caladbolg AM active: AM active. 50% Triple Damage ***')
-			send_command('timers create "Aftermath" 120 down')
+			send_command('timers create "Aftermath: Lv.2" 120 down')
 		elseif spell.english == "Torcleaver" and (player.tp >= 3000) then 
 			add_to_chat(8, '*** Caladbolg AM active. 50% Triple Damage ***')
-			send_command('timers create "Aftermath" 180 down')
+			send_command('timers create "Aftermath: Lv.3" 180 down')
 		end 
 	end
 end 
@@ -869,6 +835,10 @@ function check_buff()
 				windower.chat.input('/ja "Berserk" <me>')
 				tickdelay = os.clock() + 1.8
 				return true
+			elseif player.sub_job == 'SAM' and not buffactive.Meditate and abil_recasts[134] < latency then
+				windower.chat.input('/ja "Meditate" <me>')
+				tickdelay = os.clock() + 1.8
+				return true
 			elseif player.sub_job == 'WAR' and not buffactive.Aggressor and abil_recasts[4] < latency then
 				windower.chat.input('/ja "Aggressor" <me>')
 				tickdelay = os.clock() + 1.8
@@ -927,6 +897,6 @@ buff_spell_lists = {
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
 	include('commands')
-	include('telecmds')
-	include('htmbki')
+	--include('telecmds')
+	--include('htmbki')
 end

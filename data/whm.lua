@@ -568,9 +568,5 @@ end
 --	Command Section for Warping	--
 ----------------------------------
 function user_job_self_command(commandArgs, eventArgs) 
-	include('commands')
-	include('buffs') 
+	include('commands')	 
 end
-
-
-

@@ -17,6 +17,7 @@ end
 -- Binds for the differnt modes			--
 ------------------------------------------
 function job_binds()
+	send_command('input //lua l thebubbler')
  --[[ F9-F12 keybinds ]]
 	send_command('bind f9 gs c cycle IdleMode')
 	send_command('bind f10 gs c cycle OffenseMode')
@@ -148,6 +149,7 @@ end
 --  This section is called when you change jobs --
 --------------------------------------------------
 function file_unload()
+	send_command('input //lua u thebubbler')
 --[[ F9-F12 unbind's ]]
 	send_command('unbind f9')
 	send_command('unbind f10')
@@ -581,9 +583,6 @@ function set_lockstyle()
 end
 function set_healbot()
 	send_command('wait 6; input //lua l healbot')
-	send_command('wait 7; input //hb disable cure')
-	send_command('wait 8; input //hb disable curaga')
-	send_command('wait 9; input //hb watch enuri')
 end 
 -----------------------
 -- Miscelanous Stuff --
